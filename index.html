@@ -7,50 +7,222 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
-:root{ --bg-primary:#030810; --accent-blue:#00a8ff; --accent-cyan:#00ffff; --accent-pink:#ff3366; --accent-purple:#8b5cf6; --text-primary:#ffffff; --text-secondary:#8cb4d6; --text-muted:#5a8ab4; }
-body{ font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif; background:var(--bg-primary); color:var(--text-primary); min-height:100vh; line-height:1.2; overflow-x:hidden; background-image:radial-gradient(ellipse 100% 80% at 20% 0%,rgba(0,168,255,0.15) 0%,transparent 50%),radial-gradient(ellipse 80% 60% at 80% 100%,rgba(139,92,246,0.1) 0%,transparent 50%),linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%); background-attachment:fixed; padding: 0; }
-.header{ padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,168,255,0.3); box-shadow: 0 4px 15px rgba(0,168,255,0.1); backdrop-filter: blur(20px); background: rgba(3, 8, 16, 0.95); min-height: 44px; }
-.logo{ font-family:'Orbitron',sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform:uppercase; background: linear-gradient(180deg,#ffffff 0%,#d1d1d1 50%,#8a8a8a 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.tournament-title{ font-family:'Orbitron',sans-serif; font-size: 8px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.5px; }
+:root{
+--bg-primary:#030810;
+--accent-blue:#00a8ff;
+--accent-cyan:#00ffff;
+--accent-pink:#ff3366;
+--accent-purple:#8b5cf6;
+--text-primary:#ffffff;
+--text-secondary:#8cb4d6;
+--text-muted:#5a8ab4;
+}
+body{
+font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;
+background:var(--bg-primary);
+color:var(--text-primary);
+min-height:100vh;
+line-height:1.2;
+overflow-x:hidden;
+background-image:radial-gradient(ellipse 100% 80% at 20% 0%,rgba(0,168,255,0.15) 0%,transparent 50%),radial-gradient(ellipse 80% 60% at 80% 100%,rgba(139,92,246,0.1) 0%,transparent 50%),linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%);
+background-attachment:fixed;
+padding: 0;
+}
+/* --- 头部导航 --- */
+.header{
+padding: 8px 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: sticky;
+top: 0;
+z-index: 100;
+border-bottom: 1px solid rgba(0,168,255,0.3);
+box-shadow: 0 4px 15px rgba(0,168,255,0.1);
+backdrop-filter: blur(20px);
+background: rgba(3, 8, 16, 0.95);
+min-height: 48px;
+}
+.logo{
+font-family:'Orbitron',sans-serif;
+font-size: 13px;
+font-weight: 900;
+letter-spacing: 1px;
+text-transform:uppercase;
+background: linear-gradient(180deg,#ffffff 0%,#d1d1d1 50%,#8a8a8a 100%);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.tournament-title{
+font-family:'Orbitron',sans-serif;
+font-size: 8px;
+font-weight: 500;
+color: var(--text-secondary);
+letter-spacing: 0.5px;
+}
+/* 倒计时 - 恢复Labels显示 */
 .countdown{display:flex;gap:2px;align-items:center;}
-.countdown-item{ text-align:center; background: rgba(0,168,255,0.1); border: 1px solid rgba(0,168,255,0.2); padding: 2px 4px; min-width: 24px; height: 28px; display: flex; flex-direction: column; justify-content: center; border-radius: 2px; }
-.countdown-value{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;color:var(--accent-cyan);}
-.countdown-label{font-size:5px;color:var(--text-muted);display:none;}
-.sub-header{ background: rgba(10,21,37,0.98); padding: 4px 6px; display: flex; gap: 4px; border-bottom: 1px solid rgba(0,168,255,0.15); overflow-x: auto; position: sticky; top: 44px; z-index: 90; -webkit-overflow-scrolling:touch; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+.countdown-item{
+text-align:center;
+background: rgba(0,168,255,0.1);
+border: 1px solid rgba(0,168,255,0.2);
+padding: 2px 3px;
+min-width: 26px;
+height: 36px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+border-radius: 2px;
+}
+.countdown-value{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--accent-cyan);}
+/* 恢复显示Labels，稍作调整 */
+.countdown-label{font-size:5px;color:var(--text-muted);display:block;line-height:1;}
+
+/* 分类导航 - 恢复双行设计 */
+.sub-header{
+background: rgba(10,21,37,0.98);
+padding: 6px 8px;
+display: flex;
+gap: 6px;
+border-bottom: 1px solid rgba(0,168,255,0.15);
+overflow-x: auto;
+position: sticky;
+top: 48px;
+z-index: 90;
+-webkit-overflow-scrolling:touch;
+box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
 .sub-header::-webkit-scrollbar{display:none}
-.filter-tab{ background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; padding: 4px 8px; white-space: nowrap; font-family:'Rajdhani',sans-serif; text-transform:uppercase; border-radius: 4px; display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
-.filter-tab .tab-zh{font-family:'Noto Sans SC';font-size:9px;}
+.filter-tab{
+background: rgba(255,255,255,0.03);
+border: 1px solid rgba(255,255,255,0.05);
+color: var(--text-muted);
+font-size: 10px;
+font-weight: 600;
+cursor: pointer;
+padding: 4px 8px;
+white-space: nowrap;
+font-family:'Rajdhani',sans-serif;
+text-transform:uppercase;
+border-radius: 6px;
+display: flex;
+flex-direction: column;
+align-items: center;
+line-height: 1.2;
+height: 36px;
+justify-content: center;
+}
+.filter-tab .tab-zh{font-family:'Noto Sans SC';font-size:10px;} /* 恢复中文大小 */
 .filter-tab .tab-en{font-size:8px;opacity:0.7}
 .filter-tab.active{background:rgba(0,168,255,0.2);border-color:var(--accent-cyan);color:var(--accent-cyan);}
-.container{ width: 100%; max-width: 100%; margin: 0 auto; padding: 6px; position: relative; z-index:1 }
-.page-title{ font-family:'Orbitron',sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform:uppercase; margin: 8px 0 12px; padding-bottom: 6px; border-bottom: 2px solid rgba(0,168,255,0.3); position: relative; display: flex; align-items: baseline; gap: 6px; filter: drop-shadow(0 0 8px rgba(0,168,255,0.4)); }
+
+.container{
+width: 100%;
+max-width: 100%;
+margin: 0 auto;
+padding: 6px;
+position: relative;
+z-index:1
+}
+.page-title{
+font-family:'Orbitron',sans-serif;
+font-size: 16px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform:uppercase;
+margin: 8px 0 12px;
+padding-bottom: 6px;
+border-bottom: 2px solid rgba(0,168,255,0.3);
+position: relative;
+display: flex;
+align-items: baseline;
+gap: 6px;
+filter: drop-shadow(0 0 8px rgba(0,168,255,0.4));
+}
 .page-title .title-zh{font-family:'Noto Sans SC';font-size:15px;font-weight:700;color:#fff;}
 .page-title .title_en{font-size:11px;color:var(--accent-cyan);letter-spacing:1px;}
 .groups-grid{grid-template-columns:1fr; gap:6px;}
-.group-card{ background: rgba(12,28,50,0.6); border: 1px solid rgba(0,168,255,0.3); position: relative; backdrop-filter: blur(5px); transition: all 0.3s ease; }
+.group-card{
+background: rgba(12,28,50,0.6);
+border: 1px solid rgba(0,168,255,0.3);
+position: relative;
+backdrop-filter: blur(5px);
+transition: all 0.3s ease;
+}
 .group-header{background: rgba(0,168,255,0.1);padding: 6px 10px;border-bottom: 1px solid rgba(0,168,255,0.3);}
 .group-title{font-family:'Orbitron';font-size:10px;font-weight:700;color:var(--accent-cyan);letter-spacing:2px;}
 .match-list{padding: 4px;}
-.match-item{ background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); border-radius: 4px; margin-bottom: 4px; display: flex; align-items: center; position: relative; padding: 6px; }
-/* 左侧日期块 - 统一尺寸 */
-.match-datetime{ background: rgba(0,168,255,0.15); border: 1px solid rgba(0,168,255,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 46px; height: 40px; margin-right: 8px; border-radius: 3px; flex-shrink: 0; }
+.match-item{
+background: rgba(15,35,60,0.4);
+border: 1px solid rgba(0,168,255,0.2);
+border-radius: 4px;
+margin-bottom: 4px;
+display: flex;
+align-items: center;
+position: relative;
+padding: 6px;
+}
+.match-datetime{
+background: rgba(0,168,255,0.15);
+border: 1px solid rgba(0,168,255,0.4);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+min-width: 46px;
+height: 40px;
+margin-right: 8px;
+border-radius: 3px;
+flex-shrink: 0;
+}
 .match-datetime-date{font-family:'Orbitron';font-size:10px;font-weight:600;color:#fff;}
 .match-datetime-time{font-family:'Orbitron';font-size:8px;color:var(--accent-cyan);margin-top:1px;font-weight: 700;}
-/* 比赛双方区域 */
-.match-teams{ display: flex; align-items: center; justify-content: space-between; flex: 1; min-width: 0; }
-.team{ display: flex; align-items: center; flex: 1; min-width: 0; }
+.match-teams{
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex: 1;
+min-width: 0;
+}
+.team{
+display: flex;
+align-items: center;
+flex: 1;
+min-width: 0;
+}
 .team-home{justify-content: flex-start;gap:6px;}
 .team-away{justify-content: flex-end;gap:6px;}
-/* 国旗 */
-.team-flag{ width: 32px; height: 24px; border-radius: 2px; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-/* 球队名 - 居中对齐关键样式 */
-.team-name-wrapper{ flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; /* 水平居中 */ min-width: 0; text-align: center; }
+.team-flag{
+width: 32px;
+height: 24px;
+border-radius: 2px;
+object-fit: cover;
+flex-shrink: 0;
+box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.team-name-wrapper{
+flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+min-width: 0;
+text-align: center;
+}
 .team-name-zh{font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;width: 100%;}
 .team-name-en{font-size:8px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;width: 100%;font-weight: 700;}
-/* VS */
-.match-vs{ font-family:'Orbitron'; font-size:9px; font-weight: 800; color:var(--accent-pink); padding: 0 6px; flex-shrink: 0; text-shadow: 0 0 5px rgba(255,50,100,0.6); }
+.match-vs{
+font-family:'Orbitron';
+font-size:9px;
+font-weight: 800;
+color:var(--accent-pink);
+padding: 0 6px;
+flex-shrink: 0;
+text-shadow: 0 0 5px rgba(255,50,100,0.6);
+}
 .stage-title{font-size:13px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(0,168,255,0.2);color:#fff;}
 .stage-title .stage-zh{font-family:'Noto Sans SC';font-size:12px;}
+
 /* 桌面端适配 */
 @media (min-width:768px){
 body{padding:0;}
@@ -60,9 +232,9 @@ body{padding:0;}
 .countdown{gap:6px}
 .countdown-item{padding:4px 8px;min-width:40px;height:36px;}
 .countdown-value{font-size:14px;}
-.countdown-label{display:block;font-size:7px;}
+.countdown-label{font-size:7px;}
 .sub-header{top:48px;padding:6px 12px;gap:8px;}
-.filter-tab{padding:6px 12px;font-size:12px;}
+.filter-tab{padding:6px 12px;font-size:12px;height:auto;}
 .container{padding:12px;max-width:1200px;}
 .groups-grid{grid-template-columns:repeat(2,1fr);gap:12px}
 .group-card{margin-bottom:0;}
@@ -85,8 +257,8 @@ body{padding:0;}
 <div class="countdown" id="countdown">
 <div class="countdown-item"><div class="countdown-value" id="days">00</div><div class="countdown-label">Days</div></div>
 <div class="countdown-item"><div class="countdown-value" id="hours">00</div><div class="countdown-label">Hrs</div></div>
-<div class="countdown-item"><div class="countdown-value" id="minutes">00</div><div class="countdown-label">Min</div></div>
-<div class="countdown-item"><div class="countdown-value" id="seconds">00</div><div class="countdown-label">Sec</div></div>
+<div class="countdown-item"><div class="countdown-value" id="minutes">00</div><div class="countdown-label">Mins</div></div>
+<div class="countdown-item"><div class="countdown-value" id="seconds">00</div><div class="countdown-label">Secs</div></div>
 </div>
 </header>
 <nav class="sub-header">
@@ -108,8 +280,27 @@ body{padding:0;}
 </main>
 <script>
 const FLAG_CDN = 'https://images.weserv.nl/?url=flagcdn.com/w80';
-function getFlag(code){ return`${FLAG_CDN}/${code.toLowerCase()}.png`; }
-const teams={ 'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'}, 'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'}, 'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'}, 'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'}, 'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'}, 'Scotland':{code:'gb-sct',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'}, 'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'}, 'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'}, 'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'}, 'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特'},'Uruguay':{code:'uy',nameZh:'乌拉圭'}, 'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'}, 'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'}, 'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'}, 'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果金'}, 'Uzbekistan':{code:'uz',nameZh:'乌兹别克'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb-eng',nameZh:'英格兰'}, 'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'} };
+function getFlag(code){
+return`${FLAG_CDN}/${code.toLowerCase()}.png`;
+}
+const teams={
+'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'},
+'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'},
+'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'},
+'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'},
+'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'},
+'Scotland':{code:'gb-sct',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'},
+'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'},
+'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'},
+'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'},
+'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特'},'Uruguay':{code:'uy',nameZh:'乌拉圭'},
+'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'},
+'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'},
+'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'},
+'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果金'},
+'Uzbekistan':{code:'uz',nameZh:'乌兹别克'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb-eng',nameZh:'英格兰'},
+'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'}
+};
 const groupMatches = [
 {date:'06/12',time:'03:00',team1:'Mexico',team2:'South Africa',group:'A'},
 {date:'06/12',time:'10:00',team1:'South Korea',team2:'Czechia',group:'A'},
@@ -247,7 +438,9 @@ const team = teams[teamKey];
 if(!team) return {zh:'待定', en: teamKey};
 return {zh: team.nameZh, en: teamKey};
 }
-function isCountry(key){ return !!teams[key]; }
+function isCountry(key){
+return !!teams[key];
+}
 function formatTeamEnName(name){
 if(name.length > 9) return name.substring(0, 8) + '.';
 return name;
@@ -258,7 +451,6 @@ const team1 = getTeamName(match.team1);
 const team2 = getTeamName(match.team2);
 const isTeam1Country = isCountry(match.team1);
 const isTeam2Country = isCountry(match.team2);
-// 处理TBD的样式
 const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
 return `
 <div class="match-item" data-stage="${stageType}">
