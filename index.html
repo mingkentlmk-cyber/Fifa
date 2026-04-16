@@ -17,11 +17,15 @@ body{font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;background:v
 .logo::after{content:"FIFA World Cup";position:absolute;top:2px;left:0;color:rgba(0,0,0,0.6);z-index:-2;}
 .tournament-title{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.5px;background:linear-gradient(90deg,var(--text-secondary),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .countdown{display:flex;gap:6px;align-items:center;}
-.countdown-item{text-align:center;background:linear-gradient(180deg,rgba(0,168,255,0.15),rgba(0,102,204,0.1));padding:8px 10px;min-width:55px;position:relative;overflow:hidden;box-shadow:0 0 20px rgba(0,168,255,0.2),inset 0 1px 0 rgba(255,255,255,0.1);clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px));}
+/* 修复：锁定倒计时边框形状和数字宽度 */
+.countdown-item{text-align:center;background:linear-gradient(180deg,rgba(0,168,255,0.15),rgba(0,102,204,0.1));padding:8px 10px;min-width:55px;height:56px;position:relative;overflow:hidden;box-shadow:0 0 20px rgba(0,168,255,0.2),inset 0 1px 0 rgba(255,255,255,0.1);clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px));display:flex;flex-direction:column;justify-content:center;}
 .countdown-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent);box-shadow:0 0 10px var(--accent-cyan);}
-.countdown-item::after{content:'';position:absolute;inset:0;border:1px solid rgba(0,168,255,0.35);clip-path:inherit;pointer-events:none;box-shadow:0 0 15px rgba(0,168,255,0.2),inset 0 0 10px rgba(0,168,255,0.1);}
-.countdown-value{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;line-height:1;color:var(--accent-cyan);text-shadow:0 0 20px rgba(0,255,255,0.8);font-variant-numeric:tabular-nums;}
+.countdown-item::after{content:'';position:absolute;inset:0;border:1px solid rgba(0,168,255,0.35);clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px));pointer-events:none;box-shadow:0 0 15px rgba(0,168,255,0.2),inset 0 0 10px rgba(0,168,255,0.1);}
+/* 修复：固定数字宽度，使用等宽数字 */
+.countdown-value{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;line-height:1;color:var(--accent-cyan);text-shadow:0 0 20px rgba(0,255,255,0.8);font-variant-numeric:tabular-nums;min-width:28px;text-align:center;}
 .countdown-label{font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary);margin-top:3px;}
+/* 修复：标签也固定宽度 */
+.countdown-label{min-width:28px;text-align:center;}
 .sub-header{background:rgba(10,21,37,0.95);padding:10px 12px;display:flex;gap:8px;border-bottom:1px solid rgba(0,168,255,0.15);backdrop-filter:blur(20px);overflow-x:auto;position:sticky;top:60px;z-index:90;-webkit-overflow-scrolling:touch;box-shadow:0 4px 20px rgba(0,0,0,0.3);}
 .sub-header::-webkit-scrollbar{display:none}
 .filter-tab{background:rgba(0,168,255,0.08);border:1px solid rgba(0,168,255,0.2);border-radius:8px;color:var(--text-muted);font-size:11px;font-weight:600;cursor:pointer;padding:8px 12px;position:relative;transition:all 0.3s ease;white-space:nowrap;font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:0.5px;display:flex;flex-direction:column;align-items:center;gap:2px;}
@@ -44,7 +48,7 @@ body{font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;background:v
 .group-header{background:linear-gradient(180deg,rgba(0,168,255,0.12),rgba(0,102,204,0.06));padding:12px 16px;border-bottom:1px solid rgba(0,168,255,0.15);position:relative;display:flex;justify-content:space-between;align-items:center;}
 .group-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,255,0.4),transparent);}
 .group-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent-cyan);text-shadow:0 0 20px rgba(0,255,255,0.6);display:flex;align-items:center;gap:8px;}
-.group-title .group-zh{display:none}
+.group-title .group_z{display:none}
 .group-title .group_en{font-size:1.1em;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
 .download-btn{background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.4);color:var(--accent-cyan);padding:4px 10px;font-size:9px;border-radius:4px;cursor:pointer;text-transform:uppercase;font-weight:700;font-family:'Rajdhani',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:4px;}
 .download-btn:hover{background:rgba(0,168,255,0.3);box-shadow:0 0 10px rgba(0,168,255,0.5);transform:scale(1.05);}
@@ -83,8 +87,9 @@ body{font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;background:v
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .group-card,.knockout-card,.match-card{animation:fadeIn 0.5s ease forwards;opacity:0}
 .group-card:nth-child(1){animation-delay:0.04s}.group-card:nth-child(2){animation-delay:0.08s}.group-card:nth-child(3){animation-delay:0.12s}.group-card:nth-child(4){animation-delay:0.16s}.group-card:nth-child(5){animation-delay:0.2s}.group-card:nth-child(6){animation-delay:0.24s}.group-card:nth-child(7){animation-delay:0.28s}.group-card:nth-child(8){animation-delay:0.32s}.group-card:nth-child(9){animation-delay:0.36s}.group-card:nth-child(10){animation-delay:0.4s}.group-card:nth-child(11){animation-delay:0.44s}.group-card:nth-child(12){animation-delay:0.48s}
-@media (min-width:768px){.header{padding:16px 32px}.logo{font-size:24px;letter-spacing:4px}.tournament-title{font-size:18px;letter-spacing:1px}.countdown{gap:10px}.countdown-item{padding:10px 16px;min-width:65px;}.countdown-value{font-size:22px}.countdown-label{font-size:9px}.container{padding:24px;max-width:1200px;margin:0 auto}.page-title{font-size:32px;margin-bottom:36px;gap:14px;}.page-title .title-zh{font-size:1em;}.page-title .title_en{font-size:0.7em;}.groups-grid{grid-template-columns:repeat(2,1fr);gap:20px}.group-header{padding:16px 20px}.group-title{font-size:12px;letter-spacing:4px}.match-item{padding:16px 20px;margin-bottom:10px}.team-flag{width:44px;height:30px}.team-name-zh{font-size:13px}.team-name-en{font-size:10px}.match-vs{font-size:12px;padding:0 10px}.stage-title{font-size:18px;margin:36px 0 18px;padding-bottom:14px}.stage-title::after{width:150px}.match-datetime{min-width:70px;padding:10px}.match-datetime-date{font-size:13px}.match-datetime-time{font-size:11px}}
-@media (min-width:1200px){.groups-grid{grid-template-columns:repeat(3,1fr)}}
+/* 隐藏按天分组的卡片（默认） */
+.group-card.by-day{display:none;}
+@media (min-width:768px){.header{padding:16px 32px}.logo{font-size:24px;letter-spacing:4px}.tournament-title{font-size:18px;letter-spacing:1px}.countdown{gap:10px}.countdown-item{padding:10px 16px;min-width:65px;height:68px;}.countdown-value{font-size:22px;min-width:32px;}.countdown-label{min-width:32px;font-size:9px;}.container{padding:24px;max-width:1200px;margin:0 auto}.page-title{font-size:32px;margin-bottom:36px;gap:14px;}.page-title .title-zh{font-size:1em;}.page-title .title_en{font-size:0.7em;}.groups-grid{grid-template-columns:repeat(2,1fr);gap:20px}.group-header{padding:16px 20px}.group-title{font-size:12px;letter-spacing:4px}.match-item{padding:16px 20px;margin-bottom:10px}.team-flag{width:44px;height:30px}.team-name-zh{font-size:13px}.team-name-en{font-size:10px}.match-vs{font-size:12px;padding:0 10px}.stage-title{font-size:18px;margin:36px 0 18px;padding-bottom:14px}.stage-title::after{width:150px}.match-datetime{min-width:70px;padding:10px}.match-datetime-date{font-size:13px}.match-datetime-time{font-size:11px}}@media (min-width:1200px){.groups-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -122,8 +127,6 @@ const FLAG_CDN='https://flagcdn.com/w80';
 function getFlag(code){return`${FLAG_CDN}/${code.toLowerCase()}.png`}
 const teams={'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'},'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'},'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'},'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'},'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'},'Scotland':{code:'gb',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'},'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'},'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'},'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'},'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特阿拉伯'},'Uruguay':{code:'uy',nameZh:'乌拉圭'},'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'},'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'},'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'},'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果民主共和国'},'Uzbekistan':{code:'uz',nameZh:'乌兹别克斯坦'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb',nameZh:'英格兰'},'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'}};
 const groups={'A':['South Africa','Mexico','South Korea','Czechia'],'B':['Canada','Bosnia and Herzegovina','Qatar','Switzerland'],'C':['Brazil','Morocco','Haiti','Scotland'],'D':['USA','Paraguay','Australia','Türkiye'],'E':['Germany','Curaçao','Ivory Coast','Ecuador'],'F':['Netherlands','Japan','Sweden','Tunisia'],'G':['Spain','Cape Verde','Belgium','Egypt'],'H':['Saudi Arabia','Uruguay','Iran','New Zealand'],'I':['France','Senegal','Iraq','Norway'],'J':['Argentina','Algeria','Austria','Jordan'],'K':['Portugal','DR Congo','Uzbekistan','Colombia'],'L':['England','Croatia','Ghana','Panama']};
-
-// ==================== 小组赛 72场（按您提供的数据）================
 const groupMatches = [
 /* Day 1 - 06/12 */
 {date:'06/12',time:'3:00 AM',team1:'Mexico',team2:'South Africa',group:'A'},
@@ -215,8 +218,6 @@ const groupMatches = [
 {date:'06/28',time:'10:00 AM',team1:'Algeria',team2:'Austria',group:'J'},
 {date:'06/28',time:'10:00 AM',team1:'Jordan',team2:'Argentina',group:'J'}
 ];
-
-// ==================== 淘汰赛 32场（按您提供的数据）================
 const knockoutMatches = [
 /* Round of 32 - 16场 */
 {date:'06/29',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
@@ -257,8 +258,6 @@ const knockoutMatches = [
 /* Final - 1场 */
 {date:'07/20',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'final'}
 ];
-
-// ==================== 时间格式化（修复AM重复问题）================
 function formatTimeWithAmPm(time){
 const cleanTime = time.replace(/\s*(AM|PM)\s*/gi, '').trim();
 const [hours, minutes] = cleanTime.split(':');
@@ -267,7 +266,6 @@ const ampm = h >= 12 ? 'PM' : 'AM';
 const h12 = h % 12 || 12;
 return `${h12}:${minutes} ${ampm}`;
 }
-
 function updateCountdown(){
 const targetDate=new Date('2026-06-12T03:00:00');
 const now=new Date();
@@ -285,7 +283,6 @@ document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
 }
 setInterval(updateCountdown,1000);
 updateCountdown();
-
 function getTeamName(teamKey){
 const team=teams[teamKey];
 if(!team)return{zh:'TBD',en:teamKey};
@@ -296,8 +293,7 @@ function formatTeamEnName(name){
 if(name==='Bosnia and Herzegovina'){return'Bosnia and<br>Herzegovina';}
 return name;
 }
-
-function createCardHTML(titleText,matchesData,stageType,cardId){
+function createCardHTML(titleText,matchesData,stageType,cardId,isByDay=false){
 let matchesHtml=matchesData.map(match=>{
 const team1=getTeamName(match.team1);
 const team2=getTeamName(match.team2);
@@ -305,25 +301,34 @@ const isTeam1Country=isCountry(match.team1);
 const isTeam2Country=isCountry(match.team2);
 return`<div class="match-item" data-stage="${stageType}"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country?`<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country?`<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}</div></div></div>`}).join('');
 const downloadBtn=`<button class="download-btn" onclick="downloadCard(this)"><div class="download-icon"></div>PNG</button>`;
-return`<div class="group-card" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div>${downloadBtn}</div><div class="match-list">${matchesHtml}</div></div>`;
+const byDayClass = isByDay ? 'by-day' : '';
+return`<div class="group-card ${byDayClass}" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div>${downloadBtn}</div><div class="match-list">${matchesHtml}</div></div>`;
 }
-
 function renderGroups(){
 const container=document.getElementById('groups-container');
 let html='';
 Object.keys(groups).forEach(groupLetter=>{
 const groupMatchesFiltered=groupMatches.filter(m=>m.group===groupLetter);
-html+=createCardHTML(`Group ${groupLetter}`,groupMatchesFiltered,'group',`group-card-${groupLetter}`);
+html+=createCardHTML(`Group ${groupLetter}`,groupMatchesFiltered,'group',`group-card-${groupLetter}`,false);
 });
 container.innerHTML=html;
 }
-
-// ==================== 淘汰赛分组逻辑 ====================
+function renderGroupsByDay(){
+const container=document.getElementById('groups-container');
+let html='';
+const groupByDate = {};
+groupMatches.forEach(match => {
+if(!groupByDate[match.date]) groupByDate[match.date] = [];
+groupByDate[match.date].push(match);
+});
+Object.keys(groupByDate).sort().forEach(date => {
+html += createCardHTML(date, groupByDate[date], 'group', `group-by-day-${date}`, true);
+});
+container.innerHTML += html;
+}
 function renderKnockout(){
 const container=document.getElementById('knockout-container');
 let html='';
-
-// 1. Round of 32 - 按天分组
 const round32Matches = knockoutMatches.filter(m => m.stage === 'round32');
 const round32ByDate = {};
 round32Matches.forEach(match => {
@@ -331,10 +336,8 @@ if(!round32ByDate[match.date]) round32ByDate[match.date] = [];
 round32ByDate[match.date].push(match);
 });
 Object.keys(round32ByDate).sort().forEach(date => {
-html += createCardHTML(date, round32ByDate[date], 'round32', `round32-${date}`);
+html += createCardHTML(date, round32ByDate[date], 'round32', `round32-${date}`, false);
 });
-
-// 2. Round of 16 - 按天分组
 const round16Matches = knockoutMatches.filter(m => m.stage === 'round16');
 const round16ByDate = {};
 round16Matches.forEach(match => {
@@ -342,35 +345,48 @@ if(!round16ByDate[match.date]) round16ByDate[match.date] = [];
 round16ByDate[match.date].push(match);
 });
 Object.keys(round16ByDate).sort().forEach(date => {
-html += createCardHTML(date, round16ByDate[date], 'round16', `round16-${date}`);
+html += createCardHTML(date, round16ByDate[date], 'round16', `round16-${date}`, false);
 });
-
-// 3. Quarter-finals - 4场放一组
 const quarterfinalMatches = knockoutMatches.filter(m => m.stage === 'quarterfinal');
 if(quarterfinalMatches.length > 0){
-html += createCardHTML('Quarter-finals', quarterfinalMatches, 'quarterfinal', 'quarterfinal');
+html += createCardHTML('Quarter-finals', quarterfinalMatches, 'quarterfinal', 'quarterfinal', false);
 }
-
-// 4. Semi-finals - 每场一组
 const semifinalMatches = knockoutMatches.filter(m => m.stage === 'semifinal');
 semifinalMatches.forEach((match, index) => {
-html += createCardHTML(`Semi-final ${index + 1}`, [match], 'semifinal', `semifinal-${index + 1}`);
+html += createCardHTML(`Semi-final ${index + 1}`, [match], 'semifinal', `semifinal-${index + 1}`, false);
 });
-
-// 5. Third place - 1场一组
 const thirdMatches = knockoutMatches.filter(m => m.stage === 'third');
 if(thirdMatches.length > 0){
-html += createCardHTML('Third Place', thirdMatches, 'third', 'third-place');
+html += createCardHTML('Third Place', thirdMatches, 'third', 'third-place', false);
 }
-
-// 6. Final - 1场一组
 const finalMatches = knockoutMatches.filter(m => m.stage === 'final');
 if(finalMatches.length > 0){
-html += createCardHTML('Final', finalMatches, 'final', 'final');
+html += createCardHTML('Final', finalMatches, 'final', 'final', false);
 }
 container.innerHTML = html;
 }
-
+function filterByStage(stage,btn){
+document.querySelectorAll('.filter-tab').forEach(tab=>tab.classList.remove('active'));
+btn.classList.add('active');
+const allCards = document.querySelectorAll('.group-card');
+const groupTitle = document.getElementById('group-stage');
+if(stage === 'all'){
+allCards.forEach(card => card.style.display = 'block');
+groupTitle.style.display = 'block';
+document.querySelectorAll('.group-card:not(.by-day)').forEach(card => card.style.display = 'none');
+document.querySelectorAll('.group-card.by-day').forEach(card => card.style.display = 'block');
+}
+else if(stage === 'group'){
+allCards.forEach(card => card.style.display = 'none');
+document.querySelectorAll('.group-card[data-stage="group"]:not(.by-day)').forEach(card => card.style.display = 'block');
+groupTitle.style.display = 'block';
+}
+else {
+allCards.forEach(card => card.style.display = 'none');
+document.querySelectorAll(`.group-card[data-stage="${stage}"]`).forEach(card => card.style.display = 'block');
+groupTitle.style.display = (stage === 'group') ? 'block' : 'none';
+}
+}
 const SCREENSHOT_API = 'http://localhost:3000/screenshot';
 async function downloadCard(btn) {
 const card = btn.closest('.group-card');
@@ -394,25 +410,12 @@ alert("下载失败，请确保截图服务已启动。\n\n请运行: node scree
 btn.style.visibility = 'visible';
 }
 }
-
-function filterByStage(stage,btn){
-document.querySelectorAll('.filter-tab').forEach(tab=>tab.classList.remove('active'));
-btn.classList.add('active');
-document.querySelectorAll('.group-card').forEach(card=>{
-const isGroupStage=card.dataset.stage==='group';
-if(stage==='all')card.style.display='block';
-else if(stage==='group')card.style.display=isGroupStage?'block':'none';
-else card.style.display=(card.dataset.stage===stage)?'block':'none';
-});
-const groupTitle=document.getElementById('group-stage');
-groupTitle.style.display=(stage==='all'||stage==='group')?'block':'none';
-}
-
 function scrollToSchedule(){
 document.querySelector('.container').scrollIntoView({behavior:'smooth'})}
-
 renderGroups();
+renderGroupsByDay();
 renderKnockout();
+document.querySelectorAll('.group-card:not(.by-day)').forEach(card => card.style.display = 'none');
 </script>
 </body>
 </html>
