@@ -4,807 +4,347 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026 FIFA World Cup | 2026年国际足联世界杯</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-    --bg-primary:#030810;
-    --bg-secondary:#0a1525;
-    --bg-tertiary:#0f1f35;
-    --accent-blue:#00a8ff;
-    --accent-cyan:#00ffff;
-    --accent-pink:#ff3366;
-    --accent-purple:#8b5cf6;
-    --text-primary:#ffffff;
-    --text-secondary:#8cb4d6;
-    --text-muted:#5a8ab4;
-    --glow-blue:0 0 30px rgba(0,168,255,0.5);
-    --glow-cyan:0 0 40px rgba(0,255,255,0.4);
-    --glow-pink:0 0 30px rgba(255,51,102,0.5);
-    --glow-purple:0 0 30px rgba(139,92,246,0.4);
-    --card-shadow:0 20px 50px rgba(0,0,0,0.6),0 0 40px rgba(0,168,255,0.08);
+ --bg-primary:#030810; --bg-secondary:#0a1525; --bg-tertiary:#0f1f35;
+ --accent-blue:#00a8ff; --accent-cyan:#00ffff; --accent-pink:#ff3366; --accent-purple:#8b5cf6;
+ --text-primary:#ffffff; --text-secondary:#8cb4d6; --text-muted:#5a8ab4;
 }
 body{
-    font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;
-    background:var(--bg-primary);
-    color:var(--text-primary);
-    min-height:100vh;
-    line-height:1.5;
-    overflow-x:hidden;
-    background-image: radial-gradient(ellipse 100% 80% at 20% 0%, rgba(0,168,255,0.2) 0%, transparent 50%), radial-gradient(ellipse 80% 60% at 80% 100%, rgba(139,92,246,0.15) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,255,0.08) 0%, transparent 60%), radial-gradient(ellipse at top,#0a1a2e 0%, transparent 50%), radial-gradient(ellipse at bottom,#0d1f35 0%, transparent 50%), linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%);
-    background-attachment:fixed;
+ font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;
+ background:var(--bg-primary); color:var(--text-primary); min-height:100vh; line-height:1.5;
+ overflow-x:hidden;
+ background-image: radial-gradient(ellipse 100% 80% at 20% 0%, rgba(0,168,255,0.2) 0%, transparent 50%), radial-gradient(ellipse 80% 60% at 80% 100%, rgba(139,92,246,0.15) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,255,0.08) 0%, transparent 60%), radial-gradient(ellipse at top,#0a1a2e 0%, transparent 50%), radial-gradient(ellipse at bottom,#0d1f35 0%, transparent 50%), linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%);
+ background-attachment:fixed;
 }
 .header{
-    background:linear-gradient(135deg,rgba(10,25,45,0.98) 0%,rgba(6,20,40,0.99) 50%,rgba(10,30,50,0.98) 100%);
-    padding:12px 16px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:100;
-    border-bottom:1px solid rgba(0,168,255,0.3);
-    box-shadow:0 8px 40px rgba(0,168,255,0.15),inset 0 1px 0 rgba(255,255,255,0.05),0 0 60px rgba(0,168,255,0.08);
-    backdrop-filter:blur(25px);
-    flex-wrap:wrap;
-    gap:8px;
+ background:linear-gradient(135deg,rgba(10,25,45,0.98) 0%,rgba(6,20,40,0.99) 50%,rgba(10,30,50,0.98) 100%);
+ padding:12px 16px; display:flex; justify-content:space-between; align-items:center;
+ position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(0,168,255,0.3);
+ box-shadow:0 8px 40px rgba(0,168,255,0.15),inset 0 1px 0 rgba(255,255,255,0.05),0 0 60px rgba(0,168,255,0.08);
+ backdrop-filter:blur(25px); flex-wrap:wrap; gap:8px;
 }
-.header::after{
-    content:'';
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    height:1px;
-    background:linear-gradient(90deg,transparent,var(--accent-cyan),var(--accent-blue),var(--accent-cyan),transparent);
-    box-shadow:0 0 20px rgba(0,168,255,0.6);
-}
-/* Logo */
-.logo{
-    position: relative;
-    font-family:'Orbitron',sans-serif;
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    background: linear-gradient(180deg, #ffffff 0%, #f2f2f2 15%, #cfcfcf 35%, #ffffff 50%, #8a8a8a 70%, #2a2a2a 90%, #000000 100%);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-}
-.logo::before{ content:"FIFA World Cup"; position:absolute; top:0; left:2px; color:rgba(0,0,0,0.9); z-index:-1; }
-.logo::after{ content:"FIFA World Cup"; position:absolute; top:2px; left:0; color:rgba(0,0,0,0.6); z-index:-2; }
+.header::after{content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--accent-cyan),var(--accent-blue),var(--accent-cyan),transparent); box-shadow:0 0 20px rgba(0,168,255,0.6);}
+.logo{position: relative; font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; letter-spacing:2px; text-transform:uppercase; background: linear-gradient(180deg, #ffffff 0%, #f2f2f2 15%, #cfcfcf 35%, #ffffff 50%, #8a8a8a 70%, #2a2a2a 90%, #000000 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+.logo::before{content:"FIFA World Cup"; position:absolute; top:0; left:2px; color:rgba(0,0,0,0.9); z-index:-1;}
+.logo::after{content:"FIFA World Cup"; position:absolute; top:2px; left:0; color:rgba(0,0,0,0.6); z-index:-2;}
+.tournament-title{font-family:'Orbitron',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.5px; background:linear-gradient(90deg,var(--text-secondary),var(--accent-cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
 
-.tournament-title{
-    font-family:'Orbitron',sans-serif;
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:0.5px;
-    background:linear-gradient(90deg,var(--text-secondary),var(--accent-cyan));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-}
-/* 倒计时 */
-.countdown{ display:flex; gap:6px; align-items:center; }
+/* === 倒计时统一样式 === */
+.countdown{display:flex; gap:6px; align-items:center;}
 .countdown-item{
-    text-align:center;
-    background:linear-gradient(180deg,rgba(0,168,255,0.15),rgba(0,102,204,0.1));
-    padding:8px 12px;
-    min-width:50px;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 0 20px rgba(0,168,255,0.2),inset 0 1px 0 rgba(255,255,255,0.1);
-    clip-path: polygon( 0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px) );
+ text-align:center; background:linear-gradient(180deg,rgba(0,168,255,0.15),rgba(0,102,204,0.1));
+ /* 统一直播和大小 */
+ padding:8px 10px; 
+ min-width:55px; 
+ position:relative; overflow:hidden;
+ box-shadow:0 0 20px rgba(0,168,255,0.2),inset 0 1px 0 rgba(255,255,255,0.1);
+ clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
 }
-.countdown-item::before{ content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent); box-shadow:0 0 10px var(--accent-cyan); }
-.countdown-item::after{ content:''; position:absolute; inset:0; border:1px solid rgba(0,168,255,0.35); clip-path: inherit; pointer-events:none; box-shadow: 0 0 15px rgba(0,168,255,0.2), inset 0 0 10px rgba(0,168,255,0.1); }
-.countdown-value{
-    font-family:'Orbitron',sans-serif;
-    font-size:18px;
-    font-weight:700;
-    line-height:1;
-    color:var(--accent-cyan);
-    text-shadow:0 0 20px rgba(0,255,255,0.8);
-    font-variant-numeric:tabular-nums;
-}
+.countdown-item::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent); box-shadow:0 0 10px var(--accent-cyan);}
+.countdown-item::after{content:''; position:absolute; inset:0; border:1px solid rgba(0,168,255,0.35); clip-path: inherit; pointer-events:none; box-shadow: 0 0 15px rgba(0,168,255,0.2), inset 0 0 10px rgba(0,168,255,0.1);}
+/* 统一数值字体大小 */
+.countdown-value{ font-family:'Orbitron',sans-serif; font-size:18px; font-weight:700; line-height:1; color:var(--accent-cyan); text-shadow:0 0 20px rgba(0,255,255,0.8); font-variant-numeric:tabular-nums; }
+/* 统一标签样式 */
 .countdown-label{ font-size:8px; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); margin-top:3px; }
-/* 修改 Days 样式，仅显示数字 */
-#days + .countdown-label { display: none; }
-#days { font-size: 22px; }
 
 .header-right{display:flex;align-items:center}
-.header-btn{
-    background:linear-gradient(135deg,rgba(0,168,255,0.2),rgba(139,92,246,0.15));
-    border:1px solid rgba(0,168,255,0.6);
-    color:var(--accent-cyan);
-    padding:8px 18px;
-    border-radius:25px;
-    font-size:10px;
-    font-weight:700;
-    cursor:pointer;
-    transition:all 0.3s ease;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    font-family:'Rajdhani',sans-serif;
-    box-shadow:0 0 25px rgba(0,168,255,0.3),inset 0 1px 0 rgba(255,255,255,0.1);
-}
-.header-btn:hover{
-    background:linear-gradient(135deg,rgba(0,168,255,0.35),rgba(139,92,246,0.25));
-    box-shadow:0 0 40px rgba(0,168,255,0.5),0 0 60px rgba(0,168,255,0.3);
-    border-color:var(--accent-cyan);
-    transform:translateY(-2px);
-}
-.sub-header{
-    background:rgba(10,21,37,0.95);
-    padding:10px 12px;
-    display:flex;
-    gap:8px;
-    border-bottom:1px solid rgba(0,168,255,0.15);
-    backdrop-filter:blur(20px);
-    overflow-x:auto;
-    position:sticky;
-    top:60px;
-    z-index:90;
-    -webkit-overflow-scrolling:touch;
-    box-shadow:0 4px 20px rgba(0,0,0,0.3);
-}
+.header-btn{ background:linear-gradient(135deg,rgba(0,168,255,0.2),rgba(139,92,246,0.15)); border:1px solid rgba(0,168,255,0.6); color:var(--accent-cyan); padding:8px 18px; border-radius:25px; font-size:10px; font-weight:700; cursor:pointer; transition:all 0.3s ease; text-transform:uppercase; letter-spacing:1px; font-family:'Rajdhani',sans-serif; box-shadow:0 0 25px rgba(0,168,255,0.3),inset 0 1px 0 rgba(255,255,255,0.1); }
+.header-btn:hover{ background:linear-gradient(135deg,rgba(0,168,255,0.35),rgba(139,92,246,0.25)); box-shadow:0 0 40px rgba(0,168,255,0.5),0 0 60px rgba(0,168,255,0.3); border-color:var(--accent-cyan); transform:translateY(-2px); }
+.sub-header{ background:rgba(10,21,37,0.95); padding:10px 12px; display:flex; gap:8px; border-bottom:1px solid rgba(0,168,255,0.15); backdrop-filter:blur(20px); overflow-x:auto; position:sticky; top:60px; z-index:90; -webkit-overflow-scrolling:touch; box-shadow:0 4px 20px rgba(0,0,0,0.3); }
 .sub-header::-webkit-scrollbar{display:none}
-.filter-tab{
-    background:none;
-    border:none;
-    color:var(--text-muted);
-    font-size:11px;
-    font-weight:600;
-    cursor:pointer;
-    padding:8px 10px;
-    position:relative;
-    transition:all 0.3s ease;
-    white-space:nowrap;
-    font-family:'Rajdhani',sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:2px;
-}
+.filter-tab{ background:none; border:none; color:var(--text-muted); font-size:11px; font-weight:600; cursor:pointer; padding:8px 10px; position:relative; transition:all 0.3s ease; white-space:nowrap; font-family:'Rajdhani',sans-serif; text-transform:uppercase; letter-spacing:0.5px; display:flex; flex-direction:column; align-items:center; gap:2px; }
 .filter-tab .tab-zh{font-family:'Noto Sans SC',sans-serif;font-size:10px}
 .filter-tab .tab-en{font-size:8px;opacity:0.7}
 .filter-tab:hover,.filter-tab.active{color:var(--accent-cyan);text-shadow:0 0 15px rgba(0,255,255,0.7)}
-.filter-tab.active::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:30px;
-    height:3px;
-    background:var(--accent-cyan);
-    border-radius:0 0 50% 50%;
-    box-shadow:0 0 15px var(--accent-cyan),0 0 30px var(--accent-cyan);
-}
-.filter-tab.active::after{
-    content:'';
-    position:absolute;
-    bottom:0;
-    left:2px;
-    right:2px;
-    height:2px;
-    background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent);
-    box-shadow:0 0 12px var(--accent-cyan);
-}
+.filter-tab.active::before{content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:30px; height:3px; background:var(--accent-cyan); border-radius:0 0 50% 50%; box-shadow:0 0 15px var(--accent-cyan),0 0 30px var(--accent-cyan);}
+.filter-tab.active::after{content:''; position:absolute; bottom:0; left:2px; right:2px; height:2px; background:linear-gradient(90deg,transparent,var(--accent-cyan),transparent); box-shadow:0 0 12px var(--accent-cyan);}
 .container{max-width:100%;margin:0 auto;padding:16px;position:relative;z-index:1}
-.page-title{
-    font-family:'Orbitron',sans-serif;
-    font-size:20px;
-    font-weight:800;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:20px;
-    background:linear-gradient(180deg,#ffffff 0%,var(--accent-cyan) 50%,#a0c4e8 100%);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    position:relative;
-    display:inline-block;
-    padding-bottom:12px;
-    filter:drop-shadow(0 0 20px rgba(0,168,255,0.5));
-}
+.page-title{ font-family:'Orbitron',sans-serif; font-size:20px; font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:20px; background:linear-gradient(180deg,#ffffff 0%,var(--accent-cyan) 50%,#a0c4e8 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative; display:inline-block; padding-bottom:12px; filter:drop-shadow(0 0 20px rgba(0,168,255,0.5)); }
 .page-title .title-zh{display:block;font-size:0.5em;letter-spacing:2px;font-weight:500;margin-bottom:4px}
 .page-title .title_en{display:block;font-size:0.4em;letter-spacing:1px;opacity:0.8;font-weight:400; text-transform: uppercase; margin-top: 2px;}
-.page-title::after{
-    content:'';
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:3px;
-    background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple),transparent);
-    box-shadow:0 0 25px rgba(0,168,255,0.6),0 0 50px rgba(139,92,246,0.4);
-    border-radius:2px;
-}
-/* 布局容器统一 */
+.page-title::after{content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple),transparent); box-shadow:0 0 25px rgba(0,168,255,0.6),0 0 50px rgba(139,92,246,0.4); border-radius:2px;}
 .groups-grid,.knockout-matches{display:grid;grid-template-columns:1fr;gap:16px}
 
 /* === 统一卡片样式 === */
-.group-card, .match-card {
-    background:linear-gradient(145deg, rgba(12,28,50,0.95), rgba(5,15,32,0.98));
-    border:1px solid rgba(0,168,255,0.25);
-    overflow:hidden;
-    position:relative;
-    backdrop-filter:blur(15px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(0,168,255,0.1), inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.3);
-    transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-    transform:translateY(0);
-    clip-path: polygon( 0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px) );
-}
-.group-card::before, .match-card::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:2px;
-    background:linear-gradient(90deg,transparent,var(--accent-cyan),var(--accent-purple),var(--accent-cyan),transparent);
-    box-shadow:0 0 20px rgba(0,168,255,0.6);
-}
-.group-card::after, .match-card::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    border:1px solid rgba(0,168,255,0.35);
-    clip-path: inherit;
-    pointer-events:none;
-    box-shadow: 0 0 15px rgba(0,168,255,0.2), inset 0 0 10px rgba(0,168,255,0.1);
-}
-.group-card:hover, .match-card:hover{
-    transform:translateY(-8px);
-    border-color:rgba(0,168,255,0.5);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 50px rgba(0,168,255,0.2), 0 0 80px rgba(139,92,246,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
-}
-/* 分组标题 */
-.group-header{
-    background:linear-gradient(180deg,rgba(0,168,255,0.12),rgba(0,102,204,0.06));
-    padding:12px 16px;
-    border-bottom:1px solid rgba(0,168,255,0.15);
-    position:relative;
-}
-.group-header::after{
-    content:'';
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    height:1px;
-    background:linear-gradient(90deg,transparent,rgba(0,255,255,0.4),transparent);
-}
-.group-title{
-    font-family:'Orbitron',sans-serif;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--accent-cyan);
-    text-shadow:0 0 20px rgba(0,255,255,0.6);
-}
+.group-card{ background:linear-gradient(145deg, rgba(12,28,50,0.95), rgba(5,15,32,0.98)); border:1px solid rgba(0,168,255,0.25); overflow:hidden; position:relative; backdrop-filter:blur(15px); box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(0,168,255,0.1), inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -1px 0 rgba(0,0,0,0.3); transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); transform:translateY(0); clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px)); }
+.group-card::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--accent-cyan),var(--accent-purple),var(--accent-cyan),transparent); box-shadow:0 0 20px rgba(0,168,255,0.6);}
+.group-card::after{content:''; position:absolute; inset:0; border:1px solid rgba(0,168,255,0.35); clip-path: inherit; pointer-events:none; box-shadow: 0 0 15px rgba(0,168,255,0.2), inset 0 0 10px rgba(0,168,255,0.1);}
+.group-card:hover{ transform:translateY(-8px); border-color:rgba(0,168,255,0.5); box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 50px rgba(0,168,255,0.2), 0 0 80px rgba(139,92,246,0.15), inset 0 1px 0 rgba(255,255,255,0.12); }
+
+.group-header{ background:linear-gradient(180deg,rgba(0,168,255,0.12),rgba(0,102,204,0.06)); padding:12px 16px; border-bottom:1px solid rgba(0,168,255,0.15); position:relative; display: flex; justify-content: space-between; align-items: center; }
+.group-header::after{content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(0,255,255,0.4),transparent);}
+.group-title{ font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent-cyan); text-shadow:0 0 20px rgba(0,255,255,0.6); display: flex; align-items: center; gap: 8px; }
 .group-title .group-zh{display:none}
 .group-title .group_en{font-size:1.1em; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;}
+
+.download-btn { background: rgba(0, 168, 255, 0.1); border: 1px solid rgba(0, 168, 255, 0.4); color: var(--accent-cyan); padding: 4px 10px; font-size: 9px; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-weight: 700; font-family: 'Rajdhani', sans-serif; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
+.download-btn:hover { background: rgba(0, 168, 255, 0.3); box-shadow: 0 0 10px rgba(0,168,255,0.5); transform: scale(1.05); }
+.download-icon { width: 10px; height: 10px; border: 1px solid currentColor; position: relative; }
+.download-icon::after { content: ''; position: absolute; bottom: 1px; left: 1px; width: 6px; height: 5px; background: currentColor; }
+
 .match-list{padding:8px}
 
-/* === 统一比赛条目样式 (左侧时间卡片 + 右侧球队信息) === */
+/* === 比赛条目核心布局 === */
 .match-item{
-    padding:14px 16px;
-    transition:all 0.35s cubic-bezier(0.175,0.885,0.32,1.275);
-    position:relative;
-    background:linear-gradient(145deg, rgba(15,35,60,0.5), rgba(8,20,40,0.7));
-    margin-bottom:8px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
-    border:1px solid rgba(0,168,255,0.08);
-    clip-path: polygon( 0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px) );
-    display: flex;
-    align-items: center;
+ padding:12px 10px; /* 稍微减少padding以适应手机 */
+ transition:all 0.35s cubic-bezier(0.175,0.885,0.32,1.275); position:relative;
+ background:linear-gradient(145deg, rgba(15,35,60,0.5), rgba(8,20,40,0.7)); margin-bottom:8px;
+ box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+ border:1px solid rgba(0,168,255,0.08);
+ clip-path: polygon(0 8px, 8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px));
+ display: flex; align-items: center;
 }
-.match-item::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    border:1px solid rgba(0,168,255,0.35);
-    clip-path: inherit;
-    pointer-events:none;
-    box-shadow: 0 0 15px rgba(0,168,255,0.2), inset 0 0 10px rgba(0,168,255,0.1);
-}
+.match-item::after{content:''; position:absolute; inset:0; border:1px solid rgba(0,168,255,0.35); clip-path: inherit; pointer-events:none; box-shadow: 0 0 15px rgba(0,168,255,0.2), inset 0 0 10px rgba(0,168,255,0.1);}
 .match-item:last-child{border-bottom:none;margin-bottom:0}
-.match-item:hover{
-    background:linear-gradient(145deg, rgba(20,45,75,0.6), rgba(10,28,50,0.8));
-    transform:translateY(-4px);
-    border-color:rgba(0,168,255,0.3);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(0,168,255,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
-}
+.match-item:hover{ background:linear-gradient(145deg, rgba(20,45,75,0.6), rgba(10,28,50,0.8)); transform:translateY(-4px); border-color:rgba(0,168,255,0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(0,168,255,0.15), inset 0 1px 0 rgba(255,255,255,0.08); }
 
-/* 左侧时间日期卡片 - 统一上下排版 */
 .match-datetime{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 65px;
-    padding: 8px;
-    margin-right: 15px;
-    background: linear-gradient(180deg, rgba(0,168,255,0.15), rgba(0,102,204,0.1));
-    border: 1px solid rgba(0,168,255,0.3);
-    border-radius: 8px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    flex-shrink: 0;
+ display: flex; flex-direction: column; justify-content: center; align-items: center;
+ min-width: 60px; padding: 6px; margin-right: 10px;
+ background: linear-gradient(180deg, rgba(0,168,255,0.15), rgba(0,102,204,0.1));
+ border: 1px solid rgba(0,168,255,0.3); border-radius: 8px;
+ box-shadow: inset 0 1px 0 rgba(255,255,255,0.1); flex-shrink: 0;
 }
-.match-datetime-date{
-    font-family:'Orbitron',sans-serif;
-    font-size:12px;
-    font-weight:600;
-    color:#ffffff;
-    letter-spacing:1px;
-    text-shadow:0 0 10px rgba(255,255,255,0.3);
-}
-.match-datetime-time{
-    font-family:'Orbitron',sans-serif;
-    font-size:10px;
-    color:var(--accent-cyan);
-    margin-top:2px;
-    text-shadow:0 0 10px rgba(0,168,255,0.6);
-}
+.match-datetime-date{ font-family:'Orbitron',sans-serif; font-size:11px; font-weight:600; color:#ffffff; letter-spacing:0.5px; text-shadow:0 0 10px rgba(255,255,255,0.3); }
+.match-datetime-time{ font-family:'Orbitron',sans-serif; font-size:9px; color:var(--accent-cyan); margin-top:2px; text-shadow:0 0 10px rgba(0,168,255,0.6); }
 
-/* 右侧球队区域 */
-.match-teams{display:flex;align-items:center;justify-content:space-between;position:relative; flex:1;}
-.team{display:flex;align-items:center;gap:10px;flex:1;position:relative}
+.match-teams{display:flex;align-items:center;justify-content:space-between;position:relative; flex:1; min-width:0;}
+
+/* 强制对齐的核心样式 */
+.team{display:flex;align-items:center;gap:8px;flex:1;position:relative; min-width:0;}
 .team.team-home{justify-content:flex-start}
 .team.team-away{justify-content:flex-end}
 
 /* 国旗 */
-.team-flag{ width:44px; height:30px; border-radius:6px; object-fit:cover; flex-shrink:0; box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 25px rgba(0,168,255,0.2), inset 0 2px 6px rgba(255,255,255,0.25), inset 0 -2px 6px rgba(0,0,0,0.3); transition:all 0.35s cubic-bezier(0.175,0.885,0.32,1.275); position:relative; transform:perspective(500px) rotateY(-15deg); }
-.team-flag::before{ content:''; position:absolute; top:0; left:0; right:0; bottom:0; border-radius:6px; background:linear-gradient(135deg,rgba(255,255,255,0.3) 0%,rgba(255,255,255,0.1) 30%,transparent 50%,rgba(0,0,0,0.2) 100%); pointer-events:none; z-index:2; }
-.team-flag::after{ content:''; position:absolute; top:2px; left:8%; right:8%; height:35%; border-radius:6px 6px 50% 50%; background:linear-gradient(180deg,rgba(255,255,255,0.35) 0%,transparent 100%); pointer-events:none; z-index:3; }
-.team-away .team-flag{ transform:perspective(500px) rotateY(15deg); }
-.team-flag:hover{ transform:perspective(500px) rotateY(0deg) scale(1.15); box-shadow: 0 12px 30px rgba(0,0,0,0.7), 0 0 35px rgba(0,168,255,0.4), 0 0 50px rgba(139,92,246,0.25), inset 0 2px 8px rgba(255,255,255,0.3); }
+.team-flag{
+ width:36px; height:26px; border-radius:4px; object-fit:cover; flex-shrink:0;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 15px rgba(0,168,255,0.15);
+ transition:all 0.35s cubic-bezier(0.175,0.885,0.32,1.275); position:relative;
+ /* 稍微移除3D效果以节省空间，或者保留但确保不溢出 */
+ transform: perspective(500px) rotateY(-10deg);
+}
+/* 简化的国旗光效 */
+.team-flag::before{content:''; position:absolute; top:0; left:0; right:0; bottom:0; border-radius:4px; background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 50%,rgba(0,0,0,0.15) 100%); pointer-events:none;}
+.team-away .team-flag{transform: perspective(500px) rotateY(10deg);}
+.team-flag:hover{ transform:perspective(500px) rotateY(0deg) scale(1.1); box-shadow: 0 8px 15px rgba(0,0,0,0.6), 0 0 20px rgba(0,168,255,0.3); }
 
-/* 国家名 */
-.team-name-wrapper{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}
-.team-name-zh{ font-family:'Rajdhani','Noto Sans SC',sans-serif; font-size:13px; font-weight:700; text-align:center; color:#ffffff; text-shadow:0 2px 8px rgba(0,0,0,0.8),0 0 20px rgba(0,168,255,0.3); line-height:1.3; }
-.team-name-en{font-size:9px;color:var(--text-muted);text-align:center;letter-spacing:0.3px;margin-top:2px; font-weight: 700;}
+/* 国名容器 */
+.team-name-wrapper{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center; min-width:0; /* 关键：防止溢出 */ }
+.team-name-zh{ font-family:'Rajdhani','Noto Sans SC',sans-serif; font-size:11px; font-weight:700; text-align:center; color:#ffffff; text-shadow:0 2px 4px rgba(0,0,0,0.8); line-height:1.2; white-space: nowrap; }
+.team-name-en{font-size:8px;color:var(--text-muted);text-align:center;letter-spacing:0.2px; margin-top:1px; white-space: nowrap; font-weight: 600;}
 
-/* VS */
-.match-vs{ font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:var(--accent-pink); padding:0 10px; letter-spacing:2px; flex-shrink:0; text-shadow: 0 0 10px rgba(255,50,100,0.9), 0 0 25px rgba(255,50,100,0.6), 0 0 40px rgba(255,50,100,0.3); position:relative; }
-.match-vs::before{ content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:55px; height:55px; background:radial-gradient(circle,rgba(255,51,102,0.25) 0%,rgba(255,51,102,0.08) 40%,transparent 70%); border-radius:50%; z-index:-1; animation:vsPulse 2s ease-in-out infinite; }
-@keyframes vsPulse{ 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.9} 50%{transform:translate(-50%,-50%) scale(1.4);opacity:0.5} }
+.match-vs{ font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; color:var(--accent-pink); padding:0 6px; letter-spacing:1px; flex-shrink:0; text-shadow: 0 0 8px rgba(255,50,100,0.8); position:relative; }
+.match-vs::before{content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px; background:radial-gradient(circle,rgba(255,51,102,0.25) 0%,rgba(255,51,102,0.08) 40%,transparent 70%); border-radius:50%; z-index:-1; animation:vsPulse 2s ease-in-out infinite;}
+@keyframes vsPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.9} 50%{transform:translate(-50%,-50%) scale(1.4);opacity:0.5}}
 
 .stage-title{ font-family:'Orbitron',sans-serif; font-size:15px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin:24px 0 14px; padding-bottom:10px; border-bottom:1px solid rgba(0,168,255,0.2); position:relative; color:#ffffff; text-shadow:0 0 20px rgba(255,255,255,0.3); display:flex; align-items:center; gap:8px; }
 .stage-title .stage-zh{font-family:'Noto Sans SC';font-size:0.9em}
 .stage-title .stage_en{font-size:0.75em;opacity:0.7;font-weight:400}
-.stage-title::after{ content:''; position:absolute; bottom:-1px; left:0; width:120px; height:3px; background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple),transparent); box-shadow:0 0 20px var(--accent-cyan); border-radius:2px; }
+.stage-title::after{content:''; position:absolute; bottom:-1px; left:0; width:120px; height:3px; background:linear-gradient(90deg,var(--accent-cyan),var(--accent-purple),transparent); box-shadow:0 0 20px var(--accent-cyan); border-radius:2px;}
 .stage-title:first-child{margin-top:0}
 
-/* 淘汰赛额外样式（可选，例如决赛特殊颜色） */
-.knockout-card .match-teams { padding-right: 0; }
 .final-card{ background:linear-gradient(145deg, rgba(47,91,255,0.15), rgba(15,30,60,0.98)); border:1px solid rgba(139,92,246,0.5); box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 50px rgba(139,92,246,0.2), 0 0 80px rgba(0,168,255,0.15), inset 0 1px 0 rgba(255,255,255,0.08); }
 .final-card::before{ background:linear-gradient(90deg,transparent,rgba(139,92,246,0.8),var(--accent-cyan),rgba(139,92,246,0.8),transparent); box-shadow:0 0 25px rgba(139,92,246,0.6); }
 .final-card:hover{ box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 60px rgba(139,92,246,0.3), 0 0 100px rgba(0,168,255,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.group-card,.match-card,.knockout-card{animation:fadeIn 0.5s ease forwards;opacity:0}
+.group-card,.knockout-card,.match-card{animation:fadeIn 0.5s ease forwards;opacity:0}
 .group-card:nth-child(1){animation-delay:0.04s}.group-card:nth-child(2){animation-delay:0.08s}.group-card:nth-child(3){animation-delay:0.12s}.group-card:nth-child(4){animation-delay:0.16s}.group-card:nth-child(5){animation-delay:0.2s}.group-card:nth-child(6){animation-delay:0.24s}.group-card:nth-child(7){animation-delay:0.28s}.group-card:nth-child(8){animation-delay:0.32s}.group-card:nth-child(9){animation-delay:0.36s}.group-card:nth-child(10){animation-delay:0.4s}.group-card:nth-child(11){animation-delay:0.44s}.group-card:nth-child(12){animation-delay:0.48s}
-.knockout-card:nth-child(1){animation-delay:0.04s}
 
+/* 平板及以上 */
 @media (min-width:768px){
-    .header{padding:16px 32px}
-    .logo{font-size:24px;letter-spacing:4px}
-    .tournament-title{font-size:18px;letter-spacing:1px}
-    .countdown{gap:10px}
-    .countdown-item{padding:10px 16px;min-width:58px}
-    .countdown-value{font-size:22px}
-    .countdown-label{font-size:9px}
-    .container{padding:24px;max-width:1200px;margin:0 auto}
-    .page-title{font-size:28px;margin-bottom:32px}
-    .groups-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-    .group-header{padding:16px 20px}
-    .group-title{font-size:12px;letter-spacing:4px}
-    .match-item{padding:18px 20px;margin-bottom:10px}
-    .team-flag{width:52px;height:35px}
-    .team-name-zh{font-size:14px}
-    .match-vs{font-size:14px;padding:0 14px}
-    .stage-title{font-size:18px;margin:36px 0 18px;padding-bottom:14px}
-    .stage-title::after{width:150px}
-    .knockout-card{padding:18px 22px;gap:18px;}
-    .match-datetime{min-width:80px;padding:12px}
-    .match-datetime-date{font-size:14px}
-    .match-datetime-time{font-size:12px}
-    .knockout-team .team-flag{width:56px;height:36px}
-    .knockout-team .team-name-zh{font-size:15px}
-    .knockout-team .team-name-en{font-size:10px}
+ .header{padding:16px 32px}
+ .logo{font-size:24px;letter-spacing:4px} .tournament-title{font-size:18px;letter-spacing:1px}
+ .countdown{gap:10px}
+ /* 电脑上稍微放宽 */
+ .countdown-item{padding:10px 16px; min-width:65px; }
+ .countdown-value{font-size:22px}
+ .countdown-label{font-size:9px}
+ 
+ .container{padding:24px;max-width:1200px;margin:0 auto}
+ .page-title{font-size:28px;margin-bottom:32px}
+ .groups-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+ .group-header{padding:16px 20px}
+ .group-title{font-size:12px;letter-spacing:4px}
+ .match-item{padding:16px 20px;margin-bottom:10px}
+ 
+ /* 电脑端国旗和名字放大但对齐保持 */
+ .team-flag{width:44px;height:30px}
+ .team-name-zh{font-size:13px}
+ .team-name-en{font-size:10px}
+ .match-vs{font-size:12px;padding:0 10px}
+ 
+ .stage-title{font-size:18px;margin:36px 0 18px;padding-bottom:14px}
+ .stage-title::after{width:150px}
+ 
+ .match-datetime{min-width:70px;padding:10px}
+ .match-datetime-date{font-size:13px}
+ .match-datetime-time{font-size:11px}
 }
-@media (min-width:1200px){ .groups-grid{grid-template-columns:repeat(3,1fr)} }
+@media (min-width:1200px){
+ .groups-grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
 <header class="header">
-    <div class="header-left">
-        <div class="logo">FIFA World Cup</div>
-        <div class="tournament-title">2026 USA / Canada / Mexico</div>
-    </div>
-    <div class="countdown" id="countdown">
-        <div class="countdown-item"><div class="countdown-value" id="days">00</div><div class="countdown-label">Days</div></div>
-        <div class="countdown-item"><div class="countdown-value" id="hours">00</div><div class="countdown-label">Hours</div></div>
-        <div class="countdown-item"><div class="countdown-value" id="minutes">00</div><div class="countdown-label">Mins</div></div>
-        <div class="countdown-item"><div class="countdown-value" id="seconds">00</div><div class="countdown-label">Secs</div></div>
-    </div>
-    <div class="header-right">
-        <button class="header-btn" onclick="scrollToSchedule()">View Matches</button>
-    </div>
+ <div class="header-left">
+  <div class="logo">FIFA World Cup</div>
+  <div class="tournament-title">2026 USA / Canada / Mexico</div>
+ </div>
+ <div class="countdown" id="countdown">
+  <!-- 恢复了天数的标签显示 -->
+  <div class="countdown-item"><div class="countdown-value" id="days">00</div><div class="countdown-label">Days</div></div>
+  <div class="countdown-item"><div class="countdown-value" id="hours">00</div><div class="countdown-label">Hours</div></div>
+  <div class="countdown-item"><div class="countdown-value" id="minutes">00</div><div class="countdown-label">Mins</div></div>
+  <div class="countdown-item"><div class="countdown-value" id="seconds">00</div><div class="countdown-label">Secs</div></div>
+ </div>
+ <div class="header-right">
+  <button class="header-btn" onclick="scrollToSchedule()">View Matches</button>
+ </div>
 </header>
 <nav class="sub-header">
-    <button class="filter-tab active" onclick="filterByStage('all', this)">
-        <span class="tab-zh">全部比赛</span>
-        <span class="tab-en">All Matches</span>
-    </button>
-    <button class="filter-tab" onclick="filterByStage('group', this)">
-        <span class="tab-zh">小组赛</span>
-        <span class="tab-en">Group Stage</span>
-    </button>
-    <button class="filter-tab" onclick="filterByStage('round32', this)">
-        <span class="tab-zh">三十二强</span>
-        <span class="tab-en">Round of 32</span>
-    </button>
-    <button class="filter-tab" onclick="filterByStage('round16', this)">
-        <span class="tab-zh">十六强</span>
-        <span class="tab-en">Round of 16</span>
-    </button>
-    <button class="filter-tab" onclick="filterByStage('quarterfinal', this)">
-        <span class="tab-zh">四分之一决赛</span>
-        <span class="tab-en">Quarter-finals</span>
-    </button>
-    <button class="filter-tab" onclick="filterByStage('semifinal', this)">
-        <span class="tab-zh">半决赛</span>
-        <span class="tab-en">Semi-finals</span>
-    </button>
-    <button class="filter-tab" onclick="filterByStage('final', this)">
-        <span class="tab-zh">决赛</span>
-        <span class="tab-en">Final</span>
-    </button>
+ <button class="filter-tab active" onclick="filterByStage('all', this)"> <span class="tab-zh">全部比赛</span> <span class="tab-en">All Matches</span> </button>
+ <button class="filter-tab" onclick="filterByStage('group', this)"> <span class="tab-zh">小组赛</span> <span class="tab-en">Group Stage</span> </button>
+ <button class="filter-tab" onclick="filterByStage('round32', this)"> <span class="tab-zh">三十二强</span> <span class="tab-en">Round of 32</span> </button>
+ <button class="filter-tab" onclick="filterByStage('round16', this)"> <span class="tab-zh">十六强</span> <span class="tab-en">Round of 16</span> </button>
+ <button class="filter-tab" onclick="filterByStage('quarterfinal', this)"> <span class="tab-zh">四分之一决赛</span> <span class="tab-en">Quarter-finals</span> </button>
+ <button class="filter-tab" onclick="filterByStage('semifinal', this)"> <span class="tab-zh">半决赛</span> <span class="tab-en">Semi-finals</span> </button>
+ <button class="filter-tab" onclick="filterByStage('final', this)"> <span class="tab-zh">决赛</span> <span class="tab-en">Final</span> </button>
 </nav>
 <main class="container">
-    <h1 class="page-title">
-        <span class="title-zh">比赛日程</span>
-        <span class="title_en">Match Schedule</span>
-    </h1>
-    <h2 class="stage-title" id="group-stage">
-        <span class="stage-zh">小组赛</span>
-        <span class="stage_en">Group Stage</span>
-        <span style="opacity:0.5">·</span>
-        <span style="font-size:0.75em;opacity:0.7;font-weight:400">72 <span style="font-family:'Noto Sans SC'">场</span> Matches</span>
-    </h2>
-    <div class="groups-grid" id="groups-container"></div>
-    <h2 class="stage-title">
-        <span class="stage-zh">淘汰赛</span>
-        <span class="stage_en">Knockout Stage</span>
-    </h2>
-    <div class="knockout-matches" id="knockout-container"></div>
+ <h1 class="page-title"> <span class="title-zh">比赛日程</span> <span class="title_en">Match Schedule</span> </h1>
+ <h2 class="stage-title" id="group-stage"> <span class="stage-zh">小组赛</span> <span class="stage_en">Group Stage</span> <span style="opacity:0.5">·</span> <span style="font-size:0.75em;opacity:0.7;font-weight:400">72 <span style="font-family:'Noto Sans SC'">场</span> Matches</span> </h2>
+ <div class="groups-grid" id="groups-container"></div>
+ <h2 class="stage-title"> <span class="stage-zh">淘汰赛</span> <span class="stage_en">Knockout Stage</span> </h2>
+ <div class="groups-grid knockout-matches" id="knockout-container"></div>
 </main>
 <script>
 const FLAG_CDN='https://flagcdn.com/w80';
 function getFlag(code){return`${FLAG_CDN}/${code.toLowerCase()}.png`}
-const teams={
-    'Mexico':{code:'mx',nameZh:'墨西哥'},
-    'South Africa':{code:'za',nameZh:'南非'},
-    'South Korea':{code:'kr',nameZh:'韩国'},
-    'Czechia':{code:'cz',nameZh:'捷克'},
-    'Canada':{code:'ca',nameZh:'加拿大'},
-    'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'},
-    'Qatar':{code:'qa',nameZh:'卡塔尔'},
-    'Switzerland':{code:'ch',nameZh:'瑞士'},
-    'USA':{code:'us',nameZh:'美国'},
-    'Paraguay':{code:'py',nameZh:'巴拉圭'},
-    'Australia':{code:'au',nameZh:'澳大利亚'},
-    'Türkiye':{code:'tr',nameZh:'土耳其'},
-    'Brazil':{code:'br',nameZh:'巴西'},
-    'Morocco':{code:'ma',nameZh:'摩洛哥'},
-    'Haiti':{code:'ht',nameZh:'海地'},
-    'Scotland':{code:'gb',nameZh:'苏格兰'},
-    'Germany':{code:'de',nameZh:'德国'},
-    'Curaçao':{code:'cw',nameZh:'库拉索'},
-    'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},
-    'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},
-    'Netherlands':{code:'nl',nameZh:'荷兰'},
-    'Japan':{code:'jp',nameZh:'日本'},
-    'Sweden':{code:'se',nameZh:'瑞典'},
-    'Tunisia':{code:'tn',nameZh:'突尼斯'},
-    'Spain':{code:'es',nameZh:'西班牙'},
-    'Cape Verde':{code:'cv',nameZh:'佛得角'},
-    'Belgium':{code:'be',nameZh:'比利时'},
-    'Egypt':{code:'eg',nameZh:'埃及'},
-    'Saudi Arabia':{code:'sa',nameZh:'沙特阿拉伯'},
-    'Uruguay':{code:'uy',nameZh:'乌拉圭'},
-    'Iran':{code:'ir',nameZh:'伊朗'},
-    'New Zealand':{code:'nz',nameZh:'新西兰'},
-    'France':{code:'fr',nameZh:'法国'},
-    'Senegal':{code:'sn',nameZh:'塞内加尔'},
-    'Iraq':{code:'iq',nameZh:'伊拉克'},
-    'Norway':{code:'no',nameZh:'挪威'},
-    'Argentina':{code:'ar',nameZh:'阿根廷'},
-    'Algeria':{code:'dz',nameZh:'阿尔及利亚'},
-    'Austria':{code:'at',nameZh:'奥地利'},
-    'Jordan':{code:'jo',nameZh:'约旦'},
-    'Portugal':{code:'pt',nameZh:'葡萄牙'},
-    'DR Congo':{code:'cd',nameZh:'刚果民主共和国'},
-    'Uzbekistan':{code:'uz',nameZh:'乌兹别克斯坦'},
-    'Colombia':{code:'co',nameZh:'哥伦比亚'},
-    'England':{code:'gb',nameZh:'英格兰'},
-    'Croatia':{code:'hr',nameZh:'克罗地亚'},
-    'Ghana':{code:'gh',nameZh:'加纳'},
-    'Panama':{code:'pa',nameZh:'巴拿马'}
-};
+const teams={ 'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'},'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'},'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'},'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'},'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'},'Scotland':{code:'gb',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'},'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'},'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'},'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'},'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特阿拉伯'},'Uruguay':{code:'uy',nameZh:'乌拉圭'},'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'},'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'},'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'},'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果民主共和国'},'Uzbekistan':{code:'uz',nameZh:'乌兹别克斯坦'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb',nameZh:'英格兰'},'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'}};
+const groups={'A':['South Africa','Mexico','South Korea','Czechia'],'B':['Canada','Bosnia and Herzegovina','Qatar','Switzerland'],'C':['Brazil','Morocco','Haiti','Scotland'],'D':['USA','Paraguay','Australia','Türkiye'],'E':['Germany','Curaçao','Ivory Coast','Ecuador'],'F':['Netherlands','Japan','Sweden','Tunisia'],'G':['Spain','Cape Verde','Belgium','Egypt'],'H':['Saudi Arabia','Uruguay','Iran','New Zealand'],'I':['France','Senegal','Iraq','Norway'],'J':['Argentina','Algeria','Austria','Jordan'],'K':['Portugal','DR Congo','Uzbekistan','Colombia'],'L':['England','Croatia','Ghana','Panama']};
+const groupMatches=[{date:'06/12',time:'03:00',team1:'Mexico',team2:'South Africa',group:'A'},{date:'06/12',time:'10:00',team1:'South Korea',team2:'Czechia',group:'A'},{date:'06/13',time:'03:00',team1:'Canada',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/13',time:'09:00',team1:'USA',team2:'Paraguay',group:'D'},{date:'06/14',time:'03:00',team1:'Qatar',team2:'Switzerland',group:'B'},{date:'06/14',time:'06:00',team1:'Brazil',team2:'Morocco',group:'C'},{date:'06/14',time:'09:00',team1:'Haiti',team2:'Scotland',group:'C'},{date:'06/14',time:'12:00',team1:'Australia',team2:'Türkiye',group:'D'},{date:'06/15',time:'01:00',team1:'Germany',team2:'Curaçao',group:'E'},{date:'06/15',time:'04:00',team1:'Netherlands',team2:'Japan',group:'F'},{date:'06/15',time:'07:00',team1:'Ivory Coast',team2:'Ecuador',group:'E'},{date:'06/15',time:'10:00',team1:'Sweden',team2:'Tunisia',group:'F'},{date:'06/16',time:'00:00',team1:'Spain',team2:'Cape Verde',group:'G'},{date:'06/16',time:'03:00',team1:'Belgium',team2:'Egypt',group:'G'},{date:'06/16',time:'06:00',team1:'Saudi Arabia',team2:'Uruguay',group:'H'},{date:'06/16',time:'09:00',team1:'Iran',team2:'New Zealand',group:'H'},{date:'06/17',time:'03:00',team1:'France',team2:'Senegal',group:'I'},{date:'06/17',time:'06:00',team1:'Iraq',team2:'Norway',group:'I'},{date:'06/17',time:'09:00',team1:'Argentina',team2:'Algeria',group:'J'},{date:'06/17',time:'12:00',team1:'Austria',team2:'Jordan',group:'J'},{date:'06/18',time:'01:00',team1:'Portugal',team2:'DR Congo',group:'K'},{date:'06/18',time:'04:00',team1:'England',team2:'Croatia',group:'L'},{date:'06/18',time:'07:00',team1:'Ghana',team2:'Panama',group:'L'},{date:'06/18',time:'10:00',team1:'Uzbekistan',team2:'Colombia',group:'K'},{date:'06/19',time:'00:00',team1:'Czechia',team2:'South Africa',group:'A'},{date:'06/19',time:'09:00',team1:'Mexico',team2:'South Korea',group:'A'},{date:'06/19',time:'03:00',team1:'Switzerland',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/19',time:'06:00',team1:'Canada',team2:'Qatar',group:'B'},{date:'06/20',time:'03:00',team1:'USA',team2:'Australia',group:'D'},{date:'06/20',time:'06:00',team1:'Scotland',team2:'Morocco',group:'C'},{date:'06/20',time:'08:30',team1:'Brazil',team2:'Haiti',group:'C'},{date:'06/20',time:'11:00',team1:'Türkiye',team2:'Paraguay',group:'D'},{date:'06/21',time:'01:00',team1:'Netherlands',team2:'Sweden',group:'F'},{date:'06/21',time:'04:00',team1:'Germany',team2:'Ivory Coast',group:'E'},{date:'06/21',time:'08:00',team1:'Ecuador',team2:'Curaçao',group:'E'},{date:'06/21',time:'12:00',team1:'Tunisia',team2:'Japan',group:'F'},{date:'06/22',time:'00:00',team1:'Spain',team2:'Saudi Arabia',group:'H'},{date:'06/22',time:'03:00',team1:'Belgium',team2:'Iran',group:'G'},{date:'06/22',time:'06:00',team1:'Uruguay',team2:'Cape Verde',group:'H'},{date:'06/22',time:'09:00',team1:'New Zealand',team2:'Egypt',group:'G'},{date:'06/23',time:'01:00',team1:'Argentina',team2:'Austria',group:'J'},{date:'06/23',time:'05:00',team1:'France',team2:'Iraq',group:'I'},{date:'06/23',time:'08:00',team1:'Norway',team2:'Senegal',group:'I'},{date:'06/23',time:'11:00',team1:'Jordan',team2:'Algeria',group:'J'},{date:'06/24',time:'01:00',team1:'Portugal',team2:'Uzbekistan',group:'K'},{date:'06/24',time:'04:00',team1:'England',team2:'Ghana',group:'L'},{date:'06/24',time:'07:00',team1:'Panama',team2:'Croatia',group:'L'},{date:'06/24',time:'10:00',team1:'Colombia',team2:'DR Congo',group:'K'},{date:'06/25',time:'03:00',team1:'Switzerland',team2:'Canada',group:'B'},{date:'06/25',time:'03:00',team1:'Bosnia and Herzegovina',team2:'Qatar',group:'B'},{date:'06/25',time:'06:00',team1:'Morocco',team2:'Haiti',group:'C'},{date:'06/25',time:'06:00',team1:'Scotland',team2:'Brazil',group:'C'},{date:'06/25',time:'09:00',team1:'South Africa',team2:'South Korea',group:'A'},{date:'06/25',time:'09:00',team1:'Czechia',team2:'Mexico',group:'A'},{date:'06/26',time:'04:00',team1:'Curaçao',team2:'Ivory Coast',group:'E'},{date:'06/26',time:'04:00',team1:'Ecuador',team2:'Germany',group:'E'},{date:'06/26',time:'07:00',team1:'Tunisia',team2:'Netherlands',group:'F'},{date:'06/26',time:'07:00',team1:'Japan',team2:'Sweden',group:'F'},{date:'06/26',time:'10:00',team1:'Türkiye',team2:'USA',group:'D'},{date:'06/26',time:'10:00',team1:'Paraguay',team2:'Australia',group:'D'},{date:'06/27',time:'03:00',team1:'Norway',team2:'France',group:'I'},{date:'06/27',time:'03:00',team1:'Senegal',team2:'Iraq',group:'I'},{date:'06/27',time:'08:00',team1:'Cape Verde',team2:'Saudi Arabia',group:'H'},{date:'06/27',time:'08:00',team1:'Uruguay',team2:'Spain',group:'H'},{date:'06/27',time:'11:00',team1:'New Zealand',team2:'Belgium',group:'G'},{date:'06/27',time:'11:00',team1:'Egypt',team2:'Iran',group:'G'},{date:'06/28',time:'05:00',team1:'Panama',team2:'England',group:'L'},{date:'06/28',time:'05:00',team1:'Croatia',team2:'Ghana',group:'L'},{date:'06/28',time:'07:30',team1:'Colombia',team2:'Portugal',group:'K'},{date:'06/28',time:'07:30',team1:'DR Congo',team2:'Uzbekistan',group:'K'},{date:'06/28',time:'10:00',team1:'Algeria',team2:'Austria',group:'J'},{date:'06/28',time:'10:00',team1:'Jordan',team2:'Argentina',group:'J'}];
+const knockoutMatches=[{date:'07/01',time:'00:00',team1:'1A',team2:'2B',stage:'round32'},{date:'07/01',time:'04:00',team1:'1C',team2:'2D',stage:'round32'},{date:'07/01',time:'08:00',team1:'1E',team2:'2F',stage:'round32'},{date:'07/01',time:'12:00',team1:'1G',team2:'2H',stage:'round32'},{date:'07/02',time:'00:00',team1:'1I',team2:'2J',stage:'round32'},{date:'07/02',time:'04:00',team1:'1K',team2:'2L',stage:'round32'},{date:'07/02',time:'08:00',team1:'1B',team2:'2A',stage:'round32'},{date:'07/02',time:'12:00',team1:'1D',team2:'2C',stage:'round32'},{date:'07/03',time:'00:00',team1:'1F',team2:'2E',stage:'round32'},{date:'07/03',time:'04:00',team1:'1H',team2:'2G',stage:'round32'},{date:'07/03',time:'08:00',team1:'1J',team2:'2I',stage:'round32'},{date:'07/03',time:'12:00',team1:'1L',team2:'2K',stage:'round32'},{date:'07/04',time:'04:00',team1:'W49',team2:'W50',stage:'round16'},{date:'07/04',time:'08:00',team1:'W53',team2:'W54',stage:'round16'},{date:'07/04',time:'12:00',team1:'W57',team2:'W58',stage:'round16'},{date:'07/05',time:'04:00',team1:'W51',team2:'W52',stage:'round16'},{date:'07/05',time:'08:00',team1:'W55',team2:'W56',stage:'round16'},{date:'07/05',time:'12:00',team1:'W59',team2:'W60',stage:'round16'},{date:'07/06',time:'04:00',team1:'W61',team2:'W62',stage:'quarterfinal'},{date:'07/06',time:'08:00',team1:'W63',team2:'W64',stage:'quarterfinal'},{date:'07/07',time:'04:00',team1:'W65',team2:'W66',stage:'quarterfinal'},{date:'07/07',time:'08:00',team1:'W67',team2:'W68',stage:'quarterfinal'},{date:'07/09',time:'08:00',team1:'W69',team2:'W70',stage:'semifinal'},{date:'07/10',time:'08:00',team1:'W71',team2:'W72',stage:'semifinal'},{date:'07/13',time:'08:00',team1:'Winner SF1',team2:'Winner SF2',stage:'final'}];
 
-const groups={
-    'A':['South Africa','Mexico','South Korea','Czechia'],
-    'B':['Canada','Bosnia and Herzegovina','Qatar','Switzerland'],
-    'C':['Brazil','Morocco','Haiti','Scotland'],
-    'D':['USA','Paraguay','Australia','Türkiye'],
-    'E':['Germany','Curaçao','Ivory Coast','Ecuador'],
-    'F':['Netherlands','Japan','Sweden','Tunisia'],
-    'G':['Spain','Cape Verde','Belgium','Egypt'],
-    'H':['Saudi Arabia','Uruguay','Iran','New Zealand'],
-    'I':['France','Senegal','Iraq','Norway'],
-    'J':['Argentina','Algeria','Austria','Jordan'],
-    'K':['Portugal','DR Congo','Uzbekistan','Colombia'],
-    'L':['England','Croatia','Ghana','Panama']
-};
+function formatTimeWithAmPm(time){const[hours,minutes]=time.split(':');const h=parseInt(hours);const ampm=h>=12?'PM':'AM';const h12=h%12||12;return`${h12}:${minutes} ${ampm}`}
+function updateCountdown(){const targetDate=new Date('2026-06-12T03:00:00');const now=new Date();const diff=targetDate-now;if(diff>0){const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));const minutes=Math.floor((diff%(1000*60*60))/(1000*60));const seconds=Math.floor((diff%(1000*60))/1000);document.getElementById('days').textContent=String(days).padStart(2,'0');document.getElementById('hours').textContent=String(hours).padStart(2,'0');document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');document.getElementById('seconds').textContent=String(seconds).padStart(2,'0')}}setInterval(updateCountdown,1000);updateCountdown();
 
-const groupMatches=[
-    {date:'06/12',time:'03:00',team1:'Mexico',team2:'South Africa',group:'A'},
-    {date:'06/12',time:'10:00',team1:'South Korea',team2:'Czechia',group:'A'},
-    {date:'06/13',time:'03:00',team1:'Canada',team2:'Bosnia and Herzegovina',group:'B'},
-    {date:'06/13',time:'09:00',team1:'USA',team2:'Paraguay',group:'D'},
-    {date:'06/14',time:'03:00',team1:'Qatar',team2:'Switzerland',group:'B'},
-    {date:'06/14',time:'06:00',team1:'Brazil',team2:'Morocco',group:'C'},
-    {date:'06/14',time:'09:00',team1:'Haiti',team2:'Scotland',group:'C'},
-    {date:'06/14',time:'12:00',team1:'Australia',team2:'Türkiye',group:'D'},
-    {date:'06/15',time:'01:00',team1:'Germany',team2:'Curaçao',group:'E'},
-    {date:'06/15',time:'04:00',team1:'Netherlands',team2:'Japan',group:'F'},
-    {date:'06/15',time:'07:00',team1:'Ivory Coast',team2:'Ecuador',group:'E'},
-    {date:'06/15',time:'10:00',team1:'Sweden',team2:'Tunisia',group:'F'},
-    {date:'06/16',time:'00:00',team1:'Spain',team2:'Cape Verde',group:'G'},
-    {date:'06/16',time:'03:00',team1:'Belgium',team2:'Egypt',group:'G'},
-    {date:'06/16',time:'06:00',team1:'Saudi Arabia',team2:'Uruguay',group:'H'},
-    {date:'06/16',time:'09:00',team1:'Iran',team2:'New Zealand',group:'H'},
-    {date:'06/17',time:'03:00',team1:'France',team2:'Senegal',group:'I'},
-    {date:'06/17',time:'06:00',team1:'Iraq',team2:'Norway',group:'I'},
-    {date:'06/17',time:'09:00',team1:'Argentina',team2:'Algeria',group:'J'},
-    {date:'06/17',time:'12:00',team1:'Austria',team2:'Jordan',group:'J'},
-    {date:'06/18',time:'01:00',team1:'Portugal',team2:'DR Congo',group:'K'},
-    {date:'06/18',time:'04:00',team1:'England',team2:'Croatia',group:'L'},
-    {date:'06/18',time:'07:00',team1:'Ghana',team2:'Panama',group:'L'},
-    {date:'06/18',time:'10:00',team1:'Uzbekistan',team2:'Colombia',group:'K'},
-    {date:'06/19',time:'00:00',team1:'Czechia',team2:'South Africa',group:'A'},
-    {date:'06/19',time:'09:00',team1:'Mexico',team2:'South Korea',group:'A'},
-    {date:'06/19',time:'03:00',team1:'Switzerland',team2:'Bosnia and Herzegovina',group:'B'},
-    {date:'06/19',time:'06:00',team1:'Canada',team2:'Qatar',group:'B'},
-    {date:'06/20',time:'03:00',team1:'USA',team2:'Australia',group:'D'},
-    {date:'06/20',time:'06:00',team1:'Scotland',team2:'Morocco',group:'C'},
-    {date:'06/20',time:'08:30',team1:'Brazil',team2:'Haiti',group:'C'},
-    {date:'06/20',time:'11:00',team1:'Türkiye',team2:'Paraguay',group:'D'},
-    {date:'06/21',time:'01:00',team1:'Netherlands',team2:'Sweden',group:'F'},
-    {date:'06/21',time:'04:00',team1:'Germany',team2:'Ivory Coast',group:'E'},
-    {date:'06/21',time:'08:00',team1:'Ecuador',team2:'Curaçao',group:'E'},
-    {date:'06/21',time:'12:00',team1:'Tunisia',team2:'Japan',group:'F'},
-    {date:'06/22',time:'00:00',team1:'Spain',team2:'Saudi Arabia',group:'H'},
-    {date:'06/22',time:'03:00',team1:'Belgium',team2:'Iran',group:'G'},
-    {date:'06/22',time:'06:00',team1:'Uruguay',team2:'Cape Verde',group:'H'},
-    {date:'06/22',time:'09:00',team1:'New Zealand',team2:'Egypt',group:'G'},
-    {date:'06/23',time:'01:00',team1:'Argentina',team2:'Austria',group:'J'},
-    {date:'06/23',time:'05:00',team1:'France',team2:'Iraq',group:'I'},
-    {date:'06/23',time:'08:00',team1:'Norway',team2:'Senegal',group:'I'},
-    {date:'06/23',time:'11:00',team1:'Jordan',team2:'Algeria',group:'J'},
-    {date:'06/24',time:'01:00',team1:'Portugal',team2:'Uzbekistan',group:'K'},
-    {date:'06/24',time:'04:00',team1:'England',team2:'Ghana',group:'L'},
-    {date:'06/24',time:'07:00',team1:'Panama',team2:'Croatia',group:'L'},
-    {date:'06/24',time:'10:00',team1:'Colombia',team2:'DR Congo',group:'K'},
-    {date:'06/25',time:'03:00',team1:'Switzerland',team2:'Canada',group:'B'},
-    {date:'06/25',time:'03:00',team1:'Bosnia and Herzegovina',team2:'Qatar',group:'B'},
-    {date:'06/25',time:'06:00',team1:'Morocco',team2:'Haiti',group:'C'},
-    {date:'06/25',time:'06:00',team1:'Scotland',team2:'Brazil',group:'C'},
-    {date:'06/25',time:'09:00',team1:'South Africa',team2:'South Korea',group:'A'},
-    {date:'06/25',time:'09:00',team1:'Czechia',team2:'Mexico',group:'A'},
-    {date:'06/26',time:'04:00',team1:'Curaçao',team2:'Ivory Coast',group:'E'},
-    {date:'06/26',time:'04:00',team1:'Ecuador',team2:'Germany',group:'E'},
-    {date:'06/26',time:'07:00',team1:'Tunisia',team2:'Netherlands',group:'F'},
-    {date:'06/26',time:'07:00',team1:'Japan',team2:'Sweden',group:'F'},
-    {date:'06/26',time:'10:00',team1:'Türkiye',team2:'USA',group:'D'},
-    {date:'06/26',time:'10:00',team1:'Paraguay',team2:'Australia',group:'D'},
-    {date:'06/27',time:'03:00',team1:'Norway',team2:'France',group:'I'},
-    {date:'06/27',time:'03:00',team1:'Senegal',team2:'Iraq',group:'I'},
-    {date:'06/27',time:'08:00',team1:'Cape Verde',team2:'Saudi Arabia',group:'H'},
-    {date:'06/27',time:'08:00',team1:'Uruguay',team2:'Spain',group:'H'},
-    {date:'06/27',time:'11:00',team1:'New Zealand',team2:'Belgium',group:'G'},
-    {date:'06/27',time:'11:00',team1:'Egypt',team2:'Iran',group:'G'},
-    {date:'06/28',time:'05:00',team1:'Panama',team2:'England',group:'L'},
-    {date:'06/28',time:'05:00',team1:'Croatia',team2:'Ghana',group:'L'},
-    {date:'06/28',time:'07:30',team1:'Colombia',team2:'Portugal',group:'K'},
-    {date:'06/28',time:'07:30',team1:'DR Congo',team2:'Uzbekistan',group:'K'},
-    {date:'06/28',time:'10:00',team1:'Algeria',team2:'Austria',group:'J'},
-    {date:'06/28',time:'10:00',team1:'Jordan',team2:'Argentina',group:'J'}
-];
+function getTeamName(teamKey){const team=teams[teamKey];if(!team)return{zh:'TBD',en:teamKey};return{zh:team.nameZh,en:teamKey}}
+function isCountry(key){return!!teams[key]}
 
-const knockoutMatches=[
-    {date:'07/01',time:'00:00',team1:'1A',team2:'2B',stage:'round32'},
-    {date:'07/01',time:'04:00',team1:'1C',team2:'2D',stage:'round32'},
-    {date:'07/01',time:'08:00',team1:'1E',team2:'2F',stage:'round32'},
-    {date:'07/01',time:'12:00',team1:'1G',team2:'2H',stage:'round32'},
-    {date:'07/02',time:'00:00',team1:'1I',team2:'2J',stage:'round32'},
-    {date:'07/02',time:'04:00',team1:'1K',team2:'2L',stage:'round32'},
-    {date:'07/02',time:'08:00',team1:'1B',team2:'2A',stage:'round32'},
-    {date:'07/02',time:'12:00',team1:'1D',team2:'2C',stage:'round32'},
-    {date:'07/03',time:'00:00',team1:'1F',team2:'2E',stage:'round32'},
-    {date:'07/03',time:'04:00',team1:'1H',team2:'2G',stage:'round32'},
-    {date:'07/03',time:'08:00',team1:'1J',team2:'2I',stage:'round32'},
-    {date:'07/03',time:'12:00',team1:'1L',team2:'2K',stage:'round32'},
-    {date:'07/04',time:'04:00',team1:'W49',team2:'W50',stage:'round16'},
-    {date:'07/04',time:'08:00',team1:'W53',team2:'W54',stage:'round16'},
-    {date:'07/04',time:'12:00',team1:'W57',team2:'W58',stage:'round16'},
-    {date:'07/05',time:'04:00',team1:'W51',team2:'W52',stage:'round16'},
-    {date:'07/05',time:'08:00',team1:'W55',team2:'W56',stage:'round16'},
-    {date:'07/05',time:'12:00',team1:'W59',team2:'W60',stage:'round16'},
-    {date:'07/06',time:'04:00',team1:'W61',team2:'W62',stage:'quarterfinal'},
-    {date:'07/06',time:'08:00',team1:'W63',team2:'W64',stage:'quarterfinal'},
-    {date:'07/07',time:'04:00',team1:'W65',team2:'W66',stage:'quarterfinal'},
-    {date:'07/07',time:'08:00',team1:'W67',team2:'W68',stage:'quarterfinal'},
-    {date:'07/09',time:'08:00',team1:'W69',team2:'W70',stage:'semifinal'},
-    {date:'07/10',time:'08:00',team1:'W71',team2:'W72',stage:'semifinal'},
-    {date:'07/13',time:'08:00',team1:'Winner SF1',team2:'Winner SF2',stage:'final'}
-];
-
-function formatTimeWithAmPm(time){
-    const[hours,minutes]=time.split(':');
-    const h=parseInt(hours);
-    const ampm=h>=12?'PM':'AM';
-    const h12=h%12||12;
-    return`${h12}:${minutes} ${ampm}`
-}
-
-function updateCountdown(){
-    const targetDate=new Date('2026-06-12T03:00:00');
-    const now=new Date();
-    const diff=targetDate-now;
-    if(diff>0){
-        const days=Math.floor(diff/(1000*60*60*24));
-        const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-        const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
-        const seconds=Math.floor((diff%(1000*60))/1000);
-        document.getElementById('days').textContent=String(days).padStart(2,'0');
-        document.getElementById('hours').textContent=String(hours).padStart(2,'0');
-        document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
-        document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
-    }
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-function getTeamName(teamKey){
-    const team=teams[teamKey];
-    if(!team) return {zh: 'TBD', en: teamKey}; // 32强未确认球队
-    return {zh: team.nameZh, en: teamKey};
-}
-
-// 判断是否是确定的国家名（用于显示国旗）
-function isCountry(key) {
-    return !!teams[key];
-}
-
-// 渲染函数：生成通用的比赛卡片HTML
-function renderMatchItem(match, type) {
-    const team1 = getTeamName(match.team1);
-    const team2 = getTeamName(match.team2);
-    
-    const isTeam1Country = isCountry(match.team1);
-    const isTeam2Country = isCountry(match.team2);
-
-    // 左侧时间
-    let html = `
-        <div class="match-item" data-stage="${type}">
-            <div class="match-datetime">
-                <div class="match-datetime-date">${match.date}</div>
-                <div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div>
-            </div>
-            <div class="match-teams">
-                <div class="team team-home">
-                    ${isTeam1Country 
-                        ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}"`
-                        : `<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`
-                    }
-                    <div class="team-name-wrapper">
-                        <span class="team-name-zh">${team1.zh}</span>
-                        <span class="team-name-en">${team1.en}</span>
-                    </div>
-                </div>
-                <span class="match-vs">VS</span>
-                <div class="team team-away">
-                    <div class="team-name-wrapper">
-                        <span class="team-name-zh">${team2.zh}</span>
-                        <span class="team-name-en">${team2.en}</span>
-                    </div>
-                    ${isTeam2Country 
-                        ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}"`
-                        : `<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`
-                    }
-                </div>
-            </div>
-        </div>
-    `;
-    return html;
+function createCardHTML(titleText, matchesData, stageType, cardId) {
+ let matchesHtml = matchesData.map(match => {
+  const team1 = getTeamName(match.team1);
+  const team2 = getTeamName(match.team2);
+  const isTeam1Country = isCountry(match.team1);
+  const isTeam2Country = isCountry(match.team2);
+  return `<div class="match-item" data-stage="${stageType}">
+   <div class="match-datetime"> <div class="match-datetime-date">${match.date}</div> <div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div> </div>
+   <div class="match-teams">
+    <div class="team team-home">
+     ${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}">` : `<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}
+     <div class="team-name-wrapper"> <span class="team-name-zh">${team1.zh}</span> <span class="team-name-en">${team1.en}</span> </div>
+    </div>
+    <span class="match-vs">VS</span>
+    <div class="team team-away">
+     <div class="team-name-wrapper"> <span class="team-name-zh">${team2.zh}</span> <span class="team-name-en">${team2.en}</span> </div>
+     ${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}">` : `<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}
+    </div>
+   </div>
+  </div>`;
+ }).join('');
+ const downloadBtn = `<button class="download-btn" onclick="downloadCard(this)"> <div class="download-icon"></div> PNG </button>`;
+ return `<div class="group-card" data-stage="${stageType}" id="${cardId}"> <div class="group-header"> <div class="group-title"> <span class="group_en">${titleText}</span> </div> ${downloadBtn} </div> <div class="match-list">${matchesHtml}</div> </div>`;
 }
 
 function renderGroups(){
-    const container=document.getElementById('groups-container');
-    let html='';
-    Object.keys(groups).forEach(groupLetter=>{
-        const groupMatchesFiltered=groupMatches.filter(m=>m.group===groupLetter);
-        
-        // 生成组别卡片的Header
-        let cardsHtml = groupMatchesFiltered.map(match => renderMatchItem(match, 'group')).join('');
-        
-        html+=`
-            <div class="group-card" data-stage="group">
-                <div class="group-header">
-                    <div class="group-title">
-                        <span class="group-zh">分组 ${groupLetter}</span>
-                        <span class="group_en">Group ${groupLetter}</span>
-                    </div>
-                </div>
-                <div class="match-list">
-                    ${cardsHtml}
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML=html;
+ const container=document.getElementById('groups-container');
+ let html='';
+ Object.keys(groups).forEach(groupLetter=>{
+  const groupMatchesFiltered=groupMatches.filter(m=>m.group===groupLetter);
+  html += createCardHTML(`Group ${groupLetter}`, groupMatchesFiltered, 'group', `group-card-${groupLetter}`);
+ });
+ container.innerHTML=html;
 }
 
 function renderKnockout(){
-    const container=document.getElementById('knockout-container');
-    let html='';
-    knockoutMatches.forEach(match=>{
-        // 复用 renderMatchItem，传入对应的 stage
-        // 这里我们为了保持与 group-card 一样的外层包裹（可选），可以直接用 match-item 或者用 knockout-card
-        // 为了统一，这里使用 .knockout-card 类来获得特殊的动画延迟或可能的特殊样式（虽然CSS已统一）
-        const isFinal=match.stage==='final';
-        
-        // 复用上面的renderMatchItem，但外层容器使用 knockout-card 的class以应用特定样式（如有）
-        const innerHtml = renderMatchItem(match, match.stage).replace('match-item', 'match-item knockout-card ' + (isFinal ? 'final-card' : ''));
-        
-        html += innerHtml;
-    });
-    container.innerHTML=html;
+ const container=document.getElementById('knockout-container');
+ let html='';
+ const groupsByDate = {};
+ knockoutMatches.forEach(match => {
+  if(!groupsByDate[match.date]) groupsByDate[match.date] = [];
+  groupsByDate[match.date].push(match);
+ });
+ Object.keys(groupsByDate).forEach(date => {
+  const matches = groupsByDate[date];
+  const currentStage = matches.length > 0 ? matches[0].stage : 'knockout';
+  let matchesHtml = matches.map(match => {
+   const team1 = getTeamName(match.team1);
+   const team2 = getTeamName(match.team2);
+   const isTeam1Country = isCountry(match.team1);
+   const isTeam2Country = isCountry(match.team2);
+   return `<div class="match-item" data-stage="${match.stage}">
+    <div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div>
+    <div class="match-teams">
+     <div class="team team-home">
+      ${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}">` : `<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}
+      <div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${team1.en}</span></div>
+     </div>
+     <span class="match-vs">VS</span>
+     <div class="team team-away">
+      <div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${team2.en}</span></div>
+      ${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}">` : `<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}
+     </div>
+    </div>
+   </div>`;
+  }).join('');
+  const downloadBtn = `<button class="download-btn" onclick="downloadCard(this)"><div class="download-icon"></div> PNG</button>`;
+  html += `<div class="group-card" data-stage="${currentStage}" id="date-${date}"> <div class="group-header"> <div class="group-title"><span class="group_en">${date}</span></div> ${downloadBtn} </div> <div class="match-list">${matchesHtml}</div> </div>`;
+ });
+ container.innerHTML=html;
+}
+
+async function downloadCard(btn) {
+ const card = btn.closest('.group-card');
+ if (!card) return;
+ const title = card.querySelector('.group_en').innerText.trim();
+ btn.style.display = 'none';
+ try {
+  const canvas = await html2canvas(card, {
+   backgroundColor: null,
+   scale: 2,
+   useCORS: true,
+   logging: false,
+   windowWidth: card.scrollWidth,
+   width: card.scrollWidth,
+   height: card.scrollHeight
+  });
+  const link = document.createElement('a');
+  link.download = `FIFA2026_${title.replace(/\s+/g, '_')}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+ } catch (err) { console.error("Screenshot failed:", err); alert("Download failed. Please try again."); }
+ finally { btn.style.display = 'flex'; }
 }
 
 function filterByStage(stage,btn){
-    document.querySelectorAll('.filter-tab').forEach(tab=>tab.classList.remove('active'));
-    btn.classList.add('active');
-    
-    // 过滤 小组赛
-    document.querySelectorAll('.group-card').forEach(card=>card.style.display=(stage==='all'||stage==='group')?'block':'none');
-    
-    // 过滤 淘汰赛 (32强, 16强, 四强, 半决赛, 决赛)
-    // 注意：这里选择器包含了 .knockout-card
-    document.querySelectorAll('.knockout-card').forEach(card=>{
-        if(stage==='all') card.style.display='flex'; // 保持flex布局
-        else if(stage==='group') card.style.display='none';
-        else card.style.display=card.dataset.stage===stage?'flex':'none';
-    });
-    
-    const groupTitle=document.getElementById('group-stage');
-    groupTitle.style.display=(stage==='all'||stage==='group')?'block':'none';
+ document.querySelectorAll('.filter-tab').forEach(tab=>tab.classList.remove('active'));
+ btn.classList.add('active');
+ document.querySelectorAll('.group-card').forEach(card=>{
+  const isGroupStage = card.dataset.stage === 'group';
+  if(stage === 'all') card.style.display = 'block';
+  else if (stage === 'group') card.style.display = isGroupStage ? 'block' : 'none';
+  else card.style.display = (card.dataset.stage === stage) ? 'block' : 'none';
+ });
+ const groupTitle=document.getElementById('group-stage');
+ groupTitle.style.display=(stage==='all'||stage==='group')?'block':'none';
 }
-
-function scrollToSchedule(){
-    document.querySelector('.container').scrollIntoView({behavior:'smooth'});
-}
-
+function scrollToSchedule(){document.querySelector('.container').scrollIntoView({behavior:'smooth'})}
 renderGroups();
 renderKnockout();
 </script>
