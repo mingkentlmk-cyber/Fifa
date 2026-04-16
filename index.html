@@ -83,32 +83,7 @@ body{font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;background:v
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .group-card,.knockout-card,.match-card{animation:fadeIn 0.5s ease forwards;opacity:0}
 .group-card:nth-child(1){animation-delay:0.04s}.group-card:nth-child(2){animation-delay:0.08s}.group-card:nth-child(3){animation-delay:0.12s}.group-card:nth-child(4){animation-delay:0.16s}.group-card:nth-child(5){animation-delay:0.2s}.group-card:nth-child(6){animation-delay:0.24s}.group-card:nth-child(7){animation-delay:0.28s}.group-card:nth-child(8){animation-delay:0.32s}.group-card:nth-child(9){animation-delay:0.36s}.group-card:nth-child(10){animation-delay:0.4s}.group-card:nth-child(11){animation-delay:0.44s}.group-card:nth-child(12){animation-delay:0.48s}
-@media (min-width:768px){
-.header{padding:16px 32px}
-.logo{font-size:24px;letter-spacing:4px}
-.tournament-title{font-size:18px;letter-spacing:1px}
-.countdown{gap:10px}
-.countdown-item{padding:10px 16px;min-width:65px;}
-.countdown-value{font-size:22px}
-.countdown-label{font-size:9px}
-.container{padding:24px;max-width:1200px;margin:0 auto}
-.page-title{font-size:32px;margin-bottom:36px;gap:14px;}
-.page-title .title-zh{font-size:1em;}
-.page-title .title_en{font-size:0.7em;}
-.groups-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-.group-header{padding:16px 20px}
-.group-title{font-size:12px;letter-spacing:4px}
-.match-item{padding:16px 20px;margin-bottom:10px}
-.team-flag{width:44px;height:30px}
-.team-name-zh{font-size:13px}
-.team-name-en{font-size:10px}
-.match-vs{font-size:12px;padding:0 10px}
-.stage-title{font-size:18px;margin:36px 0 18px;padding-bottom:14px}
-.stage-title::after{width:150px}
-.match-datetime{min-width:70px;padding:10px}
-.match-datetime-date{font-size:13px}
-.match-datetime-time{font-size:11px}
-}
+@media (min-width:768px){.header{padding:16px 32px}.logo{font-size:24px;letter-spacing:4px}.tournament-title{font-size:18px;letter-spacing:1px}.countdown{gap:10px}.countdown-item{padding:10px 16px;min-width:65px;}.countdown-value{font-size:22px}.countdown-label{font-size:9px}.container{padding:24px;max-width:1200px;margin:0 auto}.page-title{font-size:32px;margin-bottom:36px;gap:14px;}.page-title .title-zh{font-size:1em;}.page-title .title_en{font-size:0.7em;}.groups-grid{grid-template-columns:repeat(2,1fr);gap:20px}.group-header{padding:16px 20px}.group-title{font-size:12px;letter-spacing:4px}.match-item{padding:16px 20px;margin-bottom:10px}.team-flag{width:44px;height:30px}.team-name-zh{font-size:13px}.team-name-en{font-size:10px}.match-vs{font-size:12px;padding:0 10px}.stage-title{font-size:18px;margin:36px 0 18px;padding-bottom:14px}.stage-title::after{width:150px}.match-datetime{min-width:70px;padding:10px}.match-datetime-date{font-size:13px}.match-datetime-time{font-size:11px}}
 @media (min-width:1200px){.groups-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
@@ -132,6 +107,7 @@ body{font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif;background:v
 <button class="filter-tab" onclick="filterByStage('round16', this)"><span class="tab-zh">十六强</span><span class="tab-en">Round of 16</span></button>
 <button class="filter-tab" onclick="filterByStage('quarterfinal', this)"><span class="tab-zh">四分之一决赛</span><span class="tab-en">Quarter-finals</span></button>
 <button class="filter-tab" onclick="filterByStage('semifinal', this)"><span class="tab-zh">半决赛</span><span class="tab-en">Semi-finals</span></button>
+<button class="filter-tab" onclick="filterByStage('third', this)"><span class="tab-zh">季军赛</span><span class="tab-en">Third Place</span></button>
 <button class="filter-tab" onclick="filterByStage('final', this)"><span class="tab-zh">决赛</span><span class="tab-en">Final</span></button>
 </nav>
 <main class="container">
@@ -146,21 +122,297 @@ const FLAG_CDN='https://flagcdn.com/w80';
 function getFlag(code){return`${FLAG_CDN}/${code.toLowerCase()}.png`}
 const teams={'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'},'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'},'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'},'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'},'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'},'Scotland':{code:'gb',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'},'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'},'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'},'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'},'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特阿拉伯'},'Uruguay':{code:'uy',nameZh:'乌拉圭'},'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'},'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'},'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'},'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果民主共和国'},'Uzbekistan':{code:'uz',nameZh:'乌兹别克斯坦'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb',nameZh:'英格兰'},'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'}};
 const groups={'A':['South Africa','Mexico','South Korea','Czechia'],'B':['Canada','Bosnia and Herzegovina','Qatar','Switzerland'],'C':['Brazil','Morocco','Haiti','Scotland'],'D':['USA','Paraguay','Australia','Türkiye'],'E':['Germany','Curaçao','Ivory Coast','Ecuador'],'F':['Netherlands','Japan','Sweden','Tunisia'],'G':['Spain','Cape Verde','Belgium','Egypt'],'H':['Saudi Arabia','Uruguay','Iran','New Zealand'],'I':['France','Senegal','Iraq','Norway'],'J':['Argentina','Algeria','Austria','Jordan'],'K':['Portugal','DR Congo','Uzbekistan','Colombia'],'L':['England','Croatia','Ghana','Panama']};
-const groupMatches=[{date:'06/12',time:'03:00',team1:'Mexico',team2:'South Africa',group:'A'},{date:'06/12',time:'10:00',team1:'South Korea',team2:'Czechia',group:'A'},{date:'06/13',time:'03:00',team1:'Canada',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/13',time:'09:00',team1:'USA',team2:'Paraguay',group:'D'},{date:'06/14',time:'03:00',team1:'Qatar',team2:'Switzerland',group:'B'},{date:'06/14',time:'06:00',team1:'Brazil',team2:'Morocco',group:'C'},{date:'06/14',time:'09:00',team1:'Haiti',team2:'Scotland',group:'C'},{date:'06/14',time:'12:00',team1:'Australia',team2:'Türkiye',group:'D'},{date:'06/15',time:'01:00',team1:'Germany',team2:'Curaçao',group:'E'},{date:'06/15',time:'04:00',team1:'Netherlands',team2:'Japan',group:'F'},{date:'06/15',time:'07:00',team1:'Ivory Coast',team2:'Ecuador',group:'E'},{date:'06/15',time:'10:00',team1:'Sweden',team2:'Tunisia',group:'F'},{date:'06/16',time:'00:00',team1:'Spain',team2:'Cape Verde',group:'G'},{date:'06/16',time:'03:00',team1:'Belgium',team2:'Egypt',group:'G'},{date:'06/16',time:'06:00',team1:'Saudi Arabia',team2:'Uruguay',group:'H'},{date:'06/16',time:'09:00',team1:'Iran',team2:'New Zealand',group:'H'},{date:'06/17',time:'03:00',team1:'France',team2:'Senegal',group:'I'},{date:'06/17',time:'06:00',team1:'Iraq',team2:'Norway',group:'I'},{date:'06/17',time:'09:00',team1:'Argentina',team2:'Algeria',group:'J'},{date:'06/17',time:'12:00',team1:'Austria',team2:'Jordan',group:'J'},{date:'06/18',time:'01:00',team1:'Portugal',team2:'DR Congo',group:'K'},{date:'06/18',time:'04:00',team1:'England',team2:'Croatia',group:'L'},{date:'06/18',time:'07:00',team1:'Ghana',team2:'Panama',group:'L'},{date:'06/18',time:'10:00',team1:'Uzbekistan',team2:'Colombia',group:'K'},{date:'06/19',time:'00:00',team1:'Czechia',team2:'South Africa',group:'A'},{date:'06/19',time:'09:00',team1:'Mexico',team2:'South Korea',group:'A'},{date:'06/19',time:'03:00',team1:'Switzerland',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/19',time:'06:00',team1:'Canada',team2:'Qatar',group:'B'},{date:'06/20',time:'03:00',team1:'USA',team2:'Australia',group:'D'},{date:'06/20',time:'06:00',team1:'Scotland',team2:'Morocco',group:'C'},{date:'06/20',time:'08:30',team1:'Brazil',team2:'Haiti',group:'C'},{date:'06/20',time:'11:00',team1:'Türkiye',team2:'Paraguay',group:'D'},{date:'06/21',time:'01:00',team1:'Netherlands',team2:'Sweden',group:'F'},{date:'06/21',time:'04:00',team1:'Germany',team2:'Ivory Coast',group:'E'},{date:'06/21',time:'08:00',team1:'Ecuador',team2:'Curaçao',group:'E'},{date:'06/21',time:'12:00',team1:'Tunisia',team2:'Japan',group:'F'},{date:'06/22',time:'00:00',team1:'Spain',team2:'Saudi Arabia',group:'H'},{date:'06/22',time:'03:00',team1:'Belgium',team2:'Iran',group:'G'},{date:'06/22',time:'06:00',team1:'Uruguay',team2:'Cape Verde',group:'H'},{date:'06/22',time:'09:00',team1:'New Zealand',team2:'Egypt',group:'G'},{date:'06/23',time:'01:00',team1:'Argentina',team2:'Austria',group:'J'},{date:'06/23',time:'05:00',team1:'France',team2:'Iraq',group:'I'},{date:'06/23',time:'08:00',team1:'Norway',team2:'Senegal',group:'I'},{date:'06/23',time:'11:00',team1:'Jordan',team2:'Algeria',group:'J'},{date:'06/24',time:'01:00',team1:'Portugal',team2:'Uzbekistan',group:'K'},{date:'06/24',time:'04:00',team1:'England',team2:'Ghana',group:'L'},{date:'06/24',time:'07:00',team1:'Panama',team2:'Croatia',group:'L'},{date:'06/24',time:'10:00',team1:'Colombia',team2:'DR Congo',group:'K'},{date:'06/25',time:'03:00',team1:'Switzerland',team2:'Canada',group:'B'},{date:'06/25',time:'03:00',team1:'Bosnia and Herzegovina',team2:'Qatar',group:'B'},{date:'06/25',time:'06:00',team1:'Morocco',team2:'Haiti',group:'C'},{date:'06/25',time:'06:00',team1:'Scotland',team2:'Brazil',group:'C'},{date:'06/25',time:'09:00',team1:'South Africa',team2:'South Korea',group:'A'},{date:'06/25',time:'09:00',team1:'Czechia',team2:'Mexico',group:'A'},{date:'06/26',time:'04:00',team1:'Curaçao',team2:'Ivory Coast',group:'E'},{date:'06/26',time:'04:00',team1:'Ecuador',team2:'Germany',group:'E'},{date:'06/26',time:'07:00',team1:'Tunisia',team2:'Netherlands',group:'F'},{date:'06/26',time:'07:00',team1:'Japan',team2:'Sweden',group:'F'},{date:'06/26',time:'10:00',team1:'Türkiye',team2:'USA',group:'D'},{date:'06/26',time:'10:00',team1:'Paraguay',team2:'Australia',group:'D'},{date:'06/27',time:'03:00',team1:'Norway',team2:'France',group:'I'},{date:'06/27',time:'03:00',team1:'Senegal',team2:'Iraq',group:'I'},{date:'06/27',time:'08:00',team1:'Cape Verde',team2:'Saudi Arabia',group:'H'},{date:'06/27',time:'08:00',team1:'Uruguay',team2:'Spain',group:'H'},{date:'06/27',time:'11:00',team1:'New Zealand',team2:'Belgium',group:'G'},{date:'06/27',time:'11:00',team1:'Egypt',team2:'Iran',group:'G'},{date:'06/28',time:'05:00',team1:'Panama',team2:'England',group:'L'},{date:'06/28',time:'05:00',team1:'Croatia',team2:'Ghana',group:'L'},{date:'06/28',time:'07:30',team1:'Colombia',team2:'Portugal',group:'K'},{date:'06/28',time:'07:30',team1:'DR Congo',team2:'Uzbekistan',group:'K'},{date:'06/28',time:'10:00',team1:'Algeria',team2:'Austria',group:'J'},{date:'06/28',time:'10:00',team1:'Jordan',team2:'Argentina',group:'J'}];
-const knockoutMatches=[{date:'07/01',time:'00:00',team1:'1A',team2:'2B',stage:'round32'},{date:'07/01',time:'04:00',team1:'1C',team2:'2D',stage:'round32'},{date:'07/01',time:'08:00',team1:'1E',team2:'2F',stage:'round32'},{date:'07/01',time:'12:00',team1:'1G',team2:'2H',stage:'round32'},{date:'07/02',time:'00:00',team1:'1I',team2:'2J',stage:'round32'},{date:'07/02',time:'04:00',team1:'1K',team2:'2L',stage:'round32'},{date:'07/02',time:'08:00',team1:'1B',team2:'2A',stage:'round32'},{date:'07/02',time:'12:00',team1:'1D',team2:'2C',stage:'round32'},{date:'07/03',time:'00:00',team1:'1F',team2:'2E',stage:'round32'},{date:'07/03',time:'04:00',team1:'1H',team2:'2G',stage:'round32'},{date:'07/03',time:'08:00',team1:'1J',team2:'2I',stage:'round32'},{date:'07/03',time:'12:00',team1:'1L',team2:'2K',stage:'round32'},{date:'07/04',time:'04:00',team1:'W49',team2:'W50',stage:'round16'},{date:'07/04',time:'08:00',team1:'W53',team2:'W54',stage:'round16'},{date:'07/04',time:'12:00',team1:'W57',team2:'W58',stage:'round16'},{date:'07/05',time:'04:00',team1:'W51',team2:'W52',stage:'round16'},{date:'07/05',time:'08:00',team1:'W55',team2:'W56',stage:'round16'},{date:'07/05',time:'12:00',team1:'W59',team2:'W60',stage:'round16'},{date:'07/06',time:'04:00',team1:'W61',team2:'W62',stage:'quarterfinal'},{date:'07/06',time:'08:00',team1:'W63',team2:'W64',stage:'quarterfinal'},{date:'07/07',time:'04:00',team1:'W65',team2:'W66',stage:'quarterfinal'},{date:'07/07',time:'08:00',team1:'W67',team2:'W68',stage:'quarterfinal'},{date:'07/09',time:'08:00',team1:'W69',team2:'W70',stage:'semifinal'},{date:'07/10',time:'08:00',team1:'W71',team2:'W72',stage:'semifinal'},{date:'07/13',time:'08:00',team1:'Winner SF1',team2:'Winner SF2',stage:'final'}];
-function formatTimeWithAmPm(time){const[hours,minutes]=time.split(':');const h=parseInt(hours);const ampm=h>=12?'PM':'AM';const h12=h%12||12;return`${h12}:${minutes} ${ampm}`}
-function updateCountdown(){const targetDate=new Date('2026-06-12T03:00:00');const now=new Date();const diff=targetDate-now;if(diff>0){const days=Math.floor(diff/(1000*60*60*24));const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));const minutes=Math.floor((diff%(1000*60*60))/(1000*60));const seconds=Math.floor((diff%(1000*60))/1000);document.getElementById('days').textContent=String(days).padStart(2,'0');document.getElementById('hours').textContent=String(hours).padStart(2,'0');document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');document.getElementById('seconds').textContent=String(seconds).padStart(2,'0')}}setInterval(updateCountdown,1000);updateCountdown();
-function getTeamName(teamKey){const team=teams[teamKey];if(!team)return{zh:'TBD',en:teamKey};return{zh:team.nameZh,en:teamKey}}
+
+// ==================== 小组赛 72场（按您提供的数据）================
+const groupMatches = [
+/* Day 1 - 06/12 */
+{date:'06/12',time:'3:00 AM',team1:'Mexico',team2:'South Africa',group:'A'},
+{date:'06/12',time:'10:00 AM',team1:'South Korea',team2:'Czechia',group:'A'},
+/* Day 2 - 06/13 */
+{date:'06/13',time:'3:00 AM',team1:'Canada',team2:'Bosnia and Herzegovina',group:'B'},
+{date:'06/13',time:'9:00 AM',team1:'USA',team2:'Paraguay',group:'D'},
+/* Day 3 - 06/14 */
+{date:'06/14',time:'3:00 AM',team1:'Qatar',team2:'Switzerland',group:'B'},
+{date:'06/14',time:'6:00 AM',team1:'Brazil',team2:'Morocco',group:'C'},
+{date:'06/14',time:'9:00 AM',team1:'Haiti',team2:'Scotland',group:'C'},
+{date:'06/14',time:'12:00 PM',team1:'Australia',team2:'Türkiye',group:'D'},
+/* Day 4 - 06/15 */
+{date:'06/15',time:'1:00 AM',team1:'Germany',team2:'Curaçao',group:'E'},
+{date:'06/15',time:'4:00 AM',team1:'Netherlands',team2:'Japan',group:'F'},
+{date:'06/15',time:'7:00 AM',team1:'Ivory Coast',team2:'Ecuador',group:'E'},
+{date:'06/15',time:'10:00 AM',team1:'Sweden',team2:'Tunisia',group:'F'},
+/* Day 5 - 06/16 */
+{date:'06/16',time:'12:00 AM',team1:'Spain',team2:'Cape Verde',group:'H'},
+{date:'06/16',time:'3:00 AM',team1:'Belgium',team2:'Egypt',group:'G'},
+{date:'06/16',time:'6:00 AM',team1:'Saudi Arabia',team2:'Uruguay',group:'H'},
+{date:'06/16',time:'9:00 AM',team1:'Iran',team2:'New Zealand',group:'G'},
+/* Day 6 - 06/17 */
+{date:'06/17',time:'3:00 AM',team1:'France',team2:'Senegal',group:'I'},
+{date:'06/17',time:'6:00 AM',team1:'Iraq',team2:'Norway',group:'I'},
+{date:'06/17',time:'9:00 AM',team1:'Argentina',team2:'Algeria',group:'J'},
+{date:'06/17',time:'12:00 PM',team1:'Austria',team2:'Jordan',group:'J'},
+/* Day 7 - 06/18 */
+{date:'06/18',time:'1:00 AM',team1:'Portugal',team2:'DR Congo',group:'K'},
+{date:'06/18',time:'4:00 AM',team1:'England',team2:'Croatia',group:'L'},
+{date:'06/18',time:'7:00 AM',team1:'Ghana',team2:'Panama',group:'L'},
+{date:'06/18',time:'10:00 AM',team1:'Uzbekistan',team2:'Colombia',group:'K'},
+/* Day 8 - 06/19 */
+{date:'06/19',time:'12:00 AM',team1:'Czechia',team2:'South Africa',group:'A'},
+{date:'06/19',time:'3:00 AM',team1:'Switzerland',team2:'Bosnia and Herzegovina',group:'B'},
+{date:'06/19',time:'6:00 AM',team1:'Canada',team2:'Qatar',group:'B'},
+{date:'06/19',time:'9:00 AM',team1:'Mexico',team2:'South Korea',group:'A'},
+/* Day 9 - 06/20 */
+{date:'06/20',time:'3:00 AM',team1:'USA',team2:'Australia',group:'D'},
+{date:'06/20',time:'6:00 AM',team1:'Scotland',team2:'Morocco',group:'C'},
+{date:'06/20',time:'8:30 AM',team1:'Brazil',team2:'Haiti',group:'C'},
+{date:'06/20',time:'11:00 AM',team1:'Türkiye',team2:'Paraguay',group:'D'},
+/* Day 10 - 06/21 */
+{date:'06/21',time:'1:00 AM',team1:'Netherlands',team2:'Sweden',group:'F'},
+{date:'06/21',time:'4:00 AM',team1:'Germany',team2:'Ivory Coast',group:'E'},
+{date:'06/21',time:'8:00 AM',team1:'Ecuador',team2:'Curaçao',group:'E'},
+{date:'06/21',time:'12:00 PM',team1:'Tunisia',team2:'Japan',group:'F'},
+/* Day 11 - 06/22 */
+{date:'06/22',time:'12:00 AM',team1:'Spain',team2:'Saudi Arabia',group:'H'},
+{date:'06/22',time:'3:00 AM',team1:'Belgium',team2:'Iran',group:'G'},
+{date:'06/22',time:'6:00 AM',team1:'Uruguay',team2:'Cape Verde',group:'H'},
+{date:'06/22',time:'9:00 AM',team1:'New Zealand',team2:'Egypt',group:'G'},
+/* Day 12 - 06/23 */
+{date:'06/23',time:'1:00 AM',team1:'Argentina',team2:'Austria',group:'J'},
+{date:'06/23',time:'5:00 AM',team1:'France',team2:'Iraq',group:'I'},
+{date:'06/23',time:'8:00 AM',team1:'Norway',team2:'Senegal',group:'I'},
+{date:'06/23',time:'11:00 AM',team1:'Jordan',team2:'Algeria',group:'J'},
+/* Day 13 - 06/24 */
+{date:'06/24',time:'1:00 AM',team1:'Portugal',team2:'Uzbekistan',group:'K'},
+{date:'06/24',time:'4:00 AM',team1:'England',team2:'Ghana',group:'L'},
+{date:'06/24',time:'7:00 AM',team1:'Panama',team2:'Croatia',group:'L'},
+{date:'06/24',time:'10:00 AM',team1:'Colombia',team2:'DR Congo',group:'K'},
+/* Day 14 - 06/25 */
+{date:'06/25',time:'3:00 AM',team1:'Switzerland',team2:'Canada',group:'B'},
+{date:'06/25',time:'3:00 AM',team1:'Bosnia and Herzegovina',team2:'Qatar',group:'B'},
+{date:'06/25',time:'6:00 AM',team1:'Morocco',team2:'Haiti',group:'C'},
+{date:'06/25',time:'6:00 AM',team1:'Scotland',team2:'Brazil',group:'C'},
+{date:'06/25',time:'9:00 AM',team1:'South Africa',team2:'South Korea',group:'A'},
+{date:'06/25',time:'9:00 AM',team1:'Czechia',team2:'Mexico',group:'A'},
+/* Day 15 - 06/26 */
+{date:'06/26',time:'4:00 AM',team1:'Curaçao',team2:'Ivory Coast',group:'E'},
+{date:'06/26',time:'4:00 AM',team1:'Ecuador',team2:'Germany',group:'E'},
+{date:'06/26',time:'7:00 AM',team1:'Tunisia',team2:'Netherlands',group:'F'},
+{date:'06/26',time:'7:00 AM',team1:'Japan',team2:'Sweden',group:'F'},
+{date:'06/26',time:'10:00 AM',team1:'Türkiye',team2:'USA',group:'D'},
+{date:'06/26',time:'10:00 AM',team1:'Paraguay',team2:'Australia',group:'D'},
+/* Day 16 - 06/27 */
+{date:'06/27',time:'3:00 AM',team1:'Norway',team2:'France',group:'I'},
+{date:'06/27',time:'3:00 AM',team1:'Senegal',team2:'Iraq',group:'I'},
+{date:'06/27',time:'8:00 AM',team1:'Cape Verde',team2:'Saudi Arabia',group:'H'},
+{date:'06/27',time:'8:00 AM',team1:'Uruguay',team2:'Spain',group:'H'},
+{date:'06/27',time:'11:00 AM',team1:'New Zealand',team2:'Belgium',group:'G'},
+{date:'06/27',time:'11:00 AM',team1:'Egypt',team2:'Iran',group:'G'},
+/* Day 17 - 06/28 */
+{date:'06/28',time:'5:00 AM',team1:'Panama',team2:'England',group:'L'},
+{date:'06/28',time:'5:00 AM',team1:'Croatia',team2:'Ghana',group:'L'},
+{date:'06/28',time:'7:30 AM',team1:'Colombia',team2:'Portugal',group:'K'},
+{date:'06/28',time:'7:30 AM',team1:'DR Congo',team2:'Uzbekistan',group:'K'},
+{date:'06/28',time:'10:00 AM',team1:'Algeria',team2:'Austria',group:'J'},
+{date:'06/28',time:'10:00 AM',team1:'Jordan',team2:'Argentina',group:'J'}
+];
+
+// ==================== 淘汰赛 32场（按您提供的数据）================
+const knockoutMatches = [
+/* Round of 32 - 16场 */
+{date:'06/29',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'06/30',time:'1:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'06/30',time:'4:30 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'06/30',time:'9:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/01',time:'1:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/01',time:'5:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/01',time:'9:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/02',time:'12:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/02',time:'4:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/02',time:'8:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/03',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/03',time:'7:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/03',time:'11:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/04',time:'2:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/04',time:'6:00 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+{date:'07/04',time:'9:30 AM',team1:'TBD',team2:'TBD',stage:'round32'},
+/* Round of 16 - 8场 */
+{date:'07/05',time:'1:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/05',time:'5:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/06',time:'4:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/06',time:'8:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/07',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/07',time:'8:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/08',time:'12:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+{date:'07/08',time:'4:00 AM',team1:'TBD',team2:'TBD',stage:'round16'},
+/* Quarter-finals - 4场 */
+{date:'07/10',time:'4:00 AM',team1:'TBD',team2:'TBD',stage:'quarterfinal'},
+{date:'07/11',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'quarterfinal'},
+{date:'07/12',time:'5:00 AM',team1:'TBD',team2:'TBD',stage:'quarterfinal'},
+{date:'07/12',time:'9:00 AM',team1:'TBD',team2:'TBD',stage:'quarterfinal'},
+/* Semi-finals - 2场 */
+{date:'07/15',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'semifinal'},
+{date:'07/16',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'semifinal'},
+/* Third Place - 1场 */
+{date:'07/19',time:'5:00 AM',team1:'TBD',team2:'TBD',stage:'third'},
+/* Final - 1场 */
+{date:'07/20',time:'3:00 AM',team1:'TBD',team2:'TBD',stage:'final'}
+];
+
+// ==================== 时间格式化（修复AM重复问题）================
+function formatTimeWithAmPm(time){
+const cleanTime = time.replace(/\s*(AM|PM)\s*/gi, '').trim();
+const [hours, minutes] = cleanTime.split(':');
+const h = parseInt(hours);
+const ampm = h >= 12 ? 'PM' : 'AM';
+const h12 = h % 12 || 12;
+return `${h12}:${minutes} ${ampm}`;
+}
+
+function updateCountdown(){
+const targetDate=new Date('2026-06-12T03:00:00');
+const now=new Date();
+const diff=targetDate-now;
+if(diff>0){
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+const seconds=Math.floor((diff%(1000*60))/1000);
+document.getElementById('days').textContent=String(days).padStart(2,'0');
+document.getElementById('hours').textContent=String(hours).padStart(2,'0');
+document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
+document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
+}
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+function getTeamName(teamKey){
+const team=teams[teamKey];
+if(!team)return{zh:'TBD',en:teamKey};
+return{zh:team.nameZh,en:teamKey};
+}
 function isCountry(key){return!!teams[key]}
-// 只对 Bosnia and Herzegovina 分成两行：Bosnia and / Herzegovina
-function formatTeamEnName(name){if(name==='Bosnia and Herzegovina'){return'Bosnia and<br>Herzegovina';}return name;}
-function createCardHTML(titleText,matchesData,stageType,cardId){let matchesHtml=matchesData.map(match=>{const team1=getTeamName(match.team1);const team2=getTeamName(match.team2);const isTeam1Country=isCountry(match.team1);const isTeam2Country=isCountry(match.team2);return`<div class="match-item" data-stage="${stageType}"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country?`<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country?`<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}</div></div></div>`}).join('');const downloadBtn=`<button class="download-btn" onclick="downloadCard(this)"><div class="download-icon"></div>PNG</button>`;return`<div class="group-card" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div>${downloadBtn}</div><div class="match-list">${matchesHtml}</div></div>`;}
-function renderGroups(){const container=document.getElementById('groups-container');let html='';Object.keys(groups).forEach(groupLetter=>{const groupMatchesFiltered=groupMatches.filter(m=>m.group===groupLetter);html+=createCardHTML(`Group ${groupLetter}`,groupMatchesFiltered,'group',`group-card-${groupLetter}`);});container.innerHTML=html;}
-function renderKnockout(){const container=document.getElementById('knockout-container');let html='';const groupsByDate={};knockoutMatches.forEach(match=>{if(!groupsByDate[match.date])groupsByDate[match.date]=[];groupsByDate[match.date].push(match);});Object.keys(groupsByDate).forEach(date=>{const matches=groupsByDate[date];const currentStage=matches.length>0?matches[0].stage:'knockout';let matchesHtml=matches.map(match=>{const team1=getTeamName(match.team1);const team2=getTeamName(match.team2);const isTeam1Country=isCountry(match.team1);const isTeam2Country=isCountry(match.team2);return`<div class="match-item" data-stage="${match.stage}"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country?`<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country?`<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}</div></div></div>`}).join('');const downloadBtn=`<button class="download-btn" onclick="downloadCard(this)"><div class="download-icon"></div>PNG</button>`;html+=`<div class="group-card" data-stage="${currentStage}" id="date-${date}"><div class="group-header"><div class="group-title"><span class="group_en">${date}</span></div>${downloadBtn}</div><div class="match-list">${matchesHtml}</div></div>`;});container.innerHTML=html;}
-async function downloadCard(btn){const card=btn.closest('.group-card');if(!card)return;const title=card.querySelector('.group_en').innerText.trim();btn.style.display='none';try{const canvas=await html2canvas(card,{backgroundColor:null,scale:2,useCORS:true,logging:false,windowWidth:card.scrollWidth,width:card.scrollWidth,height:card.scrollHeight});const link=document.createElement('a');link.download=`FIFA2026_${title.replace(/\s+/g,'_')}.png`;link.href=canvas.toDataURL('image/png');link.click();}catch(err){console.error("Screenshot failed:",err);alert("Download failed. Please try again.");}finally{btn.style.display='flex';}}
-function filterByStage(stage,btn){document.querySelectorAll('.filter-tab').forEach(tab=>tab.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.group-card').forEach(card=>{const isGroupStage=card.dataset.stage==='group';if(stage==='all')card.style.display='block';else if(stage==='group')card.style.display=isGroupStage?'block':'none';else card.style.display=(card.dataset.stage===stage)?'block':'none';});const groupTitle=document.getElementById('group-stage');groupTitle.style.display=(stage==='all'||stage==='group')?'block':'none';}
-function scrollToSchedule(){document.querySelector('.container').scrollIntoView({behavior:'smooth'})}
-renderGroups();renderKnockout();
+function formatTeamEnName(name){
+if(name==='Bosnia and Herzegovina'){return'Bosnia and<br>Herzegovina';}
+return name;
+}
+
+function createCardHTML(titleText,matchesData,stageType,cardId){
+let matchesHtml=matchesData.map(match=>{
+const team1=getTeamName(match.team1);
+const team2=getTeamName(match.team2);
+const isTeam1Country=isCountry(match.team1);
+const isTeam2Country=isCountry(match.team2);
+return`<div class="match-item" data-stage="${stageType}"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country?`<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country?`<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">`:`<div class="team-flag" style="display:flex;align-items:center;justify-content:center;background:rgba(0,168,255,0.1);border:1px solid rgba(0,168,255,0.3);">TBD</div>`}</div></div></div>`}).join('');
+const downloadBtn=`<button class="download-btn" onclick="downloadCard(this)"><div class="download-icon"></div>PNG</button>`;
+return`<div class="group-card" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div>${downloadBtn}</div><div class="match-list">${matchesHtml}</div></div>`;
+}
+
+function renderGroups(){
+const container=document.getElementById('groups-container');
+let html='';
+Object.keys(groups).forEach(groupLetter=>{
+const groupMatchesFiltered=groupMatches.filter(m=>m.group===groupLetter);
+html+=createCardHTML(`Group ${groupLetter}`,groupMatchesFiltered,'group',`group-card-${groupLetter}`);
+});
+container.innerHTML=html;
+}
+
+// ==================== 淘汰赛分组逻辑 ====================
+function renderKnockout(){
+const container=document.getElementById('knockout-container');
+let html='';
+
+// 1. Round of 32 - 按天分组
+const round32Matches = knockoutMatches.filter(m => m.stage === 'round32');
+const round32ByDate = {};
+round32Matches.forEach(match => {
+if(!round32ByDate[match.date]) round32ByDate[match.date] = [];
+round32ByDate[match.date].push(match);
+});
+Object.keys(round32ByDate).sort().forEach(date => {
+html += createCardHTML(date, round32ByDate[date], 'round32', `round32-${date}`);
+});
+
+// 2. Round of 16 - 按天分组
+const round16Matches = knockoutMatches.filter(m => m.stage === 'round16');
+const round16ByDate = {};
+round16Matches.forEach(match => {
+if(!round16ByDate[match.date]) round16ByDate[match.date] = [];
+round16ByDate[match.date].push(match);
+});
+Object.keys(round16ByDate).sort().forEach(date => {
+html += createCardHTML(date, round16ByDate[date], 'round16', `round16-${date}`);
+});
+
+// 3. Quarter-finals - 4场放一组
+const quarterfinalMatches = knockoutMatches.filter(m => m.stage === 'quarterfinal');
+if(quarterfinalMatches.length > 0){
+html += createCardHTML('Quarter-finals', quarterfinalMatches, 'quarterfinal', 'quarterfinal');
+}
+
+// 4. Semi-finals - 每场一组
+const semifinalMatches = knockoutMatches.filter(m => m.stage === 'semifinal');
+semifinalMatches.forEach((match, index) => {
+html += createCardHTML(`Semi-final ${index + 1}`, [match], 'semifinal', `semifinal-${index + 1}`);
+});
+
+// 5. Third place - 1场一组
+const thirdMatches = knockoutMatches.filter(m => m.stage === 'third');
+if(thirdMatches.length > 0){
+html += createCardHTML('Third Place', thirdMatches, 'third', 'third-place');
+}
+
+// 6. Final - 1场一组
+const finalMatches = knockoutMatches.filter(m => m.stage === 'final');
+if(finalMatches.length > 0){
+html += createCardHTML('Final', finalMatches, 'final', 'final');
+}
+container.innerHTML = html;
+}
+
+const SCREENSHOT_API = 'http://localhost:3000/screenshot';
+async function downloadCard(btn) {
+const card = btn.closest('.group-card');
+if (!card) return;
+const id = card.id;
+const title = card.querySelector('.group_en').innerText.trim();
+btn.style.visibility = 'hidden';
+try {
+const response = await fetch(`${SCREENSHOT_API}?id=${encodeURIComponent(id)}`);
+if (!response.ok) { throw new Error(`Screenshot failed: ${response.status}`); }
+const blob = await response.blob();
+const link = document.createElement('a');
+link.download = `FIFA2026_${title.replace(/\s+/g, '_')}.png`;
+link.href = URL.createObjectURL(blob);
+link.click();
+setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+} catch (err) {
+console.error("Download failed:", err);
+alert("下载失败，请确保截图服务已启动。\n\n请运行: node screenshot-server.js");
+} finally {
+btn.style.visibility = 'visible';
+}
+}
+
+function filterByStage(stage,btn){
+document.querySelectorAll('.filter-tab').forEach(tab=>tab.classList.remove('active'));
+btn.classList.add('active');
+document.querySelectorAll('.group-card').forEach(card=>{
+const isGroupStage=card.dataset.stage==='group';
+if(stage==='all')card.style.display='block';
+else if(stage==='group')card.style.display=isGroupStage?'block':'none';
+else card.style.display=(card.dataset.stage===stage)?'block':'none';
+});
+const groupTitle=document.getElementById('group-stage');
+groupTitle.style.display=(stage==='all'||stage==='group')?'block':'none';
+}
+
+function scrollToSchedule(){
+document.querySelector('.container').scrollIntoView({behavior:'smooth'})}
+
+renderGroups();
+renderKnockout();
 </script>
 </body>
 </html>
