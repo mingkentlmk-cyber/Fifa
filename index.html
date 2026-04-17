@@ -1,259 +1,336 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>2026 FIFA World Cup | 2026年国际足联世界杯</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
-*{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
-:root{ --bg-primary:#030810; --accent-blue:#00a8ff; --accent-cyan:#00ffff; --accent-pink:#ff3366; --accent-purple:#8b5cf6; --text-primary:#ffffff; --text-secondary:#8cb4d6; --text-muted:#5a8ab4; }
-body{ font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif; background:var(--bg-primary); color:var(--text-primary); min-height:100vh; line-height:1.2; overflow-x:hidden; background-image:radial-gradient(ellipse 100% 80% at 20% 0%,rgba(0,168,255,0.15) 0%,transparent 50%),radial-gradient(ellipse 80% 60% at 80% 100%,rgba(139,92,246,0.1) 0%,transparent 50%),linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%); background-attachment:fixed; padding: 0; }
-/* --- 头部导航 --- */ 
-.header{ padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,168,255,0.3); box-shadow: 0 4px 15px rgba(0,168,255,0.1); backdrop-filter: blur(20px); background: rgba(3, 8, 16, 0.95); min-height: 48px; }
-.logo{ font-family:'Orbitron',sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform:uppercase; background: linear-gradient(180deg,#ffffff 0%,#d1d1d1 50%,#8a8a8a 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.tournament-title{ font-family:'Orbitron',sans-serif; font-size: 8px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.5px; }
-.countdown{display:flex;gap:2px;align-items:center;}
-.countdown-item{ text-align:center; background: rgba(0,168,255,0.1); border: 1px solid rgba(0,168,255,0.2); padding: 2px 3px; min-width: 26px; height: 36px; display: flex; flex-direction: column; justify-content: center; border-radius: 2px; }
-.countdown-value{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--accent-cyan);}
-.countdown-label{font-size:5px;color:var(--text-muted);display:block;line-height:1;}
-/* 分类导航 */ 
-.sub-header{ background: rgba(10,21,37,0.98); padding: 6px 8px; display: flex; gap: 6px; border-bottom: 1px solid rgba(0,168,255,0.15); overflow-x: auto; position: sticky; top: 48px; z-index: 90; -webkit-overflow-scrolling:touch; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-.sub-header::-webkit-scrollbar{display:none}
-.filter-tab{ background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; padding: 4px 8px; white-space: nowrap; font-family:'Rajdhani',sans-serif; text-transform:uppercase; border-radius: 6px; display: flex; flex-direction: column; align-items: center; line-height: 1.2; height: 36px; justify-content: center; }
-.filter-tab .tab-zh{font-family:'Noto Sans SC';font-size:10px;}
-.filter-tab .tab_en{font-size:8px;opacity:0.7}
-.filter-tab.active{background:rgba(0,168,255,0.2);border-color:var(--accent-cyan);color:var(--accent-cyan);}
-.container{ width: 100%; max-width: 100%; margin: 0 auto; padding: 6px; position: relative; z-index:1 }
-.page-title{ font-family:'Orbitron',sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform:uppercase; margin: 8px 0 12px; padding-bottom: 6px; border-bottom: 2px solid rgba(0,168,255,0.3); position: relative; display: flex; align-items: baseline; gap: 6px; filter: drop-shadow(0 0 8px rgba(0,168,255,0.4)); }
-.page-title .title-zh{font-family:'Noto Sans SC';font-size:15px;font-weight:700;color:#fff;}
-.page-title .title_en{font-size:11px;color:var(--accent-cyan);letter-spacing:1px;}
-.groups-grid{grid-template-columns:1fr; gap:6px;}
-/* 卡片样式 */ 
-.group-card{ background: rgba(12,28,50,0.6); border: 1px solid rgba(0,168,255,0.3); position: relative; backdrop-filter: blur(5px); transition: all 0.3s ease; }
-.group-header{background: rgba(0,168,255,0.1);padding: 6px 10px;border-bottom: 1px solid rgba(0,168,255,0.3); display: flex; justify-content: space-between; align-items: center;}
-.group-title{font-family:'Orbitron';font-size:10px;font-weight:700;color:var(--accent-cyan);letter-spacing:2px;}
-/* 新增：单个卡片下载按钮样式 */ 
-.dl-btn { background: rgba(0, 168, 255, 0.2); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); border-radius: 4px; cursor: pointer; font-size: 10px; padding: 2px 6px; opacity: 0.6; transition: 0.3s; font-family: 'Orbitron', sans-serif; margin-left: 10px; }
-.dl-btn:hover { background: var(--accent-cyan); color: #000; opacity: 1; transform: translateY(-1px); }
-.dl-btn:disabled { opacity: 0.3; cursor: wait; }
-.match-list{padding: 4px;}
-.match-item{ background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); border-radius: 4px; margin-bottom: 4px; display: flex; align-items: center; position: relative; padding: 6px; }
-.match-datetime{ background: rgba(0,168,255,0.15); border: 1px solid rgba(0,168,255,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 46px; height: 40px; margin-right: 8px; border-radius: 3px; flex-shrink: 0; }
-.match-datetime-date{font-family:'Orbitron';font-size:10px;font-weight:600;color:#fff;}
-.match-datetime-time{font-family:'Orbitron';font-size:8px;color:var(--accent-cyan);margin-top:1px;font-weight: 700;}
-.match-teams{ display: flex; align-items: center; justify-content: space-between; flex: 1; min-width: 0; }
-.team{ display: flex; align-items: center; flex: 1; min-width: 0; }
-.team-home{justify-content: flex-start;gap:6px;}
-.team-away{justify-content: flex-end;gap:6px;}
-.team-flag{ width: 32px; height: 24px; border-radius: 2px; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.team-name-wrapper{ flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 0; text-align: center; }
-.team-name-zh{font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;width: 100%;}
-.team-name-en{font-size:8px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;width: 100%;font-weight: 700;}
-.match-vs{ font-family:'Orbitron'; font-size:9px; font-weight: 800; color:var(--accent-pink); padding: 0 6px; flex-shrink: 0; text-shadow: 0 0 5px rgba(255,50,100,0.6); }
-.stage-title{font-size:13px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(0,168,255,0.2);color:#fff;}
-.stage-title .stage-zh{font-family:'Noto Sans SC';font-size:12px;}
-/* 桌面端适配 */ 
-@media (min-width:768px){
-body{padding:0;}
-.header{padding:12px 24px;justify-content:space-between;}
-.logo{font-size:20px;}
-.tournament-title{font-size:12px;display:block;}
-.countdown{gap:6px}
-.countdown-item{padding:4px 8px;min-width:40px;height:36px;}
-.countdown-value{font-size:14px;}
-.countdown-label{font-size:7px;}
-.sub-header{top:48px;padding:6px 12px;gap:8px;}
-.filter-tab{padding:6px 12px;font-size:12px;height:auto;}
-.container{padding:12px;max-width:1200px;}
-.groups-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-.group-card{margin-bottom:0;}
-.match-item{padding:10px;margin-bottom:6px;}
-.match-datetime{min-width:60px;height:48px;margin-right:12px;}
-.team-flag{width:40px;height:28px;}
-.team-name-zh{font-size:13px}
-.team-name-en{font-size:10px;}
-.match-vs{font-size:11px;padding:0 10px;}
-.stage-title{font-size:16px;margin:24px 0 12px;}
-.dl-btn { font-size: 12px; padding: 4px 8px; }
-}
-/* ================= 导出遮罩层样式 (响应式) ================= */ 
-#export-overlay {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 9999; background: transparent; /* 透明背景 */
-  display: none; /* 默认隐藏，JS控制显示 */
-  overflow: auto; padding: 20px;
-}
-/* 导出卡片的特殊样式 - 透明背景 + 发光边框 */ 
-.export-card { 
-  background: rgba(12,28,50,0.8) !important; /* 这里稍微加一点点深色保证文字清晰，如果完全透明看不清文字可以保留一点底色。如果用户要完全透明，设为 transparent 即可，但为了美观建议保留一点透明度 */
-  background: transparent !important; /* 用户要求完全透明 */
-  border: 1px solid rgba(0, 168, 255, 0.6); 
-  box-shadow: 0 0 20px rgba(0, 168, 255, 0.3), inset 0 0 10px rgba(0, 168, 255, 0.1); 
-  backdrop-filter: none; color: #fff; 
-  position: relative; overflow: hidden; 
-  border-radius: 6px; padding: 10px; 
-  margin: 0 auto; /* 居中 */
-  /* 响应式宽度控制 */
-  max-width: 100%; 
-}
-/* 针对桌面端的特殊处理，确保在遮罩层里也是双列 */
-@media (min-width: 768px) {
-  .export-card { max-width: 800px; }
-}
-/* 导出内部的日期块 */ 
-.export-card .match-datetime { background: rgba(0, 168, 255, 0.2) !important; border: 1px solid rgba(0, 168, 255, 0.6) !important; color: #fff; box-shadow: 0 0 10px rgba(0, 168, 255, 0.4); }
-/* 导出内部的每场比赛 */ 
-.export-card .match-item { background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); margin-bottom: 6px; }
-/* 导出头部 */ 
-.export-card .group-header { background: transparent !important; border-bottom: 1px solid rgba(0, 168, 255, 0.5); margin-bottom: 8px; padding: 4px 0; }
-.export-card .group-title { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 255, 255, 0.6); }
-</style>
-</head>
-<body>
-<header class="header">
-<div class="header-left">
-<div class="logo">FIFA World Cup</div>
-<div class="tournament-title">2026 USA/CAN/MEX</div>
-</div>
-<div class="countdown" id="countdown">
-<div class="countdown-item"><div class="countdown-value" id="days">00</div><div class="countdown-label">Days</div></div>
-<div class="countdown-item"><div class="countdown-value" id="hours">00</div><div class="countdown-label">Hrs</div></div>
-<div class="countdown-item"><div class="countdown-value" id="minutes">00</div><div class="countdown-label">Mins</div></div>
-<div class="countdown-item"><div class="countdown-value" id="seconds">00</div><div class="countdown-label">Secs</div></div>
-</div>
-</header>
-<nav class="sub-header">
-<button class="filter-tab active" onclick="filterByStage('all', this)"><span class="tab-zh">全部</span><span class="tab_en">All</span></button>
-<button class="filter-tab" onclick="filterByStage('group', this)"><span class="tab-zh">小组</span><span class="tab_en">Group</span></button>
-<button class="filter-tab" onclick="filterByStage('round32', this)"><span class="tab-zh">32强</span><span class="tab_en">R32</span></button>
-<button class="filter-tab" onclick="filterByStage('round16', this)"><span class="tab-zh">16强</span><span class="tab_en">R16</span></button>
-<button class="filter-tab" onclick="filterByStage('quarterfinal', this)"><span class="tab-zh">1/4</span><span class="tab_en">QF</span></button>
-<button class="filter-tab" onclick="filterByStage('semifinal', this)"><span class="tab-zh">半决赛</span><span class="tab_en">Semi</span></button>
-<button class="filter-tab" onclick="filterByStage('third', this)"><span class="tab-zh">季军</span><span class="tab_en">3rd</span></button>
-<button class="filter-tab" onclick="filterByStage('final', this)"><span class="tab-zh">决赛</span><span class="tab_en">Final</span></button>
-</nav>
-<main class="container">
-<h1 class="page-title"><span class="title-zh">比赛日程</span><span class="title_en">Schedule</span></h1>
-<h2 class="stage-title" id="group-stage"><span class="stage-zh">小组赛</span> · <span style="font-size:0.8em;opacity:0.7">72 Matches</span></h2>
-<div class="groups-grid" id="groups-container"></div>
-<h2 class="stage-title"><span class="stage-zh">淘汰赛</span></h2>
-<div class="groups-grid knockout-matches" id="knockout-container"></div>
-</main>
-<!-- 导出遮罩层 -->
-<div id="export-overlay"></div>
-<script>
-const FLAG_CDN = 'https://images.weserv.nl/?url=flagcdn.com/w80';
-function getFlag(code){ return`${FLAG_CDN}/${code.toLowerCase()}.png`; }
-const teams={ 'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'}, 'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'}, 'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'}, 'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'}, 'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'}, 'Scotland':{code:'gb-sct',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'}, 'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'}, 'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'}, 'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'}, 'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特'},'Uruguay':{code:'uy',nameZh:'乌拉圭'}, 'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'}, 'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'}, 'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'}, 'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果金'}, 'Uzbekistan':{code:'uz',nameZh:'乌兹别克'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb-eng',nameZh:'英格兰'}, 'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'} };
-const groupMatches = [ {date:'06/12',time:'03:00',team1:'Mexico',team2:'South Africa',group:'A'},{date:'06/12',time:'10:00',team1:'South Korea',team2:'Czechia',group:'A'},{date:'06/13',time:'03:00',team1:'Canada',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/13',time:'09:00',team1:'USA',team2:'Paraguay',group:'D'},{date:'06/14',time:'03:00',team1:'Qatar',team2:'Switzerland',group:'B'},{date:'06/14',time:'06:00',team1:'Brazil',team2:'Morocco',group:'C'},{date:'06/14',time:'09:00',team1:'Haiti',team2:'Scotland',group:'C'},{date:'06/14',time:'12:00',team1:'Australia',team2:'Türkiye',group:'D'},{date:'06/15',time:'01:00',team1:'Germany',team2:'Curaçao',group:'E'},{date:'06/15',time:'04:00',team1:'Netherlands',team2:'Japan',group:'F'},{date:'06/15',time:'07:00',team1:'Ivory Coast',team2:'Ecuador',group:'E'},{date:'06/15',time:'10:00',team1:'Sweden',team2:'Tunisia',group:'F'},{date:'06/16',time:'00:00',team1:'Spain',team2:'Cape Verde',group:'G'},{date:'06/16',time:'03:00',team1:'Belgium',team2:'Egypt',group:'G'},{date:'06/16',time:'06:00',team1:'Saudi Arabia',team2:'Uruguay',group:'H'},{date:'06/16',time:'09:00',team1:'Iran',team2:'New Zealand',group:'H'},{date:'06/17',time:'03:00',team1:'France',team2:'Senegal',group:'I'},{date:'06/17',time:'06:00',team1:'Iraq',team2:'Norway',group:'I'},{date:'06/17',time:'09:00',team1:'Argentina',team2:'Algeria',group:'J'},{date:'06/17',time:'12:00',team1:'Austria',team2:'Jordan',group:'J'},{date:'06/18',time:'01:00',team1:'Portugal',team2:'DR Congo',group:'K'},{date:'06/18',time:'04:00',team1:'England',team2:'Croatia',group:'L'},{date:'06/18',time:'07:00',team1:'Ghana',team2:'Panama',group:'L'},{date:'06/18',time:'10:00',team1:'Uzbekistan',team2:'Colombia',group:'K'},{date:'06/19',time:'00:00',team1:'Czechia',team2:'South Africa',group:'A'},{date:'06/19',time:'03:00',team1:'Switzerland',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/19',time:'06:00',team1:'Canada',team2:'Qatar',group:'B'},{date:'06/19',time:'09:00',team1:'Mexico',team2:'South Korea',group:'A'},{date:'06/20',time:'03:00',team1:'USA',team2:'Australia',group:'D'},{date:'06/20',time:'06:00',team1:'Scotland',team2:'Morocco',group:'C'},{date:'06/20',time:'08:30',team1:'Brazil',team2:'Haiti',group:'C'},{date:'06/20',time:'11:00',team1:'Türkiye',team2:'Paraguay',group:'D'},{date:'06/21',time:'01:00',team1:'Netherlands',team2:'Sweden',group:'F'},{date:'06/21',time:'04:00',team1:'Germany',team2:'Ivory Coast',group:'E'},{date:'06/21',time:'08:00',team1:'Ecuador',team2:'Curaçao',group:'E'},{date:'06/21',time:'12:00',team1:'Tunisia',team2:'Japan',group:'F'},{date:'06/22',time:'00:00',team1:'Spain',team2:'Saudi Arabia',group:'H'},{date:'06/22',time:'03:00',team1:'Belgium',team2:'Iran',group:'G'},{date:'06/22',time:'06:00',team1:'Uruguay',team2:'Cape Verde',group:'H'},{date:'06/22',time:'09:00',team1:'New Zealand',team2:'Egypt',group:'G'},{date:'06/23',time:'01:00',team1:'Argentina',team2:'Austria',group:'J'},{date:'06/23',time:'05:00',team1:'France',team2:'Iraq',group:'I'},{date:'06/23',time:'08:00',team1:'Norway',team2:'Senegal',group:'I'},{date:'06/23',time:'11:00',team1:'Jordan',team2:'Algeria',group:'J'},{date:'06/24',time:'01:00',team1:'Portugal',team2:'Uzbekistan',group:'K'},{date:'06/24',time:'04:00',team1:'England',team2:'Ghana',group:'L'},{date:'06/24',time:'07:00',team1:'Panama',team2:'Croatia',group:'L'},{date:'06/24',time:'10:00',team1:'Colombia',team2:'DR Congo',group:'K'},{date:'06/25',time:'03:00',team1:'Switzerland',team2:'Canada',group:'B'},{date:'06/25',time:'03:00',team1:'Bosnia and Herzegovina',team2:'Qatar',group:'B'},{date:'06/25',time:'06:00',team1:'Morocco',team2:'Haiti',group:'C'},{date:'06/25',time:'06:00',team1:'Scotland',team2:'Brazil',group:'C'},{date:'06/25',time:'09:00',team1:'South Africa',team2:'South Korea',group:'A'},{date:'06/25',time:'09:00',team1:'Czechia',team2:'Mexico',group:'A'},{date:'06/26',time:'04:00',team1:'Curaçao',team2:'Ivory Coast',group:'E'},{date:'06/26',time:'04:00',team1:'Ecuador',team2:'Germany',group:'E'},{date:'06/26',time:'07:00',team1:'Tunisia',team2:'Netherlands',group:'F'},{date:'06/26',time:'07:00',team1:'Japan',team2:'Sweden',group:'F'},{date:'06/26',time:'10:00',team1:'Türkiye',team2:'USA',group:'D'},{date:'06/26',time:'10:00',team1:'Paraguay',team2:'Australia',group:'D'},{date:'06/27',time:'03:00',team1:'Norway',team2:'France',group:'I'},{date:'06/27',time:'03:00',team1:'Senegal',team2:'Iraq',group:'I'},{date:'06/27',time:'08:00',team1:'Cape Verde',team2:'Saudi Arabia',group:'H'},{date:'06/27',time:'08:00',team1:'Uruguay',team2:'Spain',group:'H'},{date:'06/27',time:'11:00',team1:'New Zealand',team2:'Belgium',group:'G'},{date:'06/27',time:'11:00',team1:'Egypt',team2:'Iran',group:'G'},{date:'06/28',time:'05:00',team1:'Panama',team2:'England',group:'L'},{date:'06/28',time:'05:00',team1:'Croatia',team2:'Ghana',group:'L'},{date:'06/28',time:'07:30',team1:'Colombia',team2:'Portugal',group:'K'},{date:'06/28',time:'07:30',team1:'DR Congo',team2:'Uzbekistan',group:'K'},{date:'06/28',time:'10:00',team1:'Algeria',team2:'Austria',group:'J'},{date:'06/28',time:'10:00',team1:'Jordan',team2:'Argentina',group:'J'} ];
-const knockoutMatches = [ {date:'06/29',time:'03:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'06/30',time:'01:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'06/30',time:'04:30',team1:'TBD',team2:'TBD',stage:'round32'},{date:'06/30',time:'09:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/01',time:'01:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/01',time:'05:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/01',time:'09:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/02',time:'00:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/02',time:'04:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/02',time:'08:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/03',time:'03:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/03',time:'07:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/03',time:'11:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/04',time:'02:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/04',time:'06:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/04',time:'09:30',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/05',time:'01:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/05',time:'05:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/06',time:'04:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/06',time:'08:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/07',time:'03:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/07',time:'08:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/08',time:'00:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/08',time:'04:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/10',time:'04:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/11',time:'03:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/12',time:'05:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/12',time:'09:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/15',time:'03:00',team1:'TBD',team2:'TBD',stage:'semifinal'},{date:'07/16',time:'03:00',team1:'TBD',team2:'TBD',stage:'semifinal'},{date:'07/19',time:'05:00',team1:'TBD',team2:'TBD',stage:'third'},{date:'07/20',time:'03:00',team1:'TBD',team2:'TBD',stage:'final'} ];
-function formatTimeWithAmPm(time){ const [hours, minutes] = time.split(':'); const h = parseInt(hours); const ampm = h >= 12 ? 'PM' : 'AM'; const h12 = h % 12 || 12; return `${h12}:${minutes} ${ampm}`; }
-function updateCountdown(){ const targetDate = new Date('2026-06-12T03:00:00'); const now = new Date(); const diff = targetDate - now; if(diff > 0){ const days = Math.floor(diff/(1000*60*60*24)); const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60)); const minutes = Math.floor((diff%(1000*60*60))/(1000*60)); const seconds = Math.floor((diff%(1000*60))/1000); document.getElementById('days').textContent = String(days).padStart(2,'0'); document.getElementById('hours').textContent = String(hours).padStart(2,'0'); document.getElementById('minutes').textContent = String(minutes).padStart(2,'0'); document.getElementById('seconds').textContent = String(seconds).padStart(2,'0'); } }
-setInterval(updateCountdown, 1000); updateCountdown();
-function getTeamName(teamKey){ const team = teams[teamKey]; if(!team) return {zh:'待定', en: teamKey}; return {zh: team.nameZh, en: teamKey}; }
-function isCountry(key){ return !!teams[key]; }
-function formatTeamEnName(name){ if(name.length > 9) return name.substring(0, 8) + '.'; return name; }
-function createCardHTML(titleText, matchesData, stageType, cardId, isByDay=false){
-let matchesHtml = matchesData.map(match => {
-const team1 = getTeamName(match.team1); const team2 = getTeamName(match.team2);
-const isTeam1Country = isCountry(match.team1); const isTeam2Country = isCountry(match.team2);
-const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
-return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
-}).join('');
-const byDayClass = isByDay ? 'by-day' : '';
-return `<div class="group-card ${byDayClass}" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div><button class="dl-btn" onclick="downloadGroup('${titleText}', '${encodeURIComponent(JSON.stringify(matchesData))}', this)">⬇ Download</button></div><div class="match-list">${matchesHtml}</div></div>`;
-}
-function renderGroups(){ const container = document.getElementById('groups-container'); let html = ''; ['A','B','C','D','E','F','G','H','I','J','K','L'].forEach(groupLetter => { const groupMatchesFiltered = groupMatches.filter(m => m.group === groupLetter); if(groupMatchesFiltered.length > 0) { html += createCardHTML(`Group ${groupLetter}`, groupMatchesFiltered, 'group', `group-card-${groupLetter}`, false); } }); container.innerHTML = html; }
-function renderGroupsByDay(){ const container = document.getElementById('groups-container'); let html = ''; const groupByDate = {}; groupMatches.forEach(match => { if(!groupByDate[match.date]) groupByDate[match.date] = []; groupByDate[match.date].push(match); }); Object.keys(groupByDate).sort().forEach(date => { html += createCardHTML(date, groupByDate[date], 'group', `group-by-day-${date}`, true); }); container.innerHTML += html; }
-function renderKnockout(){ const container = document.getElementById('knockout-container'); let html = ''; const r32 = knockoutMatches.filter(m => m.stage === 'round32'); const byDate = {}; r32.forEach(m => { if(!byDate[m.date]) byDate[m.date]=[]; byDate[m.date].push(m); }); Object.keys(byDate).sort().forEach(d => html += createCardHTML(d, byDate[d], 'round32', `r32-${d}`)); const r16 = knockoutMatches.filter(m => m.stage === 'round16'); const r16ByDate = {}; r16.forEach(m => { if(!r16ByDate[m.date]) r16ByDate[m.date]=[]; r16ByDate[m.date].push(m); }); Object.keys(r16ByDate).sort().forEach(d => html += createCardHTML(d, r16ByDate[d], 'round16', `r16-${d}`)); const qf = knockoutMatches.filter(m => m.stage === 'quarterfinal'); if(qf.length) html += createCardHTML('Quarter-finals', qf, 'quarterfinal', 'qf'); const sf = knockoutMatches.filter(m => m.stage === 'semifinal'); if(sf.length) html += createCardHTML('Semi-finals', sf, 'semifinal', 'sf'); const rd = knockoutMatches.filter(m => m.stage === 'third'); if(rd.length) html += createCardHTML('Third Place', rd, 'third', '3rd'); const fin = knockoutMatches.filter(m => m.stage === 'final'); if(fin.length) html += createCardHTML('Final', fin, 'final', 'final'); container.innerHTML = html; }
-function filterByStage(stage, btn){ document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active')); btn.classList.add('active'); const allCards = document.querySelectorAll('.group-card'); const groupTitle = document.getElementById('group-stage'); if(stage === 'all'){ allCards.forEach(c => c.style.display = 'none'); document.querySelectorAll('.group-card.by-day').forEach(c => c.style.display = 'block'); groupTitle.style.display = 'block'; } else if(stage === 'group'){ allCards.forEach(c => c.style.display = 'none'); document.querySelectorAll('.group-card[data-stage="group"]:not(.by-day)').forEach(c => c.style.display = 'block'); groupTitle.style.display = 'block'; } else { allCards.forEach(c => c.style.display = 'none'); document.querySelectorAll(`.group-card[data-stage="${stage}"]`).forEach(c => c.style.display = 'block'); groupTitle.style.display = 'none'; } }
-renderGroups(); renderGroupsByDay(); renderKnockout(); document.querySelectorAll('.group-card:not(.by-day)').forEach(c => c.style.display = 'none');
-// ===== 核心：响应式下载逻辑 =====
-function waitImagesLoaded(container) { const imgs = container.querySelectorAll("img"); return Promise.all([...imgs].map(img => { if (img.complete) return Promise.resolve(); return new Promise(res => { img.onload = img.onerror = res; }); })); }
-// 下载函数：接收 (标题, 数据, 按钮元素)
-async function downloadGroup(title, encodedData, btnElement) {
-    // 1. 禁用按钮，防止重复点击
-    if(btnElement) {
-        btnElement.disabled = true;
-        btnElement.textContent = "Generating...";
-    }
-    
-    const matchesData = JSON.parse(decodeURIComponent(encodedData));
-    const overlay = document.getElementById('export-overlay');
-    
-    // 2. 重新构建 HTML (和 createCardHTML 一样，但使用 export-card 类)
-    let matchesHtml = matchesData.map(match => {
-        const team1 = getTeamName(match.team1); const team2 = getTeamName(match.team2);
-        const isTeam1Country = isCountry(match.team1); const isTeam2Country = isCountry(match.team2);
-        const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
-        return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
-    }).join('');
-    
-    // 3. 关键：根据当前窗口宽度决定是否应用桌面端样式
-    // 如果当前窗口 >= 768px (CSS里的 media query 阈值)，我们给卡片加一个特定的 class
-    // 使得在 export-overlay 这个独立的容器里也能应用桌面端样式
-    const isDesktop = window.innerWidth >= 768;
-    const layoutClass = isDesktop ? 'desktop-layout' : 'mobile-layout';
-    
-    // 插入到遮罩层
-    overlay.innerHTML = `
-        <div class="export-card ${layoutClass}" style="width: ${isDesktop ? '800px' : '100%'}; margin: 0 auto;">
-            <div class="group-header">
-                <div class="group-title">${title}</div>
-            </div>
-            <div class="match-list">
-                ${matchesHtml}
-            </div>
-        </div>
-    `;
-    
-    // 显示遮罩层 (虽然看不见，但 html2canvas 需要它在 DOM 树中且可见)
-    overlay.style.display = 'block';
-    
-    // 如果是桌面端，我们还需要手动触发一下 CSS Grid 布局
-    // 因为 export-card 不在 .groups-grid 容器里，grid-template-columns 可能没生效
-    if (isDesktop) {
-        // 强制给内部容器应用 Grid 样式
-        overlay.querySelector('.export-card').style.display = 'grid';
-        overlay.querySelector('.export-card').style.gridTemplateColumns = 'repeat(2, 1fr)';
-        overlay.querySelector('.export-card').style.gap = '12px';
-    }
-
-    try {
-        // 4. 等待图片加载
-        await waitImagesLoaded(overlay);
-        await new Promise(r => setTimeout(r, 300));
-
-        // 5. 截图 (背景透明)
-        const canvas = await html2canvas(overlay, {
-            backgroundColor: null, // 透明背景
-            scale: 2, // 2倍清晰度
-            useCORS: true,
-            allowTaint: false,
-            width: isDesktop ? 840 : window.innerWidth, // 确保截图区域够宽
-            windowWidth: isDesktop ? 840 : window.innerWidth
-        });
-
-        // 6. 下载
-        const filename = `FIFA2026_${title.replace(/\s+/g, '_')}.png`;
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-    } catch (err) {
-        console.error(err);
-        alert("Download failed.");
-    } finally {
-        // 7. 清理：隐藏遮罩层，恢复按钮
-        overlay.style.display = 'none';
-        if(btnElement) {
-            btnElement.disabled = false;
-            btnElement.innerHTML = "⬇ Download";
-        }
-    }
-}
-</script>
-</body>
-</html>
+ <html lang="zh">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <title>2026 FIFA World Cup | 2026年国际足联世界杯</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ <style>
+ @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+ *{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+ :root{ --bg-primary:#030810; --accent-blue:#00a8ff; --accent-cyan:#00ffff; --accent-pink:#ff3366; --accent-purple:#8b5cf6; --text-primary:#ffffff; --text-secondary:#8cb4d6; --text-muted:#5a8ab4; }
+ body{ font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif; background:var(--bg-primary); color:var(--text-primary); min-height:100vh; line-height:1.2; overflow-x:hidden; background-image:radial-gradient(ellipse 100% 80% at 20% 0%,rgba(0,168,255,0.15) 0%,transparent 50%),radial-gradient(ellipse 80% 60% at 80% 100%,rgba(139,92,246,0.1) 0%,transparent 50%),linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%); background-attachment:fixed; padding: 0; }
+ /* --- 头部导航 --- */
+ .header{ padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,168,255,0.3); box-shadow: 0 4px 15px rgba(0,168,255,0.1); backdrop-filter: blur(20px); background: rgba(3, 8, 16, 0.95); min-height: 48px; }
+ .logo{ font-family:'Orbitron',sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform:uppercase; background: linear-gradient(180deg,#ffffff 0%,#d1d1d1 50%,#8a8a8a 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+ .tournament-title{ font-family:'Orbitron',sans-serif; font-size: 8px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.5px; }
+ .countdown{display:flex;gap:2px;align-items:center;}
+ .countdown-item{ text-align:center; background: rgba(0,168,255,0.1); border: 1px solid rgba(0,168,255,0.2); padding: 2px 3px; min-width: 26px; height: 36px; display: flex; flex-direction: column; justify-content: center; border-radius: 2px; }
+ .countdown-value{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--accent-cyan);}
+ .countdown-label{font-size:5px;color:var(--text-muted);display:block;line-height:1;}
+ /* 分类导航 */
+ .sub-header{ background: rgba(10,21,37,0.98); padding: 6px 8px; display: flex; gap: 6px; border-bottom: 1px solid rgba(0,168,255,0.15); overflow-x: auto; position: sticky; top: 48px; z-index: 90; -webkit-overflow-scrolling:touch; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+ .sub-header::-webkit-scrollbar{display:none}
+ .filter-tab{ background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; padding: 4px 8px; white-space: nowrap; font-family:'Rajdhani',sans-serif; text-transform:uppercase; border-radius: 6px; display: flex; flex-direction: column; align-items: center; line-height: 1.2; height: 36px; justify-content: center; }
+ .filter-tab .tab-zh{font-family:'Noto Sans SC';font-size:10px;}
+ .filter-tab .tab_en{font-size:8px;opacity:0.7}
+ .filter-tab.active{background:rgba(0,168,255,0.2);border-color:var(--accent-cyan);color:var(--accent-cyan);}
+ .container{ width: 100%; max-width: 100%; margin: 0 auto; padding: 6px; position: relative; z-index:1 }
+ .page-title{ font-family:'Orbitron',sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform:uppercase; margin: 8px 0 12px; padding-bottom: 6px; border-bottom: 2px solid rgba(0,168,255,0.3); position: relative; display: flex; align-items: baseline; gap: 6px; filter: drop-shadow(0 0 8px rgba(0,168,255,0.4)); }
+ .page-title .title-zh{font-family:'Noto Sans SC';font-size:15px;font-weight:700;color:#fff;}
+ .page-title .title_en{font-size:11px;color:var(--accent-cyan);letter-spacing:1px;}
+ .groups-grid{grid-template-columns:1fr; gap:6px;}
+ /* 卡片样式 */
+ .group-card{ background: rgba(12,28,50,0.6); border: 1px solid rgba(0,168,255,0.3); position: relative; backdrop-filter: blur(5px); transition: all 0.3s ease; }
+ .group-header{background: rgba(0,168,255,0.1);padding: 6px 10px;border-bottom: 1px solid rgba(0,168,255,0.3); display: flex; justify-content: space-between; align-items: center;}
+ .group-title{font-family:'Orbitron';font-size:10px;font-weight:700;color:var(--accent-cyan);letter-spacing:2px;}
+ /* 新增：单个卡片下载按钮样式 */
+ .dl-btn { background: rgba(0, 168, 255, 0.2); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); border-radius: 4px; cursor: pointer; font-size: 10px; padding: 2px 6px; opacity: 0.6; transition: 0.3s; font-family: 'Orbitron', sans-serif; margin-left: 10px; }
+ .dl-btn:hover { background: var(--accent-cyan); color: #000; opacity: 1; transform: translateY(-1px); }
+ .dl-btn:disabled { opacity: 0.3; cursor: wait; }
+ .match-list{padding: 4px;}
+ .match-item{ background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); border-radius: 4px; margin-bottom: 4px; display: flex; align-items: center; position: relative; padding: 6px; }
+ .match-datetime{ background: rgba(0,168,255,0.15); border: 1px solid rgba(0,168,255,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 46px; height: 40px; margin-right: 8px; border-radius: 3px; flex-shrink: 0; }
+ .match-datetime-date{font-family:'Orbitron';font-size:10px;font-weight:600;color:#fff;}
+ .match-datetime-time{font-family:'Orbitron';font-size:8px;color:var(--accent-cyan);margin-top:1px;font-weight: 700;}
+ .match-teams{ display: flex; align-items: center; justify-content: space-between; flex: 1; min-width: 0; }
+ .team{ display: flex; align-items: center; flex: 1; min-width: 0; }
+ .team-home{justify-content: flex-start;gap:6px;}
+ .team-away{justify-content: flex-end;gap:6px;}
+ .team-flag{ width: 32px; height: 24px; border-radius: 2px; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+ .team-name-wrapper{ flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 0; text-align: center; }
+ .team-name-zh{font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;width: 100%;}
+ .team-name-en{font-size:8px;color:var(--text-muted);white-space:nowrap;overflow:hidden;line-height:1.1;width: 100%;font-weight: 700;} 
+ /* 注意：这里移除了 text-overflow: ellipsis 以满足不缩写的要求，并配合JS中的大写转换 */
+ .match-vs{ font-family:'Orbitron'; font-size:9px; font-weight: 800; color:var(--accent-pink); padding: 0 6px; flex-shrink: 0; text-shadow: 0 0 5px rgba(255,50,100,0.6); }
+ .stage-title{font-size:13px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(0,168,255,0.2);color:#fff;}
+ .stage-title .stage-zh{font-family:'Noto Sans SC';font-size:12px;}
+ /* 桌面端适配 */
+ @media (min-width:768px){ body{padding:0;} .header{padding:12px 24px;justify-content:space-between;} .logo{font-size:20px;} .tournament-title{font-size:12px;display:block;} .countdown{gap:6px} .countdown-item{padding:4px 8px;min-width:40px;height:36px;} .countdown-value{font-size:14px;} .countdown-label{font-size:7px;} .sub-header{top:48px;padding:6px 12px;gap:8px;} .filter-tab{padding:6px 12px;font-size:12px;height:auto;} .container{padding:12px;max-width:1200px;} .groups-grid{grid-template-columns:repeat(2,1fr);gap:12px} .group-card{margin-bottom:0;} .match-item{padding:10px;margin-bottom:6px;} .match-datetime{min-width:60px;height:48px;margin-right:12px;} .team-flag{width:40px;height:28px;} .team-name-zh{font-size:13px} .team-name-en{font-size:10px;} .match-vs{font-size:11px;padding:0 10px;} .stage-title{font-size:16px;margin:24px 0 12px;} .dl-btn { font-size: 12px; padding: 4px 8px; } }
+ /* ================= 导出遮罩层样式 (响应式) ================= */
+ #export-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: transparent; display: none; overflow: auto; padding: 20px; }
+ /* 导出卡片的特殊样式 - 透明背景 + 发光边框 */
+ .export-card { background: rgba(12,28,50,0.8) !important; background: transparent !important; border: 1px solid rgba(0, 168, 255, 0.6); box-shadow: 0 0 20px rgba(0, 168, 255, 0.3), inset 0 0 10px rgba(0, 168, 255, 0.1); backdrop-filter: none; color: #fff; position: relative; overflow: hidden; border-radius: 6px; padding: 10px; margin: 0 auto; max-width: 100%; }
+ @media (min-width: 768px) { .export-card { max-width: 800px; } }
+ .export-card .match-datetime { background: rgba(0, 168, 255, 0.2) !important; border: 1px solid rgba(0, 168, 255, 0.6) !important; color: #fff; box-shadow: 0 0 10px rgba(0, 168, 255, 0.4); }
+ .export-card .match-item { background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); margin-bottom: 6px; }
+ .export-card .group-header { background: transparent !important; border-bottom: 1px solid rgba(0, 168, 255, 0.5); margin-bottom: 8px; padding: 4px 0; }
+ .export-card .group-title { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 255, 255, 0.6); }
+ </style>
+ </head>
+ <body>
+ <header class="header">
+ <div class="header-left">
+ <div class="logo">FIFA World Cup</div>
+ <div class="tournament-title">2026 USA/CAN/MEX</div>
+ </div>
+ <div class="countdown" id="countdown">
+ <div class="countdown-item"><div class="countdown-value" id="days">00</div><div class="countdown-label">Days</div></div>
+ <div class="countdown-item"><div class="countdown-value" id="hours">00</div><div class="countdown-label">Hrs</div></div>
+ <div class="countdown-item"><div class="countdown-value" id="minutes">00</div><div class="countdown-label">Mins</div></div>
+ <div class="countdown-item"><div class="countdown-value" id="seconds">00</div><div class="countdown-label">Secs</div></div>
+ </div>
+ </header>
+ <nav class="sub-header">
+ <button class="filter-tab active" onclick="filterByStage('all', this)"><span class="tab-zh">全部</span><span class="tab_en">All</span></button>
+ <button class="filter-tab" onclick="filterByStage('group', this)"><span class="tab-zh">小组</span><span class="tab_en">Group</span></button>
+ <button class="filter-tab" onclick="filterByStage('round32', this)"><span class="tab-zh">32强</span><span class="tab_en">R32</span></button>
+ <button class="filter-tab" onclick="filterByStage('round16', this)"><span class="tab-zh">16强</span><span class="tab_en">R16</span></button>
+ <button class="filter-tab" onclick="filterByStage('quarterfinal', this)"><span class="tab-zh">1/4</span><span class="tab_en">QF</span></button>
+ <button class="filter-tab" onclick="filterByStage('semifinal', this)"><span class="tab-zh">半决赛</span><span class="tab_en">Semi</span></button>
+ <button class="filter-tab" onclick="filterByStage('third', this)"><span class="tab-zh">季军</span><span class="tab_en">3rd</span></button>
+ <button class="filter-tab" onclick="filterByStage('final', this)"><span class="tab-zh">决赛</span><span class="tab_en">Final</span></button>
+ </nav>
+ <main class="container">
+ <h1 class="page-title"><span class="title-zh">比赛日程</span><span class="title_en">Schedule</span></h1>
+ <h2 class="stage-title" id="group-stage"><span class="stage-zh">小组赛</span> · <span style="font-size:0.8em;opacity:0.7">72 Matches</span></h2>
+ <div class="groups-grid" id="groups-container"></div>
+ <h2 class="stage-title"><span class="stage-zh">淘汰赛</span></h2>
+ <div class="groups-grid knockout-matches" id="knockout-container"></div>
+ </main>
+ <!-- 导出遮罩层 -->
+ <div id="export-overlay"></div>
+ <script>
+ const FLAG_CDN = 'https://images.weserv.nl/?url=flagcdn.com/w80';
+ function getFlag(code){ return`${FLAG_CDN}/${code.toLowerCase()}.png`; }
+ const teams={
+ 'Mexico':{code:'mx',nameZh:'墨西哥'},'South Africa':{code:'za',nameZh:'南非'},'South Korea':{code:'kr',nameZh:'韩国'},
+ 'Czechia':{code:'cz',nameZh:'捷克'},'Canada':{code:'ca',nameZh:'加拿大'},'Bosnia and Herzegovina':{code:'ba',nameZh:'波黑'},
+ 'Qatar':{code:'qa',nameZh:'卡塔尔'},'Switzerland':{code:'ch',nameZh:'瑞士'},'USA':{code:'us',nameZh:'美国'},
+ 'Paraguay':{code:'py',nameZh:'巴拉圭'},'Australia':{code:'au',nameZh:'澳大利亚'},'Türkiye':{code:'tr',nameZh:'土耳其'},
+ 'Brazil':{code:'br',nameZh:'巴西'},'Morocco':{code:'ma',nameZh:'摩洛哥'},'Haiti':{code:'ht',nameZh:'海地'},
+ 'Scotland':{code:'gb-sct',nameZh:'苏格兰'},'Germany':{code:'de',nameZh:'德国'},'Curaçao':{code:'cw',nameZh:'库拉索'},
+ 'Ivory Coast':{code:'ci',nameZh:'科特迪瓦'},'Ecuador':{code:'ec',nameZh:'厄瓜多尔'},'Netherlands':{code:'nl',nameZh:'荷兰'},
+ 'Japan':{code:'jp',nameZh:'日本'},'Sweden':{code:'se',nameZh:'瑞典'},'Tunisia':{code:'tn',nameZh:'突尼斯'},
+ 'Spain':{code:'es',nameZh:'西班牙'},'Cape Verde':{code:'cv',nameZh:'佛得角'},'Belgium':{code:'be',nameZh:'比利时'},
+ 'Egypt':{code:'eg',nameZh:'埃及'},'Saudi Arabia':{code:'sa',nameZh:'沙特'},'Uruguay':{code:'uy',nameZh:'乌拉圭'},
+ 'Iran':{code:'ir',nameZh:'伊朗'},'New Zealand':{code:'nz',nameZh:'新西兰'},'France':{code:'fr',nameZh:'法国'},
+ 'Senegal':{code:'sn',nameZh:'塞内加尔'},'Iraq':{code:'iq',nameZh:'伊拉克'},'Norway':{code:'no',nameZh:'挪威'},
+ 'Argentina':{code:'ar',nameZh:'阿根廷'},'Algeria':{code:'dz',nameZh:'阿尔及利亚'},'Austria':{code:'at',nameZh:'奥地利'},
+ 'Jordan':{code:'jo',nameZh:'约旦'},'Portugal':{code:'pt',nameZh:'葡萄牙'},'DR Congo':{code:'cd',nameZh:'刚果金'},
+ 'Uzbekistan':{code:'uz',nameZh:'乌兹别克'},'Colombia':{code:'co',nameZh:'哥伦比亚'},'England':{code:'gb-eng',nameZh:'英格兰'},
+ 'Croatia':{code:'hr',nameZh:'克罗地亚'},'Ghana':{code:'gh',nameZh:'加纳'},'Panama':{code:'pa',nameZh:'巴拿马'}
+ };
+ const groupMatches = [
+ {date:'06/12',time:'03:00',team1:'Mexico',team2:'South Africa',group:'A'},{date:'06/12',time:'10:00',team1:'South Korea',team2:'Czechia',group:'A'},{date:'06/13',time:'03:00',team1:'Canada',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/13',time:'09:00',team1:'USA',team2:'Paraguay',group:'D'},{date:'06/14',time:'03:00',team1:'Qatar',team2:'Switzerland',group:'B'},{date:'06/14',time:'06:00',team1:'Brazil',team2:'Morocco',group:'C'},{date:'06/14',time:'09:00',team1:'Haiti',team2:'Scotland',group:'C'},{date:'06/14',time:'12:00',team1:'Australia',team2:'Türkiye',group:'D'},{date:'06/15',time:'01:00',team1:'Germany',team2:'Curaçao',group:'E'},{date:'06/15',time:'04:00',team1:'Netherlands',team2:'Japan',group:'F'},{date:'06/15',time:'07:00',team1:'Ivory Coast',team2:'Ecuador',group:'E'},{date:'06/15',time:'10:00',team1:'Sweden',team2:'Tunisia',group:'F'},{date:'06/16',time:'00:00',team1:'Spain',team2:'Cape Verde',group:'G'},{date:'06/16',time:'03:00',team1:'Belgium',team2:'Egypt',group:'G'},{date:'06/16',time:'06:00',team1:'Saudi Arabia',team2:'Uruguay',group:'H'},{date:'06/16',time:'09:00',team1:'Iran',team2:'New Zealand',group:'H'},{date:'06/17',time:'03:00',team1:'France',team2:'Senegal',group:'I'},{date:'06/17',time:'06:00',team1:'Iraq',team2:'Norway',group:'I'},{date:'06/17',time:'09:00',team1:'Argentina',team2:'Algeria',group:'J'},{date:'06/17',time:'12:00',team1:'Austria',team2:'Jordan',group:'J'},{date:'06/18',time:'01:00',team1:'Portugal',team2:'DR Congo',group:'K'},{date:'06/18',time:'04:00',team1:'England',team2:'Croatia',group:'L'},{date:'06/18',time:'07:00',team1:'Ghana',team2:'Panama',group:'L'},{date:'06/18',time:'10:00',team1:'Uzbekistan',team2:'Colombia',group:'K'},{date:'06/19',time:'00:00',team1:'Czechia',team2:'South Africa',group:'A'},{date:'06/19',time:'03:00',team1:'Switzerland',team2:'Bosnia and Herzegovina',group:'B'},{date:'06/19',time:'06:00',team1:'Canada',team2:'Qatar',group:'B'},{date:'06/19',time:'09:00',team1:'Mexico',team2:'South Korea',group:'A'},{date:'06/20',time:'03:00',team1:'USA',team2:'Australia',group:'D'},{date:'06/20',time:'06:00',team1:'Scotland',team2:'Morocco',group:'C'},{date:'06/20',time:'08:30',team1:'Brazil',team2:'Haiti',group:'C'},{date:'06/20',time:'11:00',team1:'Türkiye',team2:'Paraguay',group:'D'},{date:'06/21',time:'01:00',team1:'Netherlands',team2:'Sweden',group:'F'},{date:'06/21',time:'04:00',team1:'Germany',team2:'Ivory Coast',group:'E'},{date:'06/21',time:'08:00',team1:'Ecuador',team2:'Curaçao',group:'E'},{date:'06/21',time:'12:00',team1:'Tunisia',team2:'Japan',group:'F'},{date:'06/22',time:'00:00',team1:'Spain',team2:'Saudi Arabia',group:'H'},{date:'06/22',time:'03:00',team1:'Belgium',team2:'Iran',group:'G'},{date:'06/22',time:'06:00',team1:'Uruguay',team2:'Cape Verde',group:'H'},{date:'06/22',time:'09:00',team1:'New Zealand',team2:'Egypt',group:'G'},{date:'06/23',time:'01:00',team1:'Argentina',team2:'Austria',group:'J'},{date:'06/23',time:'05:00',team1:'France',team2:'Iraq',group:'I'},{date:'06/23',time:'08:00',team1:'Norway',team2:'Senegal',group:'I'},{date:'06/23',time:'11:00',team1:'Jordan',team2:'Algeria',group:'J'},{date:'06/24',time:'01:00',team1:'Portugal',team2:'Uzbekistan',group:'K'},{date:'06/24',time:'04:00',team1:'England',team2:'Ghana',group:'L'},{date:'06/24',time:'07:00',team1:'Panama',team2:'Croatia',group:'L'},{date:'06/24',time:'10:00',team1:'Colombia',team2:'DR Congo',group:'K'},{date:'06/25',time:'03:00',team1:'Switzerland',team2:'Canada',group:'B'},{date:'06/25',time:'03:00',team1:'Bosnia and Herzegovina',team2:'Qatar',group:'B'},{date:'06/25',time:'06:00',team1:'Morocco',team2:'Haiti',group:'C'},{date:'06/25',time:'06:00',team1:'Scotland',team2:'Brazil',group:'C'},{date:'06/25',time:'09:00',team1:'South Africa',team2:'South Korea',group:'A'},{date:'06/25',time:'09:00',team1:'Czechia',team2:'Mexico',group:'A'},{date:'06/26',time:'04:00',team1:'Curaçao',team2:'Ivory Coast',group:'E'},{date:'06/26',time:'04:00',team1:'Ecuador',team2:'Germany',group:'E'},{date:'06/26',time:'07:00',team1:'Tunisia',team2:'Netherlands',group:'F'},{date:'06/26',time:'07:00',team1:'Japan',team2:'Sweden',group:'F'},{date:'06/26',time:'10:00',team1:'Türkiye',team2:'USA',group:'D'},{date:'06/26',time:'10:00',team1:'Paraguay',team2:'Australia',group:'D'},{date:'06/27',time:'03:00',team1:'Norway',team2:'France',group:'I'},{date:'06/27',time:'03:00',team1:'Senegal',team2:'Iraq',group:'I'},{date:'06/27',time:'08:00',team1:'Cape Verde',team2:'Saudi Arabia',group:'H'},{date:'06/27',time:'08:00',team1:'Uruguay',team2:'Spain',group:'H'},{date:'06/27',time:'11:00',team1:'New Zealand',team2:'Belgium',group:'G'},{date:'06/27',time:'11:00',team1:'Egypt',team2:'Iran',group:'G'},{date:'06/28',time:'05:00',team1:'Panama',team2:'England',group:'L'},{date:'06/28',time:'05:00',team1:'Croatia',team2:'Ghana',group:'L'},{date:'06/28',time:'07:30',team1:'Colombia',team2:'Portugal',group:'K'},{date:'06/28',time:'07:30',team1:'DR Congo',team2:'Uzbekistan',group:'K'},{date:'06/28',time:'10:00',team1:'Algeria',team2:'Austria',group:'J'},{date:'06/28',time:'10:00',team1:'Jordan',team2:'Argentina',group:'J'}
+ ];
+ const knockoutMatches = [
+ {date:'06/29',time:'03:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'06/30',time:'01:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'06/30',time:'04:30',team1:'TBD',team2:'TBD',stage:'round32'},{date:'06/30',time:'09:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/01',time:'01:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/01',time:'05:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/01',time:'09:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/02',time:'00:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/02',time:'04:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/02',time:'08:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/03',time:'03:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/03',time:'07:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/03',time:'11:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/04',time:'02:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/04',time:'06:00',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/04',time:'09:30',team1:'TBD',team2:'TBD',stage:'round32'},{date:'07/05',time:'01:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/05',time:'05:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/06',time:'04:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/06',time:'08:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/07',time:'03:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/07',time:'08:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/08',time:'00:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/08',time:'04:00',team1:'TBD',team2:'TBD',stage:'round16'},{date:'07/10',time:'04:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/11',time:'03:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/12',time:'05:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/12',time:'09:00',team1:'TBD',team2:'TBD',stage:'quarterfinal'},{date:'07/15',time:'03:00',team1:'TBD',team2:'TBD',stage:'semifinal'},{date:'07/16',time:'03:00',team1:'TBD',team2:'TBD',stage:'semifinal'},{date:'07/19',time:'05:00',team1:'TBD',team2:'TBD',stage:'third'},{date:'07/20',time:'03:00',team1:'TBD',team2:'TBD',stage:'final'}
+ ];
+ function formatTimeWithAmPm(time){
+ const [hours, minutes] = time.split(':');
+ const h = parseInt(hours);
+ const ampm = h >= 12 ? 'PM' : 'AM';
+ const h12 = h % 12 || 12;
+ return `${h12}:${minutes} ${ampm}`;
+ }
+ function updateCountdown(){
+ const targetDate = new Date('2026-06-12T03:00:00');
+ const now = new Date();
+ const diff = targetDate - now;
+ if(diff > 0){
+ const days = Math.floor(diff/(1000*60*60*24));
+ const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+ const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+ const seconds = Math.floor((diff%(1000*60))/1000);
+ document.getElementById('days').textContent = String(days).padStart(2,'0');
+ document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+ document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+ document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+ }
+ }
+ setInterval(updateCountdown, 1000);
+ updateCountdown();
+ function getTeamName(teamKey){
+ const team = teams[teamKey];
+ if(!team) return {zh:'待定', en: teamKey};
+ return {zh: team.nameZh, en: teamKey};
+ }
+ function isCountry(key){
+ return !!teams[key];
+ }
+ function formatTeamEnName(name){
+ // 修改：移除截断逻辑，并转换为大写
+ return name.toUpperCase();
+ }
+ function createCardHTML(titleText, matchesData, stageType, cardId, isByDay=false){
+ let matchesHtml = matchesData.map(match => {
+ const team1 = getTeamName(match.team1);
+ const team2 = getTeamName(match.team2);
+ const isTeam1Country = isCountry(match.team1);
+ const isTeam2Country = isCountry(match.team2);
+ const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
+ return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
+ }).join('');
+ const byDayClass = isByDay ? 'by-day' : '';
+ return `<div class="group-card ${byDayClass}" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div><button class="dl-btn" onclick="downloadGroup('${titleText}', '${encodeURIComponent(JSON.stringify(matchesData))}', this)">⬇ Download</button></div><div class="match-list">${matchesHtml}</div></div>`;
+ }
+ function renderGroups(){
+ const container = document.getElementById('groups-container');
+ let html = '';
+ ['A','B','C','D','E','F','G','H','I','J','K','L'].forEach(groupLetter => {
+ const groupMatchesFiltered = groupMatches.filter(m => m.group === groupLetter);
+ if(groupMatchesFiltered.length > 0) {
+ html += createCardHTML(`Group ${groupLetter}`, groupMatchesFiltered, 'group', `group-card-${groupLetter}`, false);
+ }
+ });
+ container.innerHTML = html;
+ }
+ function renderGroupsByDay(){
+ const container = document.getElementById('groups-container');
+ let html = '';
+ const groupByDate = {};
+ groupMatches.forEach(match => {
+ if(!groupByDate[match.date]) groupByDate[match.date] = [];
+ groupByDate[match.date].push(match);
+ });
+ Object.keys(groupByDate).sort().forEach(date => {
+ html += createCardHTML(date, groupByDate[date], 'group', `group-by-day-${date}`, true);
+ });
+ container.innerHTML += html;
+ }
+ function renderKnockout(){
+ const container = document.getElementById('knockout-container');
+ let html = '';
+ const r32 = knockoutMatches.filter(m => m.stage === 'round32');
+ const byDate = {};
+ r32.forEach(m => {
+ if(!byDate[m.date]) byDate[m.date]=[];
+ byDate[m.date].push(m);
+ });
+ Object.keys(byDate).sort().forEach(d => html += createCardHTML(d, byDate[d], 'round32', `r32-${d}`));
+ const r16 = knockoutMatches.filter(m => m.stage === 'round16');
+ const r16ByDate = {};
+ r16.forEach(m => {
+ if(!r16ByDate[m.date]) r16ByDate[m.date]=[];
+ r16ByDate[m.date].push(m);
+ });
+ Object.keys(r16ByDate).sort().forEach(d => html += createCardHTML(d, r16ByDate[d], 'round16', `r16-${d}`));
+ const qf = knockoutMatches.filter(m => m.stage === 'quarterfinal');
+ if(qf.length) html += createCardHTML('Quarter-finals', qf, 'quarterfinal', 'qf');
+ const sf = knockoutMatches.filter(m => m.stage === 'semifinal');
+ if(sf.length) html += createCardHTML('Semi-finals', sf, 'semifinal', 'sf');
+ const rd = knockoutMatches.filter(m => m.stage === 'third');
+ if(rd.length) html += createCardHTML('Third Place', rd, 'third', '3rd');
+ const fin = knockoutMatches.filter(m => m.stage === 'final');
+ if(fin.length) html += createCardHTML('Final', fin, 'final', 'final');
+ container.innerHTML = html;
+ }
+ function filterByStage(stage, btn){
+ document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+ btn.classList.add('active');
+ const allCards = document.querySelectorAll('.group-card');
+ const groupTitle = document.getElementById('group-stage');
+ if(stage === 'all'){
+ allCards.forEach(c => c.style.display = 'none');
+ document.querySelectorAll('.group-card.by-day').forEach(c => c.style.display = 'block');
+ groupTitle.style.display = 'block';
+ } else if(stage === 'group'){
+ allCards.forEach(c => c.style.display = 'none');
+ document.querySelectorAll('.group-card[data-stage="group"]:not(.by-day)').forEach(c => c.style.display = 'block');
+ groupTitle.style.display = 'block';
+ } else {
+ allCards.forEach(c => c.style.display = 'none');
+ document.querySelectorAll(`.group-card[data-stage="${stage}"]`).forEach(c => c.style.display = 'block');
+ groupTitle.style.display = 'none';
+ }
+ }
+ renderGroups();
+ renderGroupsByDay();
+ renderKnockout();
+ document.querySelectorAll('.group-card:not(.by-day)').forEach(c => c.style.display = 'none');
+ // ===== 核心：响应式下载逻辑 =====
+ function waitImagesLoaded(container) {
+ const imgs = container.querySelectorAll("img");
+ return Promise.all([...imgs].map(img => {
+ if (img.complete) return Promise.resolve();
+ return new Promise(res => {
+ img.onload = img.onerror = res;
+ });
+ }));
+ }
+ // 下载函数：接收 (标题, 数据, 按钮元素)
+ async function downloadGroup(title, encodedData, btnElement) {
+ // 1. 禁用按钮，防止重复点击
+ if(btnElement) {
+ btnElement.disabled = true;
+ btnElement.textContent = "Generating...";
+ }
+ const matchesData = JSON.parse(decodeURIComponent(encodedData));
+ const overlay = document.getElementById('export-overlay');
+ // 2. 重新构建 HTML (和 createCardHTML 一样，但使用 export-card 类)
+ let matchesHtml = matchesData.map(match => {
+ const team1 = getTeamName(match.team1);
+ const team2 = getTeamName(match.team2);
+ const isTeam1Country = isCountry(match.team1);
+ const isTeam2Country = isCountry(match.team2);
+ const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
+ return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
+ }).join('');
+ // 3. 关键：根据当前窗口宽度决定是否应用桌面端样式
+ const isDesktop = window.innerWidth >= 768;
+ const layoutClass = isDesktop ? 'desktop-layout' : 'mobile-layout';
+ // 插入到遮罩层
+ overlay.innerHTML = `
+ <div class="export-card ${layoutClass}" style="width: ${isDesktop ? '800px' : '100%'}; margin: 0 auto;">
+ <div class="group-header">
+ <div class="group-title">${title}</div>
+ </div>
+ <div class="match-list">
+ ${matchesHtml}
+ </div>
+ </div>
+ `;
+ // 显示遮罩层
+ overlay.style.display = 'block';
+ // 如果是桌面端，我们还需要手动触发一下 CSS Grid 布局
+ if (isDesktop) {
+ // 强制给内部容器应用 Grid 样式
+ overlay.querySelector('.export-card').style.display = 'grid';
+ overlay.querySelector('.export-card').style.gridTemplateColumns = 'repeat(2, 1fr)';
+ overlay.querySelector('.export-card').style.gap = '12px';
+ }
+ try {
+ // 4. 等待图片加载
+ await waitImagesLoaded(overlay);
+ await new Promise(r => setTimeout(r, 300));
+ // 5. 截图 (背景透明)
+ const canvas = await html2canvas(overlay, {
+ backgroundColor: null, // 透明背景
+ scale: 2, // 2倍清晰度
+ useCORS: true,
+ allowTaint: false,
+ width: isDesktop ? 840 : window.innerWidth, // 确保截图区域够宽
+ windowWidth: isDesktop ? 840 : window.innerWidth
+ });
+ // 6. 下载
+ const filename = `FIFA2026_${title.replace(/\s+/g, '_')}.png`;
+ const link = document.createElement('a');
+ link.download = filename;
+ link.href = canvas.toDataURL('image/png');
+ link.click();
+ } catch (err) {
+ console.error(err);
+ alert("Download failed.");
+ } finally {
+ // 7. 清理：隐藏遮罩层，恢复按钮
+ overlay.style.display = 'none';
+ if(btnElement) {
+ btnElement.disabled = false;
+ btnElement.innerHTML = "⬇ Download";
+ }
+ }
+ }
+ </script>
+ </body>
+ </html>
