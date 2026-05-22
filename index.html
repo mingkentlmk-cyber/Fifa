@@ -6,67 +6,215 @@
  <title>2026 FIFA World Cup | 2026年国际足联世界杯</title>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
  <style>
- @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
- *{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
- :root{ --bg-primary:#030810; --accent-blue:#00a8ff; --accent-cyan:#00ffff; --accent-pink:#ff3366; --accent-purple:#8b5cf6; --text-primary:#ffffff; --text-secondary:#8cb4d6; --text-muted:#5a8ab4; }
- body{ font-family:'Rajdhani','Noto Sans SC',-apple-system,sans-serif; background:var(--bg-primary); color:var(--text-primary); min-height:100vh; line-height:1.2; overflow-x:hidden; background-image:radial-gradient(ellipse 100% 80% at 20% 0%,rgba(0,168,255,0.15) 0%,transparent 50%),radial-gradient(ellipse 80% 60% at 80% 100%,rgba(139,92,246,0.1) 0%,transparent 50%),linear-gradient(180deg,#030810 0%,#061525 50%,#030810 100%); background-attachment:fixed; padding: 0; }
- /* --- 头部导航 --- */
- .header{ padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,168,255,0.3); box-shadow: 0 4px 15px rgba(0,168,255,0.1); backdrop-filter: blur(20px); background: rgba(3, 8, 16, 0.95); min-height: 48px; }
- .logo{ font-family:'Orbitron',sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform:uppercase; background: linear-gradient(180deg,#ffffff 0%,#d1d1d1 50%,#8a8a8a 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
- .tournament-title{ font-family:'Orbitron',sans-serif; font-size: 8px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.5px; }
- .countdown{display:flex;gap:2px;align-items:center;}
- .countdown-item{ text-align:center; background: rgba(0,168,255,0.1); border: 1px solid rgba(0,168,255,0.2); padding: 2px 3px; min-width: 26px; height: 36px; display: flex; flex-direction: column; justify-content: center; border-radius: 2px; }
- .countdown-value{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--accent-cyan);}
- .countdown-label{font-size:5px;color:var(--text-muted);display:block;line-height:1;}
- /* 分类导航 */
- .sub-header{ background: rgba(10,21,37,0.98); padding: 6px 8px; display: flex; gap: 6px; border-bottom: 1px solid rgba(0,168,255,0.15); overflow-x: auto; position: sticky; top: 48px; z-index: 90; -webkit-overflow-scrolling:touch; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
- .sub-header::-webkit-scrollbar{display:none}
- .filter-tab{ background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; padding: 4px 8px; white-space: nowrap; font-family:'Rajdhani',sans-serif; text-transform:uppercase; border-radius: 6px; display: flex; flex-direction: column; align-items: center; line-height: 1.2; height: 36px; justify-content: center; }
- .filter-tab .tab-zh{font-family:'Noto Sans SC';font-size:10px;}
- .filter-tab .tab_en{font-size:8px;opacity:0.7}
- .filter-tab.active{background:rgba(0,168,255,0.2);border-color:var(--accent-cyan);color:var(--accent-cyan);}
- .container{ width: 100%; max-width: 100%; margin: 0 auto; padding: 6px; position: relative; z-index:1 }
- .page-title{ font-family:'Orbitron',sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform:uppercase; margin: 8px 0 12px; padding-bottom: 6px; border-bottom: 2px solid rgba(0,168,255,0.3); position: relative; display: flex; align-items: baseline; gap: 6px; filter: drop-shadow(0 0 8px rgba(0,168,255,0.4)); }
- .page-title .title-zh{font-family:'Noto Sans SC';font-size:15px;font-weight:700;color:#fff;}
- .page-title .title_en{font-size:11px;color:var(--accent-cyan);letter-spacing:1px;}
- .groups-grid{grid-template-columns:1fr; gap:6px;}
- /* 卡片样式 */
- .group-card{ background: rgba(12,28,50,0.6); border: 1px solid rgba(0,168,255,0.3); position: relative; backdrop-filter: blur(5px); transition: all 0.3s ease; }
- .group-header{background: rgba(0,168,255,0.1);padding: 6px 10px;border-bottom: 1px solid rgba(0,168,255,0.3); display: flex; justify-content: space-between; align-items: center;}
- .group-title{font-family:'Orbitron';font-size:10px;font-weight:700;color:var(--accent-cyan);letter-spacing:2px;}
- /* 新增：单个卡片下载按钮样式 */
- .dl-btn { background: rgba(0, 168, 255, 0.2); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); border-radius: 4px; cursor: pointer; font-size: 10px; padding: 2px 6px; opacity: 0.6; transition: 0.3s; font-family: 'Orbitron', sans-serif; margin-left: 10px; }
- .dl-btn:hover { background: var(--accent-cyan); color: #000; opacity: 1; transform: translateY(-1px); }
- .dl-btn:disabled { opacity: 0.3; cursor: wait; }
- .match-list{padding: 4px;}
- .match-item{ background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); border-radius: 4px; margin-bottom: 4px; display: flex; align-items: center; position: relative; padding: 6px; }
- .match-datetime{ background: rgba(0,168,255,0.15); border: 1px solid rgba(0,168,255,0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 46px; height: 40px; margin-right: 8px; border-radius: 3px; flex-shrink: 0; }
- .match-datetime-date{font-family:'Orbitron';font-size:10px;font-weight:600;color:#fff;}
- .match-datetime-time{font-family:'Orbitron';font-size:8px;color:var(--accent-cyan);margin-top:1px;font-weight: 700;}
- .match-teams{ display: flex; align-items: center; justify-content: space-between; flex: 1; min-width: 0; }
- .team{ display: flex; align-items: center; flex: 1; min-width: 0; }
- .team-home{justify-content: flex-start;gap:6px;}
- .team-away{justify-content: flex-end;gap:6px;}
- .team-flag{ width: 32px; height: 24px; border-radius: 2px; object-fit: cover; flex-shrink: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
- .team-name-wrapper{ flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 0; text-align: center; }
- .team-name-zh{font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;width: 100%;}
- .team-name-en{font-size:8px;color:var(--text-muted);white-space:nowrap;overflow:hidden;line-height:1.1;width: 100%;font-weight: 700;} 
- /* 注意：这里移除了 text-overflow: ellipsis 以满足不缩写的要求，并配合JS中的大写转换 */
- .match-vs{ font-family:'Orbitron'; font-size:9px; font-weight: 800; color:var(--accent-pink); padding: 0 6px; flex-shrink: 0; text-shadow: 0 0 5px rgba(255,50,100,0.6); }
- .stage-title{font-size:13px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(0,168,255,0.2);color:#fff;}
- .stage-title .stage-zh{font-family:'Noto Sans SC';font-size:12px;}
- /* 桌面端适配 */
- @media (min-width:768px){ body{padding:0;} .header{padding:12px 24px;justify-content:space-between;} .logo{font-size:20px;} .tournament-title{font-size:12px;display:block;} .countdown{gap:6px} .countdown-item{padding:4px 8px;min-width:40px;height:36px;} .countdown-value{font-size:14px;} .countdown-label{font-size:7px;} .sub-header{top:48px;padding:6px 12px;gap:8px;} .filter-tab{padding:6px 12px;font-size:12px;height:auto;} .container{padding:12px;max-width:1200px;} .groups-grid{grid-template-columns:repeat(2,1fr);gap:12px} .group-card{margin-bottom:0;} .match-item{padding:10px;margin-bottom:6px;} .match-datetime{min-width:60px;height:48px;margin-right:12px;} .team-flag{width:40px;height:28px;} .team-name-zh{font-size:13px} .team-name-en{font-size:10px;} .match-vs{font-size:11px;padding:0 10px;} .stage-title{font-size:16px;margin:24px 0 12px;} .dl-btn { font-size: 12px; padding: 4px 8px; } }
- /* ================= 导出遮罩层样式 (响应式) ================= */
- #export-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: transparent; display: none; overflow: auto; padding: 20px; }
- /* 导出卡片的特殊样式 - 透明背景 + 发光边框 */
- .export-card { background: rgba(12,28,50,0.8) !important; background: transparent !important; border: 1px solid rgba(0, 168, 255, 0.6); box-shadow: 0 0 20px rgba(0, 168, 255, 0.3), inset 0 0 10px rgba(0, 168, 255, 0.1); backdrop-filter: none; color: #fff; position: relative; overflow: hidden; border-radius: 6px; padding: 10px; margin: 0 auto; max-width: 100%; }
- @media (min-width: 768px) { .export-card { max-width: 800px; } }
- .export-card .match-datetime { background: rgba(0, 168, 255, 0.2) !important; border: 1px solid rgba(0, 168, 255, 0.6) !important; color: #fff; box-shadow: 0 0 10px rgba(0, 168, 255, 0.4); }
- .export-card .match-item { background: rgba(15,35,60,0.4); border: 1px solid rgba(0,168,255,0.2); margin-bottom: 6px; }
- .export-card .group-header { background: transparent !important; border-bottom: 1px solid rgba(0, 168, 255, 0.5); margin-bottom: 8px; padding: 4px 0; }
- .export-card .group-title { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 255, 255, 0.6); }
- </style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+ --bg-primary:#020712;--panel:#07182b;--panel2:#0b233d;--line:#1d8cff;--line2:#55d9ff;--cyan:#35e7ff;--blue:#0d7dff;--gold:#f8c65b;--pink:#ff4b7a;
+ --text-primary:#f7fbff;--text-secondary:#a9c9e8;--text-muted:#6f91b0;
+}
+html{background:#020712;}
+body{
+ font-family:'Rajdhani','Noto Sans SC',system-ui,sans-serif;color:var(--text-primary);min-height:100vh;line-height:1.15;overflow-x:hidden;padding:0;
+ background:
+  radial-gradient(ellipse 120% 60% at 50% -10%,rgba(80,180,255,.28),transparent 42%),
+  radial-gradient(ellipse 90% 40% at 8% 18%,rgba(0,145,255,.25),transparent 48%),
+  radial-gradient(ellipse 80% 35% at 92% 26%,rgba(0,110,255,.16),transparent 50%),
+  linear-gradient(180deg,#061428 0%,#030914 36%,#061426 70%,#02060d 100%);
+ background-attachment:fixed;position:relative;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:
+ linear-gradient(180deg,rgba(255,255,255,.08),transparent 4%,transparent 88%,rgba(0,140,255,.09)),
+ repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px),
+ linear-gradient(90deg,transparent 0 7%,rgba(32,162,255,.13) 7.2%,transparent 7.6%,transparent 92%,rgba(32,162,255,.12) 92.4%,transparent 93%);
+ mix-blend-mode:screen;opacity:.35}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:
+ radial-gradient(ellipse 95% 34% at 50% 31%,transparent 0 45%,rgba(17,104,176,.18) 46%,transparent 50%),
+ linear-gradient(110deg,transparent 0 12%,rgba(51,190,255,.16) 12.15%,transparent 12.5%,transparent 82%,rgba(51,190,255,.12) 82.15%,transparent 82.55%),
+ radial-gradient(circle at 50% 105%,rgba(0,82,160,.28),transparent 48%);
+ opacity:.7}
+.header,.sub-header,.container{position:relative;z-index:1}
+/* top */
+.header{padding:18px 18px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;min-height:70px;background:linear-gradient(180deg,rgba(3,10,22,.94),rgba(4,16,32,.86));backdrop-filter:blur(22px);border-bottom:1px solid rgba(80,190,255,.42);box-shadow:0 8px 34px rgba(0,112,255,.18),inset 0 -1px 0 rgba(255,255,255,.08)}
+.header:before{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 18px var(--cyan)}
+.logo{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;background:linear-gradient(180deg,#fff 0%,#edf7ff 23%,#7a92a9 48%,#fff 54%,#8fa4b8 75%,#e9f7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 2px 0 #09203a,0 0 16px rgba(80,190,255,.7);filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
+.tournament-title{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:600;color:#69cfff;letter-spacing:1.5px;text-shadow:0 0 12px rgba(53,231,255,.7);margin-top:3px;text-transform:uppercase}
+.countdown{display:flex;gap:5px;align-items:center}.countdown-item{position:relative;text-align:center;min-width:35px;height:43px;padding:5px 4px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,rgba(21,61,101,.72),rgba(3,18,34,.86));border:1px solid rgba(80,190,255,.55);clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);box-shadow:inset 0 0 16px rgba(29,140,255,.18),0 0 15px rgba(0,145,255,.18)}
+.countdown-value{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:900;line-height:1;color:#e9fbff;text-shadow:0 1px 0 #081625,0 2px 0 #07111e,0 0 12px rgba(53,231,255,.8)}
+.countdown-label{font-size:6px;letter-spacing:.8px;color:#86b9e4;text-transform:uppercase;margin-top:3px}
+/* nav */
+.sub-header{background:linear-gradient(180deg,rgba(8,27,48,.96),rgba(3,12,24,.94));padding:8px 10px;display:flex;gap:8px;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(57,176,255,.38);overflow-x:auto;position:sticky;top:70px;z-index:90;-webkit-overflow-scrolling:touch;box-shadow:0 10px 28px rgba(0,0,0,.38)}
+.sub-header::-webkit-scrollbar{display:none}.filter-tab{position:relative;background:linear-gradient(180deg,rgba(18,47,78,.64),rgba(4,20,38,.84));border:1px solid rgba(84,185,255,.22);color:#9db7d1;font-size:10px;font-weight:800;cursor:pointer;padding:7px 11px;white-space:nowrap;font-family:'Rajdhani',sans-serif;text-transform:uppercase;border-radius:0;display:flex;flex-direction:column;align-items:center;line-height:1.12;min-width:58px;justify-content:center;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);box-shadow:inset 0 0 12px rgba(0,120,255,.12)}
+.filter-tab:before{content:"";position:absolute;inset:1px;border:1px solid rgba(255,255,255,.04);clip-path:inherit}.filter-tab .tab-zh{font-family:'Noto Sans SC';font-size:10px;font-weight:800}.filter-tab .tab_en{font-size:8px;opacity:.75;letter-spacing:1px}.filter-tab.active{background:linear-gradient(180deg,rgba(16,102,184,.78),rgba(4,33,68,.94));border-color:var(--cyan);color:#fff;box-shadow:0 0 18px rgba(20,170,255,.62),inset 0 0 18px rgba(60,220,255,.24);text-shadow:0 0 10px rgba(53,231,255,.9)}
+.container{width:100%;max-width:100%;margin:0 auto;padding:12px 10px 40px}.page-title{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 14px;padding:0 0 10px;position:relative;display:flex;align-items:baseline;gap:10px;color:#fff;text-shadow:0 2px 0 #07182b,0 4px 0 #02060d,0 0 18px rgba(53,231,255,.55);filter:drop-shadow(0 10px 12px rgba(0,0,0,.55))}
+.page-title:after,.stage-title:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--cyan),rgba(29,140,255,.6),transparent);box-shadow:0 0 16px var(--cyan)}.page-title .title-zh{font-family:'Noto Sans SC';font-size:18px;font-weight:900}.page-title .title_en{font-size:12px;color:#75dcff;letter-spacing:2px;text-shadow:0 0 12px rgba(53,231,255,.85)}
+.groups-grid{display:grid;grid-template-columns:1fr;gap:9px}.group-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(10,31,55,.82),rgba(3,15,29,.94) 60%,rgba(8,34,64,.78));border:1px solid rgba(67,174,255,.42);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);backdrop-filter:blur(8px);box-shadow:0 14px 34px rgba(0,0,0,.42),0 0 24px rgba(0,123,255,.16),inset 0 0 22px rgba(0,133,255,.12);transition:.25s ease}
+.group-card:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(92,208,255,.26),transparent 18%,transparent 72%,rgba(92,208,255,.16)),repeating-linear-gradient(135deg,rgba(255,255,255,.028) 0 1px,transparent 1px 11px)}.group-card:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(255,255,255,.06);clip-path:inherit}.group-card:hover{border-color:rgba(90,220,255,.75);box-shadow:0 16px 38px rgba(0,0,0,.46),0 0 30px rgba(0,145,255,.34),inset 0 0 24px rgba(0,133,255,.18)}
+.group-header{position:relative;background:linear-gradient(90deg,rgba(0,135,255,.24),rgba(0,36,74,.35));padding:8px 10px;border-bottom:1px solid rgba(65,181,255,.35);display:flex;justify-content:space-between;align-items:center;z-index:1}.group-title{font-family:'Orbitron';font-size:11px;font-weight:900;color:#73ddff;letter-spacing:2px;text-shadow:0 0 12px rgba(53,231,255,.85),0 2px 0 #021225}.dl-btn{background:linear-gradient(180deg,rgba(0,120,255,.35),rgba(2,22,42,.9));border:1px solid rgba(87,218,255,.75);color:#d8fbff;clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);cursor:pointer;font-size:9px;padding:4px 8px;opacity:.82;transition:.25s;font-family:'Orbitron';box-shadow:0 0 14px rgba(0,168,255,.25),inset 0 0 10px rgba(53,231,255,.12)}.dl-btn:hover{opacity:1;transform:translateY(-1px);box-shadow:0 0 22px rgba(53,231,255,.5)}.dl-btn:disabled{opacity:.35;cursor:wait}
+.match-list{position:relative;z-index:1;padding:7px}.match-item{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(14,45,78,.58),rgba(4,18,35,.83));border:1px solid rgba(65,170,255,.26);clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);margin-bottom:7px;display:flex;align-items:center;padding:8px 7px;box-shadow:inset 0 0 18px rgba(0,100,255,.1)}.match-item:last-child{margin-bottom:0}.match-item:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,190,255,.1),transparent 30%,rgba(255,255,255,.03) 50%,transparent 70%,rgba(42,190,255,.08));pointer-events:none}.match-datetime{position:relative;background:linear-gradient(180deg,rgba(0,141,255,.35),rgba(2,21,41,.88));border:1px solid rgba(84,218,255,.58);display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:52px;height:46px;margin-right:8px;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);flex-shrink:0;box-shadow:0 0 15px rgba(0,168,255,.25),inset 0 0 12px rgba(53,231,255,.12)}.match-datetime-date{font-family:'Orbitron';font-size:10px;font-weight:900;color:#fff;text-shadow:0 1px 0 #071525,0 0 10px rgba(255,255,255,.38)}.match-datetime-time{font-family:'Orbitron';font-size:8px;color:#6ff0ff;margin-top:2px;font-weight:800;text-shadow:0 0 9px rgba(53,231,255,.8)}
+.match-teams{display:flex;align-items:center;justify-content:space-between;flex:1;min-width:0}.team{display:flex;align-items:center;flex:1;min-width:0}.team-home{justify-content:flex-start;gap:7px}.team-away{justify-content:flex-end;gap:7px}.team-flag{width:38px;height:28px;border-radius:0;object-fit:cover;flex-shrink:0;border:1px solid rgba(224,244,255,.75);box-shadow:0 4px 12px rgba(0,0,0,.55),0 0 12px rgba(81,184,255,.32),inset 0 0 8px rgba(255,255,255,.18);background:#12223a}.team-name-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:0;text-align:center}.team-name-zh{font-family:'Noto Sans SC';font-size:12px;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15;width:100%;text-shadow:0 1px 0 #06101d,0 0 9px rgba(255,255,255,.18)}.team-name-en{font-size:8px;color:#9ec3e4;white-space:nowrap;overflow:hidden;line-height:1.05;width:100%;font-weight:800;letter-spacing:.3px;text-shadow:0 0 8px rgba(80,180,255,.25)}.match-vs{font-family:'Orbitron';font-size:11px;font-weight:900;color:#eaf6ff;padding:0 7px;flex-shrink:0;text-shadow:0 1px 0 #071525,0 2px 0 #02060d,0 0 12px rgba(255,255,255,.55),0 0 18px rgba(53,231,255,.38)}
+.stage-title{position:relative;font-family:'Orbitron';font-size:17px;font-weight:900;letter-spacing:1.5px;margin:22px 0 11px;padding-bottom:8px;color:#fff;text-transform:uppercase;text-shadow:0 2px 0 #061625,0 4px 0 #02060d,0 0 15px rgba(255,255,255,.25)}.stage-title .stage-zh{font-family:'Noto Sans SC';font-size:14px;font-weight:900;color:#fff}
+#knockout-container .group-card[data-stage="final"]{border-color:rgba(255,198,91,.65);box-shadow:0 14px 34px rgba(0,0,0,.42),0 0 24px rgba(248,198,91,.22),inset 0 0 22px rgba(248,198,91,.12)}#knockout-container .group-card[data-stage="final"] .group-title,#knockout-container .group-card[data-stage="final"] .match-datetime-time{color:#ffd773;text-shadow:0 0 12px rgba(248,198,91,.8)}
+@media (min-width:768px){.header{padding:22px 36px;min-height:92px}.logo{font-size:32px}.tournament-title{font-size:12px}.countdown{gap:8px}.countdown-item{min-width:58px;height:54px}.countdown-value{font-size:19px}.countdown-label{font-size:8px}.sub-header{top:92px;padding:10px 18px;gap:10px}.filter-tab{min-width:82px;padding:9px 16px}.filter-tab .tab-zh{font-size:12px}.filter-tab .tab_en{font-size:9px}.container{padding:20px;max-width:1200px}.page-title{font-size:28px;margin:20px 0 18px}.page-title .title-zh{font-size:26px}.page-title .title_en{font-size:15px}.groups-grid{grid-template-columns:repeat(2,1fr);gap:14px}.match-list{padding:9px}.group-header{padding:10px 13px}.group-title{font-size:12px}.match-item{padding:10px;margin-bottom:8px}.match-datetime{min-width:68px;height:54px;margin-right:13px}.match-datetime-date{font-size:12px}.match-datetime-time{font-size:9px}.team-flag{width:46px;height:32px}.team-name-zh{font-size:14px}.team-name-en{font-size:10px}.match-vs{font-size:13px;padding:0 12px}.stage-title{font-size:24px;margin:30px 0 15px}.stage-title .stage-zh{font-size:17px}.dl-btn{font-size:10px;padding:5px 10px}}
+#export-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:transparent;display:none;overflow:auto;padding:20px}.export-card{background:linear-gradient(145deg,rgba(10,31,55,.82),rgba(3,15,29,.94))!important;border:1px solid rgba(67,174,255,.62);box-shadow:0 0 24px rgba(0,168,255,.32),inset 0 0 18px rgba(0,168,255,.12);backdrop-filter:none;color:#fff;position:relative;overflow:hidden;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);padding:10px;margin:0 auto;max-width:100%}@media (min-width:768px){.export-card{max-width:800px}}.export-card .match-datetime{background:linear-gradient(180deg,rgba(0,141,255,.35),rgba(2,21,41,.88))!important;border:1px solid rgba(84,218,255,.7)!important;color:#fff;box-shadow:0 0 14px rgba(0,168,255,.35)}.export-card .match-item{background:linear-gradient(135deg,rgba(14,45,78,.58),rgba(4,18,35,.83));border:1px solid rgba(65,170,255,.3);margin-bottom:6px}.export-card .group-header{background:transparent!important;border-bottom:1px solid rgba(0,168,255,.5);margin-bottom:8px;padding:4px 0}.export-card .group-title{color:#73ddff;text-shadow:0 0 10px rgba(53,231,255,.7)}
+
+/* =========================================================
+   PATCH: clean FIFA title + original flag shape 3D mirror
+   - No schedule/data/filter logic changed
+   - Fix header title rendering artifacts
+   - Keep flags rectangular, add 3D bevel + sliding reflection
+========================================================= */
+
+/* Cleaner header logo: remove broken stencil-like artifact from Orbitron rendering */
+.logo{
+  font-family:'Rajdhani','Noto Sans SC',system-ui,sans-serif !important;
+  font-size:22px !important;
+  font-weight:900 !important;
+  letter-spacing:2.2px !important;
+  line-height:1 !important;
+  text-transform:uppercase !important;
+  color:#f2fbff !important;
+  background:none !important;
+  -webkit-background-clip:initial !important;
+  -webkit-text-fill-color:#f2fbff !important;
+  text-shadow:
+    0 1px 0 #ffffff,
+    0 2px 0 #9bb9d0,
+    0 3px 0 #35526b,
+    0 5px 0 #071827,
+    0 0 12px rgba(112,224,255,.75),
+    0 0 26px rgba(0,141,255,.46) !important;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.55)) !important;
+}
+
+/* Flag frame keeps original rectangle, adds premium thickness and moving glass highlight */
+.flag-frame{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:30px;
+  flex-shrink:0;
+  border-radius:3px;
+  padding:2px;
+  overflow:hidden;
+  transform:perspective(420px) rotateX(5deg) rotateY(-4deg) translateZ(0);
+  transform-style:preserve-3d;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.96) 0%,rgba(127,172,202,.9) 18%,rgba(20,46,76,.92) 42%,rgba(231,248,255,.92) 56%,rgba(62,101,135,.95) 76%,rgba(255,255,255,.85) 100%);
+  border:1px solid rgba(219,245,255,.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    inset 0 -3px 7px rgba(0,0,0,.48),
+    0 0 0 1px rgba(2,16,31,.95),
+    0 0 0 2px rgba(77,205,255,.28),
+    0 7px 13px rgba(0,0,0,.55),
+    0 0 16px rgba(66,202,255,.24);
+  animation:flag3dFloat 5.2s ease-in-out infinite;
+}
+
+.flag-frame::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  z-index:2;
+  pointer-events:none;
+  border-radius:2px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.03) 35%,rgba(0,0,0,.18) 100%),
+    radial-gradient(circle at 25% 8%,rgba(255,255,255,.42),transparent 28%);
+  mix-blend-mode:screen;
+}
+
+.flag-frame::after{
+  content:"";
+  position:absolute;
+  top:-38%;
+  left:-95%;
+  width:70%;
+  height:180%;
+  z-index:3;
+  pointer-events:none;
+  background:linear-gradient(110deg,
+    transparent 0%,
+    rgba(255,255,255,.05) 22%,
+    rgba(255,255,255,.68) 45%,
+    rgba(127,235,255,.34) 52%,
+    rgba(255,255,255,.12) 64%,
+    transparent 100%);
+  transform:skewX(-18deg);
+  mix-blend-mode:screen;
+  animation:flagMirrorSlide 3.9s ease-in-out infinite;
+}
+
+.team-flag{
+  width:100% !important;
+  height:100% !important;
+  padding:0 !important;
+  object-fit:cover !important;
+  border-radius:1px !important;
+  border:none !important;
+  background:#0b1a2c !important;
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.38),
+    inset 0 -4px 8px rgba(0,0,0,.36) !important;
+  filter:saturate(1.18) contrast(1.12) brightness(1.04);
+  transform:translateZ(8px);
+}
+
+.match-item:hover .flag-frame{
+  transform:perspective(420px) rotateX(2deg) rotateY(5deg) translateY(-1px) translateZ(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -3px 7px rgba(0,0,0,.48),
+    0 0 0 1px rgba(2,16,31,.95),
+    0 0 0 2px rgba(103,231,255,.46),
+    0 10px 18px rgba(0,0,0,.58),
+    0 0 24px rgba(92,233,255,.42);
+}
+
+@keyframes flagMirrorSlide{
+  0%{ left:-105%; opacity:.05; }
+  18%{ opacity:.78; }
+  42%{ left:132%; opacity:.5; }
+  100%{ left:132%; opacity:.06; }
+}
+
+@keyframes flag3dFloat{
+  0%,100%{ transform:perspective(420px) rotateX(5deg) rotateY(-4deg) translateZ(0); }
+  50%{ transform:perspective(420px) rotateX(2deg) rotateY(4deg) translateZ(2px); }
+}
+
+/* TBD is not a real flag; keep it simple */
+div.team-flag{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  border:1px solid rgba(84,218,255,.35) !important;
+  border-radius:2px !important;
+  box-shadow:inset 0 0 10px rgba(0,168,255,.12) !important;
+}
+
+/* Desktop polish */
+@media (min-width:768px){
+  .logo{
+    font-size:34px !important;
+    letter-spacing:3px !important;
+  }
+  .flag-frame{
+    width:52px;
+    height:36px;
+  }
+}
+
+/* Export keeps the same flag 3D frame */
+.export-card .flag-frame{
+  width:52px;
+  height:36px;
+}
+
+</style>
  </head>
  <body>
  <header class="header">
@@ -170,7 +318,7 @@
  const isTeam1Country = isCountry(match.team1);
  const isTeam2Country = isCountry(match.team2);
  const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
- return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
+ return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
  }).join('');
  const byDayClass = isByDay ? 'by-day' : '';
  return `<div class="group-card ${byDayClass}" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div><button class="dl-btn" onclick="downloadGroup('${titleText}', '${encodeURIComponent(JSON.stringify(matchesData))}', this)">⬇ Download</button></div><div class="match-list">${matchesHtml}</div></div>`;
@@ -275,7 +423,7 @@
  const isTeam1Country = isCountry(match.team1);
  const isTeam2Country = isCountry(match.team2);
  const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
- return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous">` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
+ return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
  }).join('');
  // 3. 关键：根据当前窗口宽度决定是否应用桌面端样式
  const isDesktop = window.innerWidth >= 768;
