@@ -214,6 +214,70 @@ div.team-flag{
   height:36px;
 }
 
+
+
+/* ===== Manual score editor + clean export patch ===== */
+.match-item{cursor:pointer;}
+.score-display{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:900;color:#fff2b8;min-width:48px;text-align:center;letter-spacing:1px;line-height:1;text-shadow:0 1px 0 #2c1b00,0 0 14px rgba(248,198,91,.75),0 0 22px rgba(53,231,255,.28);}
+.score-display .dash{display:inline-block;color:#f4fbff;margin:0 5px;text-shadow:0 0 10px rgba(255,255,255,.75);}
+.score-display.empty{color:#eaf6ff;font-size:11px;text-shadow:0 1px 0 #071525,0 2px 0 #02060d,0 0 12px rgba(255,255,255,.55),0 0 18px rgba(53,231,255,.38);}
+@media (min-width:768px){.score-display{font-size:20px;min-width:72px}.score-display.empty{font-size:13px}}
+.score-modal{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.62);backdrop-filter:blur(12px);padding:18px;}
+.score-modal.active{display:flex;}
+.score-box{width:min(420px,100%);background:linear-gradient(145deg,rgba(10,31,55,.96),rgba(3,15,29,.98));border:1px solid rgba(87,218,255,.78);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);box-shadow:0 0 36px rgba(0,168,255,.36),inset 0 0 24px rgba(53,231,255,.12);padding:18px;color:#fff;}
+.score-box h3{font-family:'Orbitron','Noto Sans SC';font-size:16px;letter-spacing:1px;margin-bottom:14px;color:#73ddff;text-shadow:0 0 12px rgba(53,231,255,.7);}
+.score-editor-row{display:grid;grid-template-columns:1fr 88px;gap:12px;align-items:center;margin:10px 0;}
+.score-editor-team{font-family:'Noto Sans SC';font-size:16px;font-weight:900;line-height:1.1;}
+.score-editor-team small{display:block;font-family:'Rajdhani';font-size:11px;color:#9ec3e4;margin-top:3px;letter-spacing:1px;}
+.score-editor-row input{width:88px;height:48px;text-align:center;font-family:'Orbitron';font-size:22px;font-weight:900;color:#fff;background:rgba(0,18,36,.86);border:1px solid rgba(87,218,255,.65);outline:none;box-shadow:inset 0 0 14px rgba(0,168,255,.16);}
+.score-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:16px;}
+.score-actions button{height:42px;border:1px solid rgba(87,218,255,.65);background:linear-gradient(180deg,rgba(0,120,255,.35),rgba(2,22,42,.92));color:#d8fbff;font-family:'Rajdhani','Noto Sans SC';font-weight:900;font-size:14px;cursor:pointer;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);}
+.score-actions .save{border-color:rgba(248,198,91,.88);color:#fff2b8;}
+/* Download image: compact export, only match rows */
+#export-overlay{background:transparent!important;padding:0!important;overflow:hidden!important;align-items:flex-start;justify-content:flex-start;}
+.export-card.clean-export{
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  padding:0!important;
+  margin:0!important;
+  max-width:none!important;
+  overflow:visible!important;
+}
+.export-card.clean-export .match-list{padding:0!important;}
+.export-card.clean-export .match-item{
+  width:780px!important;
+  min-height:92px!important;
+  margin:0 0 9px 0!important;
+  padding:11px 14px!important;
+  cursor:default!important;
+  border-color:rgba(65,170,255,.42)!important;
+}
+.export-card.clean-export .match-item:last-child{margin-bottom:0!important;}
+.export-card.clean-export .match-teams{gap:10px!important;}
+.export-card.clean-export .team{gap:10px!important;}
+.export-card.clean-export .team-home,.export-card.clean-export .team-away{flex:1 1 0!important;}
+.export-card.clean-export .score-display{font-size:28px!important;min-width:82px!important;padding:0 8px!important;}
+.export-card.clean-export .score-display .dash{margin:0 8px!important;}
+.export-card.clean-export .score-display.empty{font-size:18px!important;}
+.export-card.clean-export .team-name-zh{font-size:20px!important;line-height:1.05!important;}
+.export-card.clean-export .team-name-en{font-size:13px!important;line-height:1.05!important;}
+.export-card.clean-export .match-datetime{min-width:76px!important;width:76px!important;height:58px!important;margin-right:14px!important;}
+.export-card.clean-export .match-datetime-date{font-size:15px!important;}
+.export-card.clean-export .match-datetime-time{font-size:11px!important;}
+.export-card.clean-export .flag-frame{width:58px!important;height:40px!important;}
+@media (max-width:767px){
+  .export-card.clean-export .match-item{width:100vw!important;min-height:76px!important;padding:8px 7px!important;margin-bottom:7px!important;}
+  .export-card.clean-export .match-datetime{min-width:55px!important;width:55px!important;height:48px!important;margin-right:7px!important;}
+  .export-card.clean-export .match-datetime-date{font-size:11px!important;}
+  .export-card.clean-export .match-datetime-time{font-size:8px!important;}
+  .export-card.clean-export .flag-frame{width:40px!important;height:28px!important;}
+  .export-card.clean-export .team-name-zh{font-size:13px!important;}
+  .export-card.clean-export .team-name-en{font-size:8px!important;}
+  .export-card.clean-export .score-display{font-size:17px!important;min-width:52px!important;padding:0 4px!important;}
+}
+
 </style>
  </head>
  <body>
@@ -230,14 +294,14 @@ div.team-flag{
  </div>
  </header>
  <nav class="sub-header">
- <button class="filter-tab active" onclick="filterByStage('all', this)"><span class="tab-zh">全部</span><span class="tab_en">All</span></button>
- <button class="filter-tab" onclick="filterByStage('group', this)"><span class="tab-zh">小组</span><span class="tab_en">Group</span></button>
- <button class="filter-tab" onclick="filterByStage('round32', this)"><span class="tab-zh">32强</span><span class="tab_en">R32</span></button>
- <button class="filter-tab" onclick="filterByStage('round16', this)"><span class="tab-zh">16强</span><span class="tab_en">R16</span></button>
- <button class="filter-tab" onclick="filterByStage('quarterfinal', this)"><span class="tab-zh">1/4</span><span class="tab_en">QF</span></button>
- <button class="filter-tab" onclick="filterByStage('semifinal', this)"><span class="tab-zh">半决赛</span><span class="tab_en">Semi</span></button>
- <button class="filter-tab" onclick="filterByStage('third', this)"><span class="tab-zh">季军</span><span class="tab_en">3rd</span></button>
- <button class="filter-tab" onclick="filterByStage('final', this)"><span class="tab-zh">决赛</span><span class="tab_en">Final</span></button>
+ <button class="filter-tab active" onclick="filterByStage('all', this)" data-stage-filter="all"><span class="tab-zh">全部</span><span class="tab_en">All</span></button>
+ <button class="filter-tab" onclick="filterByStage('group', this)" data-stage-filter="group"><span class="tab-zh">小组</span><span class="tab_en">Group</span></button>
+ <button class="filter-tab" onclick="filterByStage('round32', this)" data-stage-filter="round32"><span class="tab-zh">32强</span><span class="tab_en">R32</span></button>
+ <button class="filter-tab" onclick="filterByStage('round16', this)" data-stage-filter="round16"><span class="tab-zh">16强</span><span class="tab_en">R16</span></button>
+ <button class="filter-tab" onclick="filterByStage('quarterfinal', this)" data-stage-filter="quarterfinal"><span class="tab-zh">1/4</span><span class="tab_en">QF</span></button>
+ <button class="filter-tab" onclick="filterByStage('semifinal', this)" data-stage-filter="semifinal"><span class="tab-zh">半决赛</span><span class="tab_en">Semi</span></button>
+ <button class="filter-tab" onclick="filterByStage('third', this)" data-stage-filter="third"><span class="tab-zh">季军</span><span class="tab_en">3rd</span></button>
+ <button class="filter-tab" onclick="filterByStage('final', this)" data-stage-filter="final"><span class="tab-zh">决赛</span><span class="tab_en">Final</span></button>
  </nav>
  <main class="container">
  <h1 class="page-title"><span class="title-zh">比赛日程</span><span class="title_en">Schedule</span></h1>
@@ -246,6 +310,26 @@ div.team-flag{
  <h2 class="stage-title"><span class="stage-zh">淘汰赛</span></h2>
  <div class="groups-grid knockout-matches" id="knockout-container"></div>
  </main>
+
+ <div class="score-modal" id="score-modal">
+  <div class="score-box">
+   <h3>手动填写比分</h3>
+   <div class="score-editor-row">
+    <div class="score-editor-team"><span id="score-home-name">Home</span><small id="score-home-en">HOME</small></div>
+    <input id="score-home-input" type="number" inputmode="numeric" min="0" max="99" placeholder="-">
+   </div>
+   <div class="score-editor-row">
+    <div class="score-editor-team"><span id="score-away-name">Away</span><small id="score-away-en">AWAY</small></div>
+    <input id="score-away-input" type="number" inputmode="numeric" min="0" max="99" placeholder="-">
+   </div>
+   <div class="score-actions">
+    <button type="button" onclick="closeScoreEditor()">取消</button>
+    <button type="button" onclick="clearScore()">清除</button>
+    <button type="button" class="save" onclick="saveScore()">保存</button>
+   </div>
+  </div>
+ </div>
+
  <!-- 导出遮罩层 -->
  <div id="export-overlay"></div>
  <script>
@@ -311,6 +395,79 @@ div.team-flag{
  // 修改：移除截断逻辑，并转换为大写
  return name.toUpperCase();
  }
+ function getMatchKey(match){
+   return `${match.date}_${match.time}_${match.team1}_${match.team2}`.replace(/[^a-zA-Z0-9]+/g,'_');
+ }
+ function getSavedScore(match){
+   try{
+     const raw = localStorage.getItem('fifa_score_' + getMatchKey(match));
+     if(!raw) return null;
+     const data = JSON.parse(raw);
+     if(data.score1 === '' || data.score2 === '' || data.score1 == null || data.score2 == null) return null;
+     return {score1:String(data.score1), score2:String(data.score2)};
+   }catch(e){ return null; }
+ }
+ function getScoreHTML(match){
+   const score = getSavedScore(match);
+   if(score) return `${score.score1}<span class="dash">-</span>${score.score2}`;
+   return 'VS';
+ }
+ let activeScoreKey = null;
+ function findMatchByKey(key){
+   return [...groupMatches, ...knockoutMatches].find(m => getMatchKey(m) === key);
+ }
+ function openScoreEditor(key){
+   const match = findMatchByKey(key);
+   if(!match) return;
+   activeScoreKey = key;
+   const team1 = getTeamName(match.team1);
+   const team2 = getTeamName(match.team2);
+   document.getElementById('score-home-name').textContent = team1.zh;
+   document.getElementById('score-home-en').textContent = formatTeamEnName(team1.en);
+   document.getElementById('score-away-name').textContent = team2.zh;
+   document.getElementById('score-away-en').textContent = formatTeamEnName(team2.en);
+   const saved = getSavedScore(match);
+   document.getElementById('score-home-input').value = saved ? saved.score1 : '';
+   document.getElementById('score-away-input').value = saved ? saved.score2 : '';
+   document.getElementById('score-modal').classList.add('active');
+   setTimeout(()=>document.getElementById('score-home-input').focus(),50);
+ }
+ function closeScoreEditor(){
+   document.getElementById('score-modal').classList.remove('active');
+   activeScoreKey = null;
+ }
+ function rerenderCurrentView(){
+   const activeBtn = document.querySelector('.filter-tab.active');
+   const activeStage = activeBtn ? activeBtn.getAttribute('data-stage-filter') || 'all' : 'all';
+   renderGroups();
+   renderGroupsByDay();
+   renderKnockout();
+   if(activeBtn){ filterByStage(activeStage, activeBtn); }
+   else{ document.querySelectorAll('.group-card:not(.by-day)').forEach(c => c.style.display = 'none'); }
+ }
+ function saveScore(){
+   if(!activeScoreKey) return;
+   const s1 = document.getElementById('score-home-input').value.trim();
+   const s2 = document.getElementById('score-away-input').value.trim();
+   if(s1 === '' || s2 === ''){ alert('两个比分都要填'); return; }
+   localStorage.setItem('fifa_score_' + activeScoreKey, JSON.stringify({score1:Number(s1), score2:Number(s2)}));
+   closeScoreEditor();
+   rerenderCurrentView();
+ }
+ function clearScore(){
+   if(!activeScoreKey) return;
+   localStorage.removeItem('fifa_score_' + activeScoreKey);
+   closeScoreEditor();
+   rerenderCurrentView();
+ }
+ document.addEventListener('click', function(e){
+   const item = e.target.closest('.match-item[data-match-key]');
+   if(!item) return;
+   if(item.closest('#export-overlay')) return;
+   openScoreEditor(item.dataset.matchKey);
+ });
+ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeScoreEditor(); });
+ document.addEventListener('click', function(e){ if(e.target && e.target.id === 'score-modal') closeScoreEditor(); });
  function createCardHTML(titleText, matchesData, stageType, cardId, isByDay=false){
  let matchesHtml = matchesData.map(match => {
  const team1 = getTeamName(match.team1);
@@ -318,7 +475,7 @@ div.team-flag{
  const isTeam1Country = isCountry(match.team1);
  const isTeam2Country = isCountry(match.team2);
  const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
- return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
+ return `<div class="match-item" data-match-key="${getMatchKey(match)}"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs score-display ${getSavedScore(match)?'':'empty'}">${getScoreHTML(match)}</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
  }).join('');
  const byDayClass = isByDay ? 'by-day' : '';
  return `<div class="group-card ${byDayClass}" data-stage="${stageType}" id="${cardId}"><div class="group-header"><div class="group-title"><span class="group_en">${titleText}</span></div><button class="dl-btn" onclick="downloadGroup('${titleText}', '${encodeURIComponent(JSON.stringify(matchesData))}', this)">⬇ Download</button></div><div class="match-list">${matchesHtml}</div></div>`;
@@ -423,17 +580,14 @@ div.team-flag{
  const isTeam1Country = isCountry(match.team1);
  const isTeam2Country = isCountry(match.team2);
  const tbdStyle = "display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);color:#888;font-size:8px;";
- return `<div class="match-item"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs">VS</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
+ return `<div class="match-item" data-match-key="${getMatchKey(match)}"><div class="match-datetime"><div class="match-datetime-date">${match.date}</div><div class="match-datetime-time">${formatTimeWithAmPm(match.time)}</div></div><div class="match-teams"><div class="team team-home">${isTeam1Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team1]?.code||'xx')}" class="team-flag" alt="${match.team1}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}<div class="team-name-wrapper"><span class="team-name-zh">${team1.zh}</span><span class="team-name-en">${formatTeamEnName(team1.en)}</span></div></div><span class="match-vs score-display ${getSavedScore(match)?'':'empty'}">${getScoreHTML(match)}</span><div class="team team-away"><div class="team-name-wrapper"><span class="team-name-zh">${team2.zh}</span><span class="team-name-en">${formatTeamEnName(team2.en)}</span></div>${isTeam2Country ? `<span class="flag-frame"><img src="${getFlag(teams[match.team2]?.code||'xx')}" class="team-flag" alt="${match.team2}" crossorigin="anonymous"></span>` : `<div class="team-flag" style="${tbdStyle}">TBD</div>`}</div></div></div>`;
  }).join('');
  // 3. 关键：根据当前窗口宽度决定是否应用桌面端样式
  const isDesktop = window.innerWidth >= 768;
  const layoutClass = isDesktop ? 'desktop-layout' : 'mobile-layout';
  // 插入到遮罩层
  overlay.innerHTML = `
- <div class="export-card ${layoutClass}" style="width: ${isDesktop ? '800px' : '100%'}; margin: 0 auto;">
- <div class="group-header">
- <div class="group-title">${title}</div>
- </div>
+ <div class="export-card clean-export ${layoutClass}" style="width: ${isDesktop ? '780px' : '100vw'}; margin: 0;">
  <div class="match-list">
  ${matchesHtml}
  </div>
@@ -442,24 +596,22 @@ div.team-flag{
  // 显示遮罩层
  overlay.style.display = 'block';
  // 如果是桌面端，我们还需要手动触发一下 CSS Grid 布局
- if (isDesktop) {
- // 强制给内部容器应用 Grid 样式
- overlay.querySelector('.export-card').style.display = 'grid';
- overlay.querySelector('.export-card').style.gridTemplateColumns = 'repeat(2, 1fr)';
- overlay.querySelector('.export-card').style.gap = '12px';
- }
+ if (isDesktop) { /* clean export: keep vertical match boxes only */ }
  try {
  // 4. 等待图片加载
  await waitImagesLoaded(overlay);
  await new Promise(r => setTimeout(r, 300));
- // 5. 截图 (背景透明)
- const canvas = await html2canvas(overlay, {
- backgroundColor: null, // 透明背景
- scale: 2, // 2倍清晰度
+ // 5. 截图：只截 export-card 本身，避免多余空白
+ const exportTarget = overlay.querySelector('.export-card.clean-export');
+ const canvas = await html2canvas(exportTarget, {
+ backgroundColor: null,
+ scale: 2,
  useCORS: true,
  allowTaint: false,
- width: isDesktop ? 840 : window.innerWidth, // 确保截图区域够宽
- windowWidth: isDesktop ? 840 : window.innerWidth
+ width: exportTarget.offsetWidth,
+ height: exportTarget.offsetHeight,
+ windowWidth: exportTarget.offsetWidth,
+ windowHeight: exportTarget.offsetHeight
  });
  // 6. 下载
  const filename = `FIFA2026_${title.replace(/\s+/g, '_')}.png`;
