@@ -278,6 +278,352 @@ div.team-flag{
   .export-card.clean-export .score-display{font-size:17px!important;min-width:52px!important;padding:0 4px!important;}
 }
 
+
+
+/* =========================================================
+   REFERENCE STYLE PATCH: big broadcast score rows
+   - Closer to supplied reference image
+   - Larger flags, date block, teams, score
+   - Stronger red/blue layered glow and beveled rows
+   - Export uses the same full-width match rows only
+========================================================= */
+body{
+  background:
+    radial-gradient(circle at 0% 6%,rgba(31,146,255,.38),transparent 24%),
+    radial-gradient(circle at 100% 4%,rgba(255,31,48,.34),transparent 26%),
+    radial-gradient(circle at 50% 112%,rgba(13,95,185,.34),transparent 42%),
+    linear-gradient(180deg,#020915 0%,#061426 46%,#020813 100%) !important;
+}
+.container{max-width:1380px!important;padding:18px 18px 50px!important;}
+.groups-grid{gap:16px!important;}
+.group-card{
+  background:rgba(0,0,0,0)!important;
+  border:none!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  overflow:visible!important;
+}
+.group-card:before,.group-card:after{display:none!important;}
+.group-header{margin-bottom:14px!important;}
+.match-list{padding:0!important;display:flex!important;flex-direction:column!important;gap:16px!important;}
+.match-item{
+  width:100%!important;
+  min-height:160px!important;
+  margin:0!important;
+  padding:20px 26px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 0% 50%,rgba(0,144,255,.22),transparent 28%),
+    radial-gradient(circle at 100% 50%,rgba(255,25,39,.22),transparent 28%),
+    linear-gradient(90deg,rgba(6,36,74,.96) 0%,rgba(7,25,50,.96) 18%,rgba(5,17,38,.98) 50%,rgba(43,6,19,.94) 100%)!important;
+  border:2px solid rgba(44,180,255,.82)!important;
+  border-right-color:rgba(255,42,54,.9)!important;
+  border-radius:18px!important;
+  clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 22px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 22px)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 38px rgba(0,140,255,.16),
+    inset -24px 0 48px rgba(255,31,44,.14),
+    0 0 0 1px rgba(2,18,34,.92),
+    0 0 26px rgba(0,145,255,.52),
+    0 0 34px rgba(255,23,39,.28)!important;
+}
+.match-item:before{
+  background:
+    linear-gradient(90deg,rgba(0,183,255,.58),transparent 18%,transparent 82%,rgba(255,35,49,.55)),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 12px)!important;
+  opacity:.65!important;
+}
+.match-item:after{
+  content:"";position:absolute;left:10px;right:10px;top:8px;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,#20b8ff,rgba(71,202,255,.22),rgba(255,60,70,.22),#ff3046);
+  box-shadow:0 0 16px rgba(45,193,255,.9),0 0 18px rgba(255,45,61,.62);
+}
+.match-datetime{
+  min-width:166px!important;width:166px!important;height:116px!important;margin-right:30px!important;
+  background:linear-gradient(180deg,rgba(9,77,139,.84),rgba(3,22,50,.94))!important;
+  border:2px solid rgba(54,193,255,.9)!important;
+  border-radius:10px!important;
+  clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)!important;
+  box-shadow:inset 0 0 28px rgba(0,158,255,.22),0 0 20px rgba(0,170,255,.32)!important;
+}
+.match-datetime-date{font-size:36px!important;letter-spacing:1px!important;color:#fff!important;}
+.match-datetime-time{font-size:22px!important;color:#35f0ff!important;margin-top:8px!important;}
+.match-teams{display:grid!important;grid-template-columns:1fr 210px 1fr!important;align-items:center!important;gap:20px!important;}
+.team{display:grid!important;align-items:center!important;gap:24px!important;min-width:0!important;}
+.team-home{grid-template-columns:150px 1fr!important;justify-content:start!important;}
+.team-away{grid-template-columns:1fr 150px!important;justify-content:end!important;}
+.flag-frame{width:150px!important;height:96px!important;border-radius:12px!important;padding:4px!important;}
+.team-name-wrapper{align-items:flex-start!important;text-align:left!important;}
+.team-away .team-name-wrapper{align-items:flex-end!important;text-align:right!important;}
+.team-name-zh{font-size:40px!important;line-height:1.05!important;letter-spacing:1px!important;text-shadow:0 2px 0 #081627,0 0 12px rgba(255,255,255,.52)!important;}
+.team-name-en{font-size:24px!important;letter-spacing:1.4px!important;color:#a9cfff!important;text-shadow:0 0 12px rgba(80,180,255,.5)!important;}
+.score-display{
+  min-width:210px!important;
+  font-size:64px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;gap:20px!important;
+  color:#ffe79c!important;
+  text-shadow:0 2px 0 #6a4200,0 0 18px rgba(255,214,102,.78),0 0 30px rgba(255,170,38,.38)!important;
+}
+.score-display .dash{
+  color:#f7fbff!important;
+  font-size:.42em!important;
+  margin:0!important;
+  transform:translateY(2px);
+  text-shadow:0 0 12px rgba(255,255,255,.9),0 0 20px rgba(53,231,255,.55)!important;
+}
+.score-display.empty{font-size:42px!important;color:#fff!important;}
+
+/* Export: same reference rows, only match boxes, no date title card */
+#export-overlay{padding:0!important;background:transparent!important;overflow:hidden!important;}
+.export-card.clean-export{width:1366px!important;background:transparent!important;border:none!important;box-shadow:none!important;clip-path:none!important;padding:0!important;margin:0!important;overflow:visible!important;}
+.export-card.clean-export .match-list{gap:18px!important;padding:0!important;display:flex!important;flex-direction:column!important;}
+.export-card.clean-export .match-item{width:1366px!important;min-height:200px!important;padding:28px 34px!important;margin:0!important;border-radius:22px!important;}
+.export-card.clean-export .match-datetime{min-width:176px!important;width:176px!important;height:130px!important;margin-right:34px!important;}
+.export-card.clean-export .match-datetime-date{font-size:40px!important;}
+.export-card.clean-export .match-datetime-time{font-size:24px!important;}
+.export-card.clean-export .match-teams{grid-template-columns:1fr 240px 1fr!important;gap:28px!important;}
+.export-card.clean-export .team-home{grid-template-columns:160px 1fr!important;}
+.export-card.clean-export .team-away{grid-template-columns:1fr 160px!important;}
+.export-card.clean-export .flag-frame{width:160px!important;height:104px!important;}
+.export-card.clean-export .team-name-zh{font-size:44px!important;}
+.export-card.clean-export .team-name-en{font-size:25px!important;}
+.export-card.clean-export .score-display{font-size:72px!important;min-width:240px!important;gap:22px!important;}
+.export-card.clean-export .score-display.empty{font-size:46px!important;}
+@media(max-width:767px){
+  .container{padding:12px 8px 40px!important;}
+  .match-item{min-height:92px!important;padding:10px 8px!important;border-radius:12px!important;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)!important;}
+  .match-datetime{min-width:58px!important;width:58px!important;height:54px!important;margin-right:8px!important;}
+  .match-datetime-date{font-size:13px!important;}.match-datetime-time{font-size:9px!important;margin-top:3px!important;}
+  .match-teams{grid-template-columns:1fr 70px 1fr!important;gap:6px!important;}
+  .team{gap:7px!important;}.team-home{grid-template-columns:42px 1fr!important;}.team-away{grid-template-columns:1fr 42px!important;}
+  .flag-frame{width:42px!important;height:30px!important;}
+  .team-name-zh{font-size:13px!important;}.team-name-en{font-size:8px!important;}
+  .score-display{font-size:18px!important;min-width:70px!important;gap:5px!important;}.score-display.empty{font-size:14px!important;}
+}
+
+
+
+/* =========================================================
+   FINAL VISUAL OPTIMIZATION PATCH
+   - Semi-transparent export match cards
+   - Flags fully flush to frame, no inner gap
+   - Stronger broadcast hierarchy, cleaner glow, tighter layering
+========================================================= */
+:root{
+  --fifa-blue:#19b8ff;
+  --fifa-red:#ff3048;
+  --fifa-gold:#ffe189;
+}
+
+body{
+  background:
+    radial-gradient(circle at 0% 8%,rgba(24,148,255,.44),transparent 23%),
+    radial-gradient(circle at 100% 8%,rgba(255,36,54,.42),transparent 25%),
+    radial-gradient(circle at 50% 112%,rgba(10,88,185,.32),transparent 45%),
+    linear-gradient(180deg,#010814 0%,#061327 44%,#020712 100%) !important;
+}
+
+.match-item{
+  background:
+    linear-gradient(90deg,rgba(0,145,255,.20),rgba(0,0,0,0) 23%,rgba(0,0,0,0) 76%,rgba(255,30,48,.19)),
+    radial-gradient(circle at 18% 50%,rgba(20,144,255,.24),transparent 33%),
+    radial-gradient(circle at 82% 50%,rgba(255,36,54,.22),transparent 34%),
+    linear-gradient(90deg,rgba(5,30,65,.76) 0%,rgba(4,20,43,.70) 24%,rgba(3,13,32,.72) 52%,rgba(37,6,18,.68) 100%) !important;
+  border-color:rgba(44,185,255,.86)!important;
+  border-right-color:rgba(255,45,64,.9)!important;
+  backdrop-filter:blur(8px) saturate(1.15);
+  -webkit-backdrop-filter:blur(8px) saturate(1.15);
+}
+.match-item:before{
+  background:
+    linear-gradient(90deg,rgba(20,190,255,.55),transparent 16%,transparent 84%,rgba(255,50,68,.52)),
+    linear-gradient(180deg,rgba(255,255,255,.08),transparent 24%,rgba(0,0,0,.18)),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.030) 0 1px,transparent 1px 13px)!important;
+}
+.match-item:after{
+  left:14px!important;right:14px!important;top:8px!important;height:2px!important;
+  background:linear-gradient(90deg,var(--fifa-blue),rgba(80,210,255,.12),rgba(255,70,82,.14),var(--fifa-red))!important;
+}
+
+/* Date block more solid and closer to reference */
+.match-datetime{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(71,211,255,.20),transparent 42%),
+    linear-gradient(180deg,rgba(11,84,151,.82),rgba(3,22,49,.88))!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.10),
+    inset 0 0 26px rgba(0,175,255,.22),
+    0 0 22px rgba(0,174,255,.34)!important;
+}
+
+/* Flag fully fills frame: remove the tiny hollow gap */
+.flag-frame{
+  padding:0!important;
+  overflow:hidden!important;
+  background:linear-gradient(145deg,#f4fbff 0%,#5e7991 18%,#142033 43%,#f8fdff 55%,#42596f 78%,#ffffff 100%)!important;
+  border:2px solid rgba(230,250,255,.92)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    inset 0 -4px 8px rgba(0,0,0,.38),
+    0 0 0 2px rgba(3,15,30,.86),
+    0 0 0 3px rgba(56,222,255,.40),
+    0 8px 18px rgba(0,0,0,.56),
+    0 0 22px rgba(67,210,255,.28)!important;
+}
+.flag-frame::before{
+  inset:0!important;
+  border-radius:inherit!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.03) 38%,rgba(0,0,0,.20) 100%),
+    radial-gradient(circle at 22% 8%,rgba(255,255,255,.48),transparent 24%)!important;
+}
+.team-flag{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  border-radius:inherit!important;
+  border:0!important;
+  padding:0!important;
+  margin:0!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+
+/* Better score hierarchy: VS is centered and compact */
+.score-display{
+  font-variant-numeric:tabular-nums;
+  letter-spacing:1px!important;
+}
+.score-display .dash{
+  font-size:.34em!important;
+  color:#eaf9ff!important;
+  letter-spacing:1px!important;
+  padding:0 3px!important;
+}
+
+/* Export card: semi-transparent actual PNG rows, transparent outside */
+#export-overlay{background:transparent!important;}
+.export-card.clean-export .match-item{
+  background:
+    linear-gradient(90deg,rgba(0,145,255,.22),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 75%,rgba(255,30,48,.20)),
+    radial-gradient(circle at 16% 50%,rgba(20,144,255,.24),transparent 34%),
+    radial-gradient(circle at 84% 50%,rgba(255,36,54,.22),transparent 34%),
+    linear-gradient(90deg,rgba(5,30,65,.62) 0%,rgba(4,20,43,.56) 24%,rgba(3,13,32,.58) 52%,rgba(37,6,18,.54) 100%)!important;
+  backdrop-filter:blur(8px) saturate(1.18)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(1.18)!important;
+}
+.export-card.clean-export .flag-frame{
+  padding:0!important;
+}
+.export-card.clean-export .team-flag{
+  border-radius:inherit!important;
+}
+
+/* Slightly tighter export rows without losing premium scale */
+.export-card.clean-export{width:1320px!important;}
+.export-card.clean-export .match-item{width:1320px!important;min-height:188px!important;padding:24px 30px!important;}
+.export-card.clean-export .match-list{gap:14px!important;}
+.export-card.clean-export .match-datetime{min-width:166px!important;width:166px!important;height:122px!important;margin-right:30px!important;}
+.export-card.clean-export .match-datetime-date{font-size:38px!important;}
+.export-card.clean-export .match-datetime-time{font-size:23px!important;}
+.export-card.clean-export .match-teams{grid-template-columns:1fr 230px 1fr!important;gap:24px!important;}
+.export-card.clean-export .team-home{grid-template-columns:154px 1fr!important;}
+.export-card.clean-export .team-away{grid-template-columns:1fr 154px!important;}
+.export-card.clean-export .flag-frame{width:154px!important;height:100px!important;}
+.export-card.clean-export .team-name-zh{font-size:42px!important;}
+.export-card.clean-export .team-name-en{font-size:24px!important;}
+.export-card.clean-export .score-display{font-size:70px!important;min-width:230px!important;gap:17px!important;}
+.export-card.clean-export .score-display .dash{font-size:.34em!important;}
+
+@media(max-width:767px){
+  .flag-frame{padding:0!important;border-width:1px!important;}
+  .match-item{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
+  .score-display .dash{font-size:.42em!important;}
+}
+
+
+
+/* =========================================================
+   DESKTOP SCREEN RESPONSIVE FIX
+   - Keep reference-style rows, but stop desktop 2-column squeeze
+   - This only affects the visible webpage, not the PNG export card
+========================================================= */
+@media (min-width:768px){
+  main.container{
+    max-width:1280px!important;
+    padding:26px 28px 48px!important;
+  }
+  main.container .groups-grid{
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+  }
+  main.container .group-card{
+    width:100%!important;
+    max-width:1180px!important;
+    margin:0 auto!important;
+  }
+  main.container .match-list{
+    padding:14px!important;
+  }
+  main.container .match-item{
+    width:100%!important;
+    min-height:138px!important;
+    padding:16px 22px!important;
+    margin-bottom:14px!important;
+    overflow:hidden!important;
+  }
+  main.container .match-datetime{
+    min-width:138px!important;
+    width:138px!important;
+    height:100px!important;
+    margin-right:28px!important;
+  }
+  main.container .match-datetime-date{
+    font-size:30px!important;
+  }
+  main.container .match-datetime-time{
+    font-size:20px!important;
+  }
+  main.container .flag-frame{
+    width:118px!important;
+    height:76px!important;
+    padding:0!important;
+    border-radius:9px!important;
+  }
+  main.container .team-name-wrapper{
+    min-width:120px!important;
+    max-width:220px!important;
+  }
+  main.container .team-name-zh{
+    font-size:30px!important;
+    line-height:1.08!important;
+  }
+  main.container .team-name-en{
+    font-size:18px!important;
+    line-height:1!important;
+  }
+  main.container .score-display{
+    font-size:48px!important;
+    min-width:170px!important;
+    gap:12px!important;
+  }
+  main.container .score-display.empty{
+    font-size:32px!important;
+  }
+}
+@media (min-width:1300px){
+  main.container{max-width:1400px!important;}
+  main.container .group-card{max-width:1320px!important;}
+  main.container .match-item{min-height:152px!important;padding:18px 26px!important;}
+  main.container .match-datetime{min-width:150px!important;width:150px!important;height:108px!important;}
+  main.container .flag-frame{width:132px!important;height:84px!important;}
+  main.container .team-name-zh{font-size:34px!important;}
+  main.container .team-name-en{font-size:20px!important;}
+  main.container .score-display{font-size:56px!important;min-width:190px!important;}
+}
+
 </style>
  </head>
  <body>
@@ -409,7 +755,7 @@ div.team-flag{
  }
  function getScoreHTML(match){
    const score = getSavedScore(match);
-   if(score) return `${score.score1}<span class="dash">-</span>${score.score2}`;
+   if(score) return `${score.score1}<span class="dash">VS</span>${score.score2}`;
    return 'VS';
  }
  let activeScoreKey = null;
@@ -587,7 +933,7 @@ div.team-flag{
  const layoutClass = isDesktop ? 'desktop-layout' : 'mobile-layout';
  // 插入到遮罩层
  overlay.innerHTML = `
- <div class="export-card clean-export ${layoutClass}" style="width: ${isDesktop ? '780px' : '100vw'}; margin: 0;">
+ <div class="export-card clean-export ${layoutClass}" style="width:1320px; margin:0;">
  <div class="match-list">
  ${matchesHtml}
  </div>
